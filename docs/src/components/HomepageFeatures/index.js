@@ -45,7 +45,7 @@ export default function HomepageFeatures() {
               <div className={styles.buttons}>
                 <Link
                   className="button button--secondary button--lg"
-                  to="https://google.ca">
+                  to="/blog/wip-2">
                   See Demo
                 </Link>
               </div>
