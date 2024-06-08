@@ -24,8 +24,6 @@
 <li><strong>Settings Pages</strong>: User Profile/Account Settings Page</li>
 </ul>
 <p>Each of these pages consists of various sub-components. For Progress 2, we have developed some of these core pages and their sub-components that define our MVP.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="live-demo">Live Demo<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2#live-demo" class="hash-link" aria-label="Direct link to Live Demo" title="Direct link to Live Demo">​</a></h2>
-<p>Check out our live demo <a href="https://google.com/" target="_blank" rel="noopener noreferrer">here</a>.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="tech-stack">Tech Stack<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2#tech-stack" class="hash-link" aria-label="Direct link to Tech Stack" title="Direct link to Tech Stack">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="typescript">TypeScript<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2#typescript" class="hash-link" aria-label="Direct link to TypeScript" title="Direct link to TypeScript">​</a></h3>
 <p>We chose React with TypeScript for this phase. TypeScript offers type safety, is an industry standard, and all Trekkers members have experience working with it.</p>
@@ -35,12 +33,25 @@
 <p>We also utilized Mantine, a popular React UI Component library. After comparing MUI, Chakra, and Mantine, we chose Mantine for its diverse components and ease of customization.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-pages-and-features">Key Pages and Features<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2#key-pages-and-features" class="hash-link" aria-label="Direct link to Key Pages and Features" title="Direct link to Key Pages and Features">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="landing-page">Landing Page<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2#landing-page" class="hash-link" aria-label="Direct link to Landing Page" title="Direct link to Landing Page">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="Landing Page 1" src="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/assets/images/landing-page-1-1c07358863182486c7e1d20dea590bf6.png" width="1909" height="969" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="Landing Page 2" src="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/assets/images/landing-page-2-5b5b743133814e02bf31788f60d80533.png" width="413" height="697" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="Responsive 2" src="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/assets/images/responsive-2-1039919b4a89bfdb7d93baa06b004b52.png" width="395" height="683" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="Profile Dropdown" src="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/assets/images/profile-dropdown-e7283b9da75bc79ca9edeae1e312d6ce.png" width="279" height="269" class="img_ev3q"></p>
 <p>Our landing page provides a brief description of the application, includes short card components related to travel, and features a newsletter signup.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="profile-page">Profile Page<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2#profile-page" class="hash-link" aria-label="Direct link to Profile Page" title="Direct link to Profile Page">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="Profile Page" src="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/assets/images/profile-page-88dae68fb17722c00f15b66e4757a4ce.png" width="1906" height="987" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="Small Trip Cards" src="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/assets/images/small-trip-cards-3dedbb9e70d6aa5d65cb00a9a2656bd1.png" width="967" height="498" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="Large Trip Cards" src="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/assets/images/large-trip-cards-085a0b6e46aea1d5e422e8c19637941b.png" width="1880" height="651" class="img_ev3q"></p>
 <p>As mentioned in Progress 1, the profile page displays all trips associated with a user, allowing them to browse through their trips conveniently.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="trip-planning-page">Trip Planning Page<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2#trip-planning-page" class="hash-link" aria-label="Direct link to Trip Planning Page" title="Direct link to Trip Planning Page">​</a></h3>
 <p>The Trip Planning page is one of the main features of our application, consisting of four subpages: Overview, Details, Map, and Timeline.</p>
+<p><img decoding="async" loading="lazy" alt="Map" src="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/assets/images/map-65fa55f432d0ac893a09ebb5a2691503.png" width="3209" height="1639" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="To-do List" src="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/assets/images/to-do-list-03219a0bb020a43bf6b38e96e75d4e89.png" width="913" height="315" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="Trip Details" src="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/assets/images/trip-details-ae3dd50870634bdc2d51a54df49e78dd.png" width="1920" height="993" class="img_ev3q"></p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="settings-page">Settings Page<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2#settings-page" class="hash-link" aria-label="Direct link to Settings Page" title="Direct link to Settings Page">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="Account Settings" src="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/assets/images/account-settings-7cda9e9d88046dfdb0135c9b42a2bec4.png" width="1915" height="974" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="Responsive 1" src="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/assets/images/responsive-1-8f1a093e4775e257f5319ebeb0811aed.png" width="401" height="684" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="Profile Settings" src="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/assets/images/profile-settings-0311ecf40e53227f2ea779f7f6f1f654.png" width="1895" height="981" class="img_ev3q"></p>
 <p>The Settings page includes Account Settings and Public Profile Settings, enabling users to manage their profiles and account preferences.</p>
 <p>Stay tuned for more updates as we continue to refine and enhance Trek!</p>]]></content:encoded>
             <category>WIP</category>
