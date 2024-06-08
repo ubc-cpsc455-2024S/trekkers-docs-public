@@ -1,20 +1,27 @@
-endi:
-  name: Endilie Yacop Sucipto
-  title: Maintainer of Docusaurus
-  url: https://github.com/endiliey
-  image_url: https://github.com/endiliey.png
+justin:
+  name: Justin Lieu
+  title: Developer
+  url: https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/team
+  imageurl: "https://ires.ubc.ca/files/2019/10/ubc-logo.png"
 
-yangshun:
-  name: Yangshun Tay
-  title: Front End Engineer @ Facebook
-  url: https://github.com/yangshun
-  image_url: https://github.com/yangshun.png
+jacob:
+  name: Jacob Zhu
+  title: Developer
+  url: https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/team
+  imageurl: "https://ires.ubc.ca/files/2019/10/ubc-logo.png"
 
-slorber:
-  name: Sébastien Lorber
-  title: Docusaurus maintainer
-  url: https://sebastienlorber.com
-  image_url: https://github.com/slorber.png
+  
+kevin:
+  name: Kevin Xu
+  title: Developer
+  url: https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/team
+  imageurl: https://ires.ubc.ca/files/2019/10/ubc-logo.png
+
+william:
+  name: William Xiao
+  title: Developer
+  url: https://wyfx.ca/
+  image_url: https://wyfx.ca/assets/WX.jpg
 
 matthew:
   name: Matthew Kang
