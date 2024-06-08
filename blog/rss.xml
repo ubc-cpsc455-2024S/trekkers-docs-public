@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Trekkers Blog</title>
+        <link>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog</link>
+        <description>Trekkers Blog</description>
+        <lastBuildDate>Tue, 05 Mar 2024 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <item>
+            <title><![CDATA[Work In Progress 2]]></title>
+            <link>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog/wip-2</link>
+            <guid>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog/wip-2</guid>
+            <pubDate>Tue, 05 Mar 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[All members of Trekkers are thrilled to share our second work-in-progress update and introduce the first pre-release (v0.1.0) of Trek.]]></description>
+            <content:encoded><![CDATA[<p>All members of Trekkers are thrilled to share our second work-in-progress update and introduce the first pre-release (v0.1.0) of Trek.</p>
+<p>In <strong>Progress 2</strong>, we have finalized our app structure, including the high-level React component structure, and developed front-end interfaces for the main features of our minimal viable product (MVP).</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="high-level-overview">High-Level Overview<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2#high-level-overview" class="hash-link" aria-label="Direct link to High-Level Overview" title="Direct link to High-Level Overview">​</a></h3>
+<p>The pages of our web application are categorized into three main groups:</p>
+<ul>
+<li><strong>Main Pages</strong>: Landing Page, Public Profile Page, etc.</li>
+<li><strong>Trip App Pages</strong>: Overview, Details, Analytics Pages</li>
+<li><strong>Settings Pages</strong>: User Profile/Account Settings Page</li>
+</ul>
+<p>Each of these pages consists of various sub-components. For Progress 2, we have developed some of these core pages and their sub-components that define our MVP.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="live-demo">Live Demo<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2#live-demo" class="hash-link" aria-label="Direct link to Live Demo" title="Direct link to Live Demo">​</a></h2>
+<p>Check out our live demo <a href="https://google.com/" target="_blank" rel="noopener noreferrer">here</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tech-stack">Tech Stack<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2#tech-stack" class="hash-link" aria-label="Direct link to Tech Stack" title="Direct link to Tech Stack">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="typescript">TypeScript<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2#typescript" class="hash-link" aria-label="Direct link to TypeScript" title="Direct link to TypeScript">​</a></h3>
+<p>We chose React with TypeScript for this phase. TypeScript offers type safety, is an industry standard, and all Trekkers members have experience working with it.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="tailwind-css">Tailwind CSS<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2#tailwind-css" class="hash-link" aria-label="Direct link to Tailwind CSS" title="Direct link to Tailwind CSS">​</a></h3>
+<p>We integrated Tailwind CSS for easier and faster development of styled components. Justin Lieu has led the team in implementing Tailwind during the development process.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="mantine-ui">Mantine UI<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2#mantine-ui" class="hash-link" aria-label="Direct link to Mantine UI" title="Direct link to Mantine UI">​</a></h3>
+<p>We also utilized Mantine, a popular React UI Component library. After comparing MUI, Chakra, and Mantine, we chose Mantine for its diverse components and ease of customization.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-pages-and-features">Key Pages and Features<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2#key-pages-and-features" class="hash-link" aria-label="Direct link to Key Pages and Features" title="Direct link to Key Pages and Features">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="landing-page">Landing Page<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2#landing-page" class="hash-link" aria-label="Direct link to Landing Page" title="Direct link to Landing Page">​</a></h3>
+<p>Our landing page provides a brief description of the application, includes short card components related to travel, and features a newsletter signup.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="profile-page">Profile Page<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2#profile-page" class="hash-link" aria-label="Direct link to Profile Page" title="Direct link to Profile Page">​</a></h3>
+<p>As mentioned in Progress 1, the profile page displays all trips associated with a user, allowing them to browse through their trips conveniently.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="trip-planning-page">Trip Planning Page<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2#trip-planning-page" class="hash-link" aria-label="Direct link to Trip Planning Page" title="Direct link to Trip Planning Page">​</a></h3>
+<p>The Trip Planning page is one of the main features of our application, consisting of four subpages: Overview, Details, Map, and Timeline.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="settings-page">Settings Page<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2#settings-page" class="hash-link" aria-label="Direct link to Settings Page" title="Direct link to Settings Page">​</a></h3>
+<p>The Settings page includes Account Settings and Public Profile Settings, enabling users to manage their profiles and account preferences.</p>
+<p>Stay tuned for more updates as we continue to refine and enhance Trek!</p>]]></content:encoded>
+            <category>WIP</category>
+        </item>
+    </channel>
+</rss>
