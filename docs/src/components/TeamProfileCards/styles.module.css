@@ -1,0 +1,211 @@
+.aboutCard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: var(--feature-card-bg-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+}
+
+.trekkersCard {
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  padding: 20px;
+  background-color: var(--feature-card-bg-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+}
+
+.trekkersSlides {
+  width: 50%;
+}
+
+.trekkersPrefix {
+  font-family: "Poetsen One", sans-serif;
+  font-size: 1rem;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.trekkersName {
+  font-size: 2.25rem;
+  font-family: "Poetsen One", sans-serif;
+  color: var(--ifm-color-primary);
+  margin-top: 0px;
+  padding-top: 0;
+}
+
+.trekkersDescription {
+  font-size: 1rem;
+  font-family: "Poetsen One", sans-serif;
+  color: var(--ifm-color-primary-lighter);
+}
+
+.trekkersDescriptionTwo {
+  font-size: 1.15rem;
+  font-family: "Poetsen One", sans-serif;
+  color: var(--ifm-color-primary);
+}
+
+.trekkersDescriptionThree {
+  font-size: 0.85rem;
+  font-family: "Poetsen One", sans-serif;
+  color: var(--ifm-color-primary);
+}
+
+.profileCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+  background-color: var(--feature-card-bg-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  gap: 10px;
+}
+
+.profileCardContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.profileAreaContainer {
+  width: 70%;
+  margin: 0 auto;
+  margin-bottom: 10%;
+}
+
+@media (max-width: 997px) {
+  .profileCard {
+    width: 100%;
+  }
+
+  .trekkersSlides {
+    width: 95%;
+  }
+
+  .profileCardContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .aboutCard {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .trekkersCard {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .trekkersLogoContainer {
+    width: 100%;
+    flex: 3;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .profileCard {
+    width: 100%;
+  }
+
+  .trekkersSlides {
+    width: 95%;
+  }
+
+  .profileCardContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+h2 {
+  font-family: "Poetsen One", sans-serif;
+  color: var(--ifm-color-primary);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 50px;
+}
+
+.trekkersLogo {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.backbenchersLogo {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transform: rotate(0.5deg);
+}
+
+.trekkersLogoContainer {
+  flex: 1;
+  max-width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.aboutDescriptionContainer {
+  flex: 2;
+  min-width: 50%;
+  overflow: hidden;
+}
+
+.aboutDescription {
+  font-size: 1rem;
+  font-family: "Poetsen One", sans-serif;
+  color: var(--ifm-color-primary);
+}
+
+.representativeName {
+  font-size: 1.5rem;
+  font-family: "Poetsen One", sans-serif;
+  color: var(--black-or-white);
+  margin-top: 10px;
+}
+
+.profileImage {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.profileImageContainer {
+  width: 90%;
+}
+
+.roleContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.linksContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.name {
+  font-family: "Poetsen One", sans-serif;
+  font-size: 1rem;
+  text-align: center;
+  color: var(--ifm-color-primary);
+}

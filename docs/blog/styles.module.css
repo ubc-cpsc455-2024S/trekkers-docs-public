@@ -1,0 +1,60 @@
+.features {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+  margin-top: 5vh;
+  margin-bottom: 10vh;
+}
+
+.featureSvg2 {
+  height: 200px;
+  width: 200px;
+}
+
+.featureSvg {
+  height: 200px;
+  /* width: 200px; */
+  fill: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+.adminLogo {
+  width: 240px;
+}
+
+.trekTextLogo {
+  font-family: "Poetsen One", sans-serif;
+  font-size: 3rem;
+  color: var(--ifm-color-primary);
+}
+
+.adminLogoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.featureSvg path {
+  fill: var(--ifm-color-primary);
+}
+
+
+.featureCard {
+  background-color: var(--feature-card-bg-color);
+  border-radius: 15px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px;
+}
+
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 20px;
+  justify-content: center;
+}

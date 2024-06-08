@@ -1,0 +1,115 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.heroBanner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroBannerMain {
+  padding: 0;
+  padding-top: 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--header-bg-color);
+}
+
+.heroBannerMainTitle {
+  font-size: 3rem;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.heroBannerMainSubtext {
+  font-size: 0.9rem;
+  color: white;
+  text-align: left;
+}
+
+.trekPhoneImage {
+  max-height: 60vh;
+  animation: slideIn 3s forwards;
+  position: relative;
+  left: -10%;
+}
+
+.animationContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.headingDescriptor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  opacity: 0;
+  animation: fadeIn 3s forwards;
+  animation-delay: 1s;
+  margin-left: 20px;
+}
+
+.headerSubtext {
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  color: white;
+  font-family: "Poetsen One", sans-serif;
+  font-weight: bold;
+}
+
+.heroBannerTitle {
+  margin: 0;
+  margin-top: 0;
+  font-size: 1.25rem;
+  font-family: "Poetsen One", sans-serif;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+}
+
+.heroBanner {
+  padding: 1rem;
+  background-color: var(--header-bg-color);
+}
+
+@media screen and (max-width: 996px) {
+
+  .heroBannerMain {
+    padding: 1rem;
+  }
+
+  .heroBanner {
+    padding: 2rem;
+  }
+
+  .trekPhoneImage {
+    display: none;
+  }
+}
+
+
+@keyframes slideIn {
+  to {
+    left: 5%;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

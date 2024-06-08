@@ -1,0 +1,148 @@
+---
+sidebar_position: 2
+---
+
+# Terms of Reference
+
+:::tip
+A **PDF version** of the Terms of Reference document is available [here](/files/Trekkers_Terms_of_Reference_2024-05-29.pdf).
+:::
+
+Group 4: Trekkers is a dedicated team of five students from the University of British Columbia, enrolled in CPSC 455. The team members, Jacob Zhu, Justin Lieu, Kevin Xu, Matthew Kang, and William Xiao, are under the guidance of instructors Ian McLean and Firas Moosvi, with Justin Jao serving as their teaching assistant for Workshop Cluster 1.
+Driven by a shared enthusiasm for exploring new technologies in the ever-evolving tech landscape, we are thrilled to introduce Trek—an intuitive and personalized trip-planner designed to cater to travelers of all kinds. Trek harnesses the power of cutting-edge ML/AI technologies to offer personalized trip recommendations, coupled with a user-friendly interface that simplifies and enhances the trip-planning experience.
+While the CPSC 455 course project is intended as a beginner-level software development exercise, our team is committed to designing Trek as a scalable, industry-grade product with a strong emphasis on compliance and user-centric design. Our approach ensures that, even as a student project, Trek meets high standards of quality and functionality, providing a robust foundation for future development and deployment.
+
+## Project Information
+
+### Product Deliverables
+The deliverable will be under one website that contains multiple key interfaces including the following:
+
+
+**Interface to View User’s Profile with Associated Trips** - This interface includes a user’s public profile, a public about me section, basic public statistics and information about the user, and lists of trips that the user is associated with (user created or user is participating or participated in) the trip.
+
+
+**Interface to View/Create/Remove/Modify a User’s Trip** - This interface includes the user’s trip, add/delete/modify new itinerary for a trip, manage budget, and view the overall summary of a trip.
+
+**Interface to Communicate with a Chat Bot to Modify a User’s Trip** - This interface exists within the interface to View/Create/Remove/Modify a user’s trip. It is a popup chatbot interface, where the user can request the Chat Bot to create changes or suggest information regarding the trip.
+
+**Interface to Manage User’s Information** - This interface allows the user to view and manage the user’s private information.
+
+### High-Level Project Description
+
+The high-level initial project description is written as below:
+
+
+> Have you ever tried to plan a group trip with your friends, but it never "made it out of the group chat"? Then this web app is perfect for you! Trek provides a centralized place to do all of your trip planning - say goodbye to Google Docs! Once you log in, Trek allows you to design your ideal trip, with trip destinations, timeframes, accommodations, and more. Then save the trip and let Trek easily let you share your trips with a single click. Trek can intelligently recommend the best things to do by using API calls to sites like Tripadvisor to get up-to-date ratings on good places to visit, as well as through other Trek users' most popular destinations. Trek can also display everything on an interactive map to help you visualize your transportation planning! Trek might also be able to give your groups weather information, a full itinerary written up by an LLM, and even specific transportation options with their costs.
+> - Created by Trekkers
+
+### Out of Scope
+
+Although we are building Trek to be an industry-level software, given the limitations in timeline, we are unable to design this product to include software/system administrators and analysts in our user base, and not be able to include an administrative interface for managing the software.
+As an alternative, thorough documentation will be provided with the release of version 1.0.0 that outlines how administrators and analysts can extract key metrics and manage the app from the backend, as well as deployment and troubleshooting guides.
+
+### Constraints 
+
+As a student-led project without a sponsor, Trek has strict budget constraints that must be followed. Currently, our budget is set to be a total of $100. Utilising ML/AI technologies with external APIs can build-up costs. Due to this budget constraint, this project will introduce an API rate limit to minimise costs.
+
+### Assumptions
+
+Our usability assumptions are based on the typical operating environment for the solution. This web-based application is designed for use on various devices, including desktop and laptop computers, tablets, and mobile devices. It is optimized to function seamlessly on major and up-to-date web browsers, such as Chrome, Safari, Edge, and Firefox.
+
+We assume the system will handle real-life production use without any load limitations. It is engineered to support up to 150 concurrent users, reflecting the class size of CPSC 455. The system's stateless design ensures efficient management, ease of implementation, and scalability while delivering a streamlined and responsive user experience.
+
+### Dependencies 
+
+Dependencies for this project include access to OpenAI and Google’s API, which is crucial for personalisation and usability, along with various other functionalities. Funding for this dependency will be $20 per team member, with a total of $100 per member.
+
+## Development Roadmap
+
+### Development Phase Plan
+
+The development of Trek will happen in the phases mentioned below. The development phases are distinct from the deadlines and course schedule of CPSC 455, and not necessarily aligned with it.
+
+| Phase                       | Description                                                                                   | Duration                |
+|-----------------------------|-----------------------------------------------------------------------------------------------|-------------------------|
+| Planning                    | Define the objective MVP by establishing a target specification that includes key functionalities, integration, and a responsive UI. | May 18th, 2024 to May 25th, 2024 |
+| Requirements & Design       | User stories and use cases for the web app defined through interviews, and integration points between the app and other dependencies specified. | May 26th, 2024 to May 30th, 2024 |
+| Complete Front-end Development | Complete frontend development of the web app without API hook-up                              | May 30th, 2024 to June 8th, 2024 |
+| API Design                  | Complete specification documentation for internal APIs                                       | June 8th, 2024 to June 15th, 2024 |
+| Core Back-end Development   | Core backend development including database and API hook-ups. Excludes ML/AI functionalities. | June 15th, 2024 to June 30th, 2024 |
+| Beta Testing                | Conduct initial testing in a controlled environment, evaluate core functionalities and app usability, by gathering feedback from a small user group (TAs, cluster classmates) | (overlaps) June 25th, 2024 to June 30th, 2024 |
+| ML/AI Backend Development   | Integrate and implement ML/AI features of the web app                                        | July 1st, 2024 to July 20th, 2024 |
+| Testing and Final Implementations | Conduct extensive tests and thorough system testing with a coordinated and systematic test plan. Finalize implementation. | July 20th, 2024 to July 31st, 2024 |
+| Project Completion          | Provide all necessary documentation                                                          | August 1st, 2024 to August 5th, 2024 |
+
+### Documentation Release Plan
+
+The documentation of this project will be released in the schedule and format mentioned below. There is no formal requirement for documentation with respect to the CPSC 455 course with exception to the Work-In-Progress Scrum reports.
+
+| Document                           | Format     | Expected Release Date |
+|------------------------------------|------------|-----------------------|
+| Terms of Reference                 | PDF, web   | May 28th, 2024        |
+| Project Plan                       | PDF, web   | May 29th, 2024        |
+| Business Requirements              | PDF, web   | May 29th, 2024        |
+| Technical Design                   | PDF, web   | May 29th, 2024        |
+| Testing Plan                       | PDF, web   | June 15th, 2024       |
+| Deployment Guide                   | PDF, web   | July 31st, 2024       |
+| Work-In-Progress Report (Scrum)    | web        | Every two weeks       |
+| Pre-Release Notes                  | web        | Every week            |
+| 1.0.0 Release Note                 | web        | August 5th, 2024      |
+
+## Team Structure 
+
+Unlike most software development teams, our team does not have an explicit leadership role including project manager, front-end lead, back-end lead. All members are expected to show leadership in their areas of knowledge and interests, and all members are expected to be a full-stack developer. Much of the traditional project manager roles, such as maintaining development phases and deadlines belong to the documentation experts.
+
+### Experts 
+
+One of the strengths of our team is the diversity in knowledge and the shared goal to learn from one another. Instead of having lead roles, we have designated team ‘experts’ that act as a point of contact when a member is having difficulties during a development process. Members are encouraged to ping an expert on the slack channel when they require assistance or guidance. Our experts have a responsibility that all team members are able to produce high quality code and understand the code they produce.
+
+| Area of Expertise | Experts               |
+|-------------------|------------------------|
+| Web Design        | Justin Lieu, Matthew Kang |
+| React             | Justin Lieu, Matthew Kang |
+| Redux             | Justin Lieu            |
+| Auth0             | Matthew Kang           |
+| API Design        | William Xiao, Matthew Kang |
+| NodeJS            | Jacob Zhu              |
+| Express           | William Xiao, Jacob Zhu |
+| MongoDB           | TBA                    |
+| Documentation     | William Xiao, Matthew Kang |
+
+The list of experts will be updated throughout the project. 
+
+
+### Communications Plan
+
+Our team’s availability is managed through a private When2Meet link shared on our Slack channel. Team members are expected to keep their availability updated throughout the project’s duration. All asynchronous communication for project needs will be conducted in the team’s slack channel.
+
+We have established four types of synchronous team meetings:
+
+#### Weekly Team Meetings
+Held every Sunday from 10:00 a.m. to 11:00 a.m. on Zoom, these meetings provide an opportunity for all team members to brainstorm ideas, discuss progress, address blockers, re-evaluate milestone deadlines, and identify and mitigate project risks. Additional team meetings may be scheduled as needed.
+
+#### Feature Meetings
+These smaller meetings focus on a specific feature or group of features (sprints) to be developed. They can be scheduled at any time by two or more members using our shared availability on When2Meet.
+
+#### Bi-Weekly TA Design/Code Reviews
+Occurring every other Saturday workshop from 12:30 p.m. to 3:30 p.m., these reviews are dedicated to assessing current progress, obtaining feedback from TAs or other CPSC 455 teams, addressing blockers and risks, and ensuring the project stays on track.
+
+#### Lab Meetings
+Taking place during registered lab times on Thursdays between 5:00 p.m. and 7:00 p.m., these quick meetings serve to provide brief updates between weekly meetings. Note that Matthew Kang will not be present for these lab meetings.
+
+
+
+### Trekkers’ Code (Code of Conduct)
+
+Each member of Trekkers believes that products of high quality work must necessarily be followed by high quality processes.
+
+> “Strive to achieve high quality in both the processes and products of professional work.”
+> - ACM Code of Ethics 2.1
+
+Each member of the Trekkers commits to excellence in the quality of the process of the work, and pledges follow the Trekkers’ Code.
+
+- **Inclusivity**: Encourage and support contributions from all team members, regardless of their level of experience or background.
+- **Respect**: Respect differing viewpoints and experiences. Provide constructive feedback and be open to receiving it.
+- **Patience**: Recognize that everyone is learning. Offer help and guidance, and be patient with those who may need more time to understand.
+- **Collaboration-oriented**: Work together to solve problems and achieve our project goals. Share knowledge and resources freely.
+- **Kindness**: Show empathy and kindness to all team members. Celebrate successes and provide support during challenges.
+- **Transparency**: Communicate openly and honestly. Share your progress, challenges, and decisions with the team to maintain trust and clarity.
