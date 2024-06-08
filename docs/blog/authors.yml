@@ -2,21 +2,20 @@ justin:
   name: Justin Lieu
   title: Developer
   url: https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/team
-  imageurl: "https://ires.ubc.ca/files/2019/10/ubc-logo.png"
+  image_url: https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/img/favicon.ico
 
 jacob:
   name: Jacob Zhu
   title: Developer
   url: https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/team
-  imageurl: "https://ires.ubc.ca/files/2019/10/ubc-logo.png"
-
+  image_url: https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/img/favicon.ico
   
 kevin:
   name: Kevin Xu
   title: Developer
   url: https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/team
-  imageurl: https://ires.ubc.ca/files/2019/10/ubc-logo.png
-
+  image_url: https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/img/favicon.ico
+  
 william:
   name: William Xiao
   title: Developer
