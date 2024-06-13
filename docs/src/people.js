@@ -23,7 +23,7 @@ export const developmentTeam = [
     {
         name: "Matthew Kang",
         roles: ["Developer"],
-        pictureLink: "https://media.licdn.com/dms/image/D5603AQFd9TjvenNSfA/profile-displayphoto-shrink_800_800/0/1712636932500?e=1722470400&v=beta&t=znZGBA4HWjpkHeKd4iFISDDlxcpHMAlnUrbJN80Cvm0",
+        pictureLink: "/trekkers-docs-public/img/matthewkang.jpeg",
         websiteLink: "",
         linkedInLink: "https://www.linkedin.com/in/kang-matt/",
     },
