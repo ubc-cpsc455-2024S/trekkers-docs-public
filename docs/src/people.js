@@ -30,7 +30,7 @@ export const developmentTeam = [
     {
         name: "William Xiao",
         roles: ["Developer"],
-        pictureLink: "https://wyfx.ca/assets/WX.jpg",
+        pictureLink: "https://wyfx.ca/misc/WX.jpg",
         websiteLink: "https://wyfx.ca",
         linkedInLink: "",
     }
