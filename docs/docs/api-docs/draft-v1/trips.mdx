@@ -1,0 +1,651 @@
+---
+sidebar_position: 3
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Trips
+
+## List Trips
+`GET /api/v1/trips`
+
+Get all the trips associated with the authenticated user
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `401` | Unauthorized |
+
+### Code samples for "Get a user"
+
+```bash title="GET /api/v1/trips"
+curl -L \
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/trips
+```
+
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response">
+    `status: 200`
+    ```json
+    {
+        [
+            {
+                "uuid": "uyashd-afs981237-asiuf",
+                "name": "Graduation Trip",
+                "desc": "Graduation trip to LA and Vegas...",
+                "img": "http://localhost:3000/api/v1/trip/default/picture"
+            },
+            {
+                "uuid": "a97f-sf98h2kjhas9-198hfoa",
+                "name": "Graduation Trip",
+                "desc": "Graduation trip to LA and Vegas...",
+                "img": "http://localhost:3000/api/v1/trip/uyashd-afs981237-asiuf/picture"
+            }
+        ]
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    {
+        [
+            {
+                "uuid": "string",
+                "name": "string",
+                "desc": "string",
+                "img": "string"
+            }
+        ]
+    }
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Get a user's trips
+`GET /api/v1/trips/:username`
+
+Get all the trips associated with a username.
+
+If a authentication token is provided, then more trips will be displayed depending on the privacy settings.
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token (optional) |
+
+#### Path
+| | |
+|-|-|
+| `username` string | The handle for the Trek user account |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `404` | Not found |
+
+### Code samples for "Get a user's trips"
+```bash title="GET /api/v1/trips/:username"
+curl -L \
+    http://localhost:3000/api/v1/trips/gregork
+```
+
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response">
+    `status: 200`
+    ```json
+    {
+        [
+            {
+                "uuid": "skdhjf9-23iuhfsd-0iuas",
+                "name": "Public Grad Trip",
+                "desc": "Grad trip for others to reference :)",
+                "img": "http://localhost:3000/api/v1/trip/skdhjf9-23iuhfsd-0iuas/picture"
+            }
+        ]
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    {
+        [
+            {
+                "uuid": "string",
+                "name": "string",
+                "desc": "string",
+                "img": "string"
+            }
+        ]
+    }
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Get a trip
+`GET /api/v1/trip/:uuid`
+
+Get detailed trip information for the trip with the given UUID if the user is authorized.
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+
+#### Path
+| | |
+|-|-|
+| `uuid` string | The UUID of the trip |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+### Code samples for "Get a trip"
+
+```bash title="GET /api/v1/trip/:uuid"
+curl -L \
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/trip/alsdkfj-9123jl-asldfkj
+```
+
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response" default>
+    `status: 200`
+    ```json
+    {
+        "uuid": "alsdkfj-9123jl-asldfkj",
+        "name": "Graduation trip",
+        "desc": "Graduation trip to LA and Vegas…",
+        "dest": ["LA", "Vegas"],
+        "budget": { "lo": 500, "hi": 2000 },
+        "expenditures": [
+                            { "expenditure": "hotel", "cost": 400 },
+                            { "expenditure": "flight", "cost": 400 }
+                        ],
+        "date": { "start": 1715640000, "end": 1717087200 },
+        "todo": [
+                    "Stay at X hotel for 3 days",
+                    "Visit Y memorial and check out the gift shop"
+                ],
+        "img": "http://localhost:3000/api/v1/trip/alsdkfj-9123jl-asldfkj/picture",
+        "url": "http://localhost:5173/trip/alsdkfj-9123jl-asldfkj",
+        "owner": "gregork",
+        "members": ["gregork", "rtholmes", "rxg"],
+        "private": true
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    {
+        "uuid": "string",
+        "name": "string",
+        "desc": "string",
+        "dest": "Array<string>",
+        "budget": "{ lo: number, hi: number }",
+        "expenditures": "Array<{ expenditure: string, cost: number }>",
+        "date": "{ start: number, end: number }",
+        "todo": "Array<string>",
+        "notes": "string"
+        "img": "string",
+        "url": "string",
+        "owner": "string",
+        "members": "Array<string>",
+        "private": "boolean"
+    }
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Get a trip's map
+`GET /api/v1/trip/:uuid/map`
+
+Get a trip's map information for the trip with the given UUID if the user is authorized.
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+
+#### Path
+| | |
+|-|-|
+| `uuid` string | The UUID of the trip |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+### Code samples for "Get a trip's map"
+
+```bash title="GET /api/v1/trip/:uuid/map"
+curl -L \
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/trip/alsdkfj-9123jl-asldfkj/map
+```
+| measurement | units |
+| - | - |
+|`distance` | kilometers |
+| `time` | minutes |
+| `cost` | TBD |
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response" default>
+    `status: 200`
+    ```json
+    {
+        "notes": "<h3><p>This is where I go into detail about all the fun we are going to have, etc.</p></h3>",
+        "locations": [{
+            "title": "ICICS Building",
+            "address": "2366 Main Mall, Vancouver, BC V6T 1Z4",
+            "date": {"start": 1715640000, "end": 1715640000},
+            "transportation": {
+                "type": "bus",
+                "distance": 2,
+                "time": 5,
+                "cost": 10,
+                }
+            }
+        ]
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    {
+        "notes": "string",
+        "locations": [{
+            "title": "string",
+            "address": "string",
+            "date": {"start": "number", "end": "number"},
+            "transportation": {
+                "type": "string",
+                "distance": "number",
+                "time": "number",
+                "cost": "number",
+                }
+            }
+        ]
+    }
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Get a trip's picture
+`GET /api/v1/trip/:uuid/picture`
+
+Get the picture of the given trip.
+
+The authenticated user must have access permissions to the trip in order to see its picture.
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+| `Max-Width` number | maximum width of the image to return (required?) |
+| `Max-Height` number | maximum height of the image to return (required?) |
+
+
+#### Path
+| | |
+|-|-|
+| `uuid` string | The UUID of the trip |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `401` | Unauthorized |
+| `403` | Not found |
+
+### Code samples for "Get a trip's picture"
+
+```bash title="GET /api/v1/trip/:uuid/picture"
+curl -L \
+    -H "Max-Width: 400" \
+    -H "Max-Height: 400" \
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/trip/alsdkfj-9123jl-asldfkj/picture
+```
+- Responds with the picture with width and height equal or less than what was provided
+
+## Create a trip
+`POST /api/v1/trip`
+
+Create a new trip under the authenticated user’s name
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+
+#### Body
+| | |
+|-|-|
+| `name` string | Required. The name of the trip |
+| `desc` string | The description of the trip |
+| `budget` &#123; lo: number, hi: number &#125; | The budget of the trip |
+| `date` &#123; start: number, end: number &#125; | The date of the trip |
+| `private` boolean | Privacy setting of the trip |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `401` | Not authorized |
+
+### Code samples for "Create a trip"
+
+```bash title="POST /api/v1/trip"
+curl -L \
+    -X POST \
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/api/v1/trip \
+    -d '{"name": "gregorks Trip", "desc": "tmp grad trip", "private":true}'
+```
+
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response" default>
+    `status: 200`
+    ```json
+    {
+        "uuid": "aksjfh9320-oaf90-12iuhfiuas",
+        "name": "gregorks Trip",
+        "desc": "tmp grad trip",
+        "dest": [],
+        "budget": { "lo": 0, "hi": 0 },
+        "expenditures": [],
+        "date": { "start": 1715640000, "end": 1715640000 },
+        "todo": [],
+        "img": "http://localhost:3000/api/v1/trip/default/picture",
+        "url": "http://localhost:5173/trip/aksjfh9320-oaf90-12iuhfiuas",
+        "owner": "gregork",
+        "members": ["gregork"],
+        "private": true
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    {
+        "uuid": "string",
+        "name": "string",
+        "desc": "string",
+        "dest": "Array<string>",
+        "budget": "{ lo: number, hi: number }",
+        "expenditures": "Array<{ expenditure: string, cost: number }>",
+        "date": "{ start: number, end: number }",
+        "todo": "Array<string>",
+        "notes": "string"
+        "img": "string",
+        "url": "string",
+        "owner": "string",
+        "members": "Array<string>",
+        "private": "boolean"
+    }
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Update a trip
+`PUT /api/v1/trip/:uuid`
+
+Update a trip
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+
+#### Path
+| | |
+|-|-|
+| `uuid` string | The UUID of the trip |
+
+#### Body
+| | |
+|-|-|
+| `name` string | The new name of the trip |
+| `desc` string | The new description of the trip |
+| `dest` Array&lt;string&gt; | The new budget of the trip |
+| `budget` &#123; lo: number, hi: number &#125; | The new date of the trip |
+| `expenditures` Array&lt;&#123; expenditure: string, cost: number &#125;&gt; | The new expenditures of the trip |
+| `date` &#123; start: number, end: number &#125; | The new date of the trip |
+| `todo` Array&lt;string&gt; | The new todo items of the trip |
+| `img` string | The new image url of the trip |
+| `owner` string | The username of the new owner of the trip |
+| `members` Array&lt;string&gt; | The updated members of the trip |
+| `private` boolean| The new privacy setting of the trip |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `304` | Not modified |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+### Code samples for "Update a trip"
+
+```bash title="PUT /api/v1/trip/:uuid"
+curl -L \
+    -X PUT \
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/trip/aksjfh9320-oaf90-12iuhfiuas \
+    -d '{"todo": ["visit the Vegas sphere"]}'
+```
+
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response" default>
+    `status: 200`
+    ```json
+    {
+        "uuid": "aksjfh9320-oaf90-12iuhfiuas",
+        "name": "gregorks Trip",
+        "desc": "tmp grad trip",
+        "dest": [],
+        "budget": { "lo": 0, "hi": 0 },
+        "expenditures": [],
+        "date": { "start": 1715640000, "end": 1715640000 },
+        "todo": ["visit the Vegas sphere"],
+        "img": "http://localhost:3000/api/v1/trip/default/picture",
+        "url": "http://localhost:5173/trip/aksjfh9320-oaf90-12iuhfiuas",
+        "owner": "gregork",
+        "members": ["gregork"],
+        "private": true
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    {
+        "uuid": "string",
+        "name": "string",
+        "desc": "string",
+        "dest": "Array<string>",
+        "budget": "{ lo: number, hi: number }",
+        "expenditures": "Array<{ expenditure: string, cost: number }>",
+        "date": "{ start: number, end: number }",
+        "todo": "Array<string>",
+        "notes": "string"
+        "img": "string",
+        "url": "string",
+        "owner": "string",
+        "members": "Array<string>",
+        "private": "boolean"
+    }
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Update a trip's map
+`PUT /api/v1/trip/:uuid/map`
+
+Update a trip's map information
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+
+#### Path
+| | |
+|-|-|
+| `uuid` string | The UUID of the trip |
+
+#### Body
+| | |
+|-|-|
+| `notes` string | The new notes for the trip's map |
+| `locations` | The new locations of the trip |
+```json title="locations schema"
+{
+    "locations": [{
+        "title": "string",
+        "address": "string",
+        "date": {"start": "number", "end": "number"},
+        "transportation": {
+            "type": "string",
+            "distance": "number",
+            "time": "number",
+            "cost": "number",
+            }
+        }
+    ]
+}
+```
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `304` | Not modified |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+### Code samples for "Update a trip's map"
+
+```bash title="PUT /api/v1/trip/:uuid/map"
+curl -L \
+    -X PUT \
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/trip/aksjfh9320-oaf90-12iuhfiuas \
+    -d '{"locations": []}'
+```
+
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response" default>
+    `status: 200`
+    ```json
+    {
+        "notes": "<h3><p>This is where I go into detail about all the fun we are going to have, etc.</p></h3>",
+        "locations": []
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    {
+        "notes": "string",
+        "locations": [{
+            "title": "string",
+            "address": "string",
+            "date": {"start": "number", "end": "number"},
+            "transportation": {
+                "type": "string",
+                "distance": "number",
+                "time": "number",
+                "cost": "number",
+                }
+            }
+        ]
+    }
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Delete a trip
+`DELETE /api/v1/trip/:uuid`
+
+Delete a trip
+Protect against cross-site forgery? (Auth0)
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+
+#### Path
+| | |
+|-|-|
+| `uuid` string | The UUID for the trip |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `204` | No Content |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+### Code samples for "Delete a trip"
+
+```bash title="DELETE /api/v1/trip/:uuid"
+curl -L \
+    -X DELETE
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/trip/askdjh-eqfhu9823-iquwef
+```
+- No response body

@@ -1,0 +1,40 @@
+---
+sidebar_position: 1
+---
+# Quickstart
+
+## Goals and Motivations
+- Cover all of the minimal, standard, and stretch goals
+  - While all stretch goals will have appropriate documentation and endpoints to support their functionality, not all of
+   their endpoints may be implemented.
+- Have endpoints that correspond to functionality on every frontend page of Trek so far
+- Follow best practices for API design, including documentation, testing, and standards as documented by the relevant RFCs
+
+## Group Discussion
+- There will be no semantic versioning
+- There will be global server errors that are as informative as possible *during the development phase*
+- All dates are represented in Unix Epoch time
+
+## Getting Started
+*Add description of what a REST API is and how it works here*
+
+The proposed URI for the API is /api/v1, which will be incremented on any release updates. To avoid the API versioning
+to increment too quickly, we will make fewer but larger updates to the API as required.
+
+The release of the next API version will deprecate all prior API versions, but the prior API versions will remain
+available for one year after its deprecation.
+
+### Authentication
+Many of the endpoints of Trek will not be accessible without authenticating a request.
+
+At the moment, the proposed authentication method will be Auth0 implementing OAuth2. Auth0 is preferred as it has an
+implementation of OAuth2 already, in addition to support for protecting against attacks such as cross-site request forgery.
+
+Documentation is available at https://auth0.com/docs/api/authentication and https://oauth.net/2/. Requests that require
+authentication will require a “Authorization: Bearer” token in the request’s header resulting from a successful OAuth
+client-server token exchange.
+
+### Supported Datatypes
+At the moment, the only proposed supported datatype is JSON. JSON is one of the most popular formats and is very
+compatible with JavaScript.
+

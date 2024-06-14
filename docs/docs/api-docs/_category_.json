@@ -1,0 +1,8 @@
+{
+  "label": "REST API Documentation",
+  "position": 200,
+  "link": {
+    "type": "generated-index",
+    "description": "Trek REST API documentation"
+  }
+}
