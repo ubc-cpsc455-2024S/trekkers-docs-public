@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[735],{7890:s=>{s.exports=JSON.parse('{"tags":[{"label":"WIP","permalink":"/trekkers-docs-public/blog/tags/wip","count":1}]}')}}]);

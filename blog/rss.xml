@@ -4,15 +4,91 @@
         <title>Trekkers Blog</title>
         <link>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog</link>
         <description>Trekkers Blog</description>
-        <lastBuildDate>Tue, 05 Mar 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 16 Jun 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
+            <title><![CDATA[A Deep Dive into Trekkers Project Workflow]]></title>
+            <link>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog/project-workflow</link>
+            <guid>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog/project-workflow</guid>
+            <pubDate>Sun, 16 Jun 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Our primary organizational goal at Trekkers is to develop software using the best industry practices we learn from workshops, lab assignments, and our project experiences. When building Trek, we aimed to adopt Agile values and principles effectively in our project workflow.]]></description>
+            <content:encoded><![CDATA[<p>Our primary organizational goal at <strong>Trekkers</strong> is to develop software using the best industry practices we learn from workshops, lab assignments, and our project experiences. When building Trek, we aimed to adopt Agile values and principles effectively in our project workflow.</p>
+<p>The CPSC 455 course, titled <em>"Applied Industry Practices,"</em> emphasizes industry practices. However, being Agile is not about merely adopting the most popular industry practices but about embracing practices that support our principles and values. Simply following the most popular "Agile" practices doesn't make us an Agile development team. We strive to be more than just another shop that claims to be Agile.</p>
+<blockquote>
+<p><em><strong><a href="https://agilemanifesto.org/" target="_blank" rel="noopener noreferrer">Manifesto for Agile Software Development:</a></strong></em></p>
+<ul>
+<li><strong>Individuals and interactions</strong> over processes and tools</li>
+<li><strong>Working software</strong> over comprehensive documentation</li>
+<li><strong>Customer collaboration</strong> over contract negotiation</li>
+<li><strong>Responding to change</strong> over following a plan</li>
+</ul>
+</blockquote>
+<p>In our development journey, we have chosen to follow Agile principles because they align with our commitment to continuous improvement, collaboration, and delivering value to our users. Our adaptation of Scrum reflects our dedication to these principles, the <strong><a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/docs/terms-of-reference#trekkers-code-code-of-conduct">Trekkers Code</a></strong>, and our desire to create an effective and efficient workflow that supports our project goals.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="our-version-of-scrum">Our Version of Scrum<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/project-workflow#our-version-of-scrum" class="hash-link" aria-label="Direct link to Our Version of Scrum" title="Direct link to Our Version of Scrum">​</a></h2>
+<p>Our version of Scrum aims to be as Agile as possible while meeting all project requirements and learning objectives.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="weekly-sprint-schedule">Weekly Sprint Schedule<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/project-workflow#weekly-sprint-schedule" class="hash-link" aria-label="Direct link to Weekly Sprint Schedule" title="Direct link to Weekly Sprint Schedule">​</a></h3>
+<p>Individual (non-Trekkers) Course Assignments and Deadlines are <em>italicized</em></p>
+<table><thead><tr><th>Day</th><th>Schedule</th></tr></thead><tbody><tr><td><strong>Sunday</strong></td><td><strong>Start of Sprint Meeting @ 10:00 AM</strong><br><strong>Bi-weekly Formal Scrum due @ 10:00 pm</strong></td></tr><tr><td><strong>Monday</strong></td><td><em>Bi-Weekly Individual Assignments Due @ 10:00 PM</em></td></tr><tr><td><strong>Tuesday</strong></td><td></td></tr><tr><td><strong>Wednesday</strong></td><td></td></tr><tr><td><strong>Thursday</strong></td><td><strong>Mid-Sprint Check-in Meeting @ 5:00 PM</strong><br>Planning for next sprint or WIP Progress presentation.</td></tr><tr><td><strong>Friday</strong></td><td><em>Bi-Weekly Individual Workshop Survey Due on 11:59 PM</em></td></tr><tr><td><strong>Saturday</strong></td><td><strong>End of Sprint (Push @ 10:00 AM)</strong><br><strong>Sprint Review:</strong> Read other members' scrum reports.</td></tr></tbody></table>
+<ul>
+<li>Our sprint begins on <strong>Sunday @ 10:00 AM</strong> and ends on <strong>Saturday @ 10:00 AM</strong>.</li>
+<li>During the <em><strong>Start of Sprint Meeting</strong></em> we review our scrum report (Sprint Review) on what we have accomplished in the past sprint, and formalize new sprint goals.</li>
+<li>During the <em><strong>Mid-Sprint Check-in Meeting</strong></em> (happens during Labs), we do a brief check-in on the progress of our sprints.<!-- -->
+<ul>
+<li>Based on our progress, we do some planning for what we should do on the next sprint</li>
+<li>On weeks where there are <strong>Workshop Presentations</strong>, we do planning for presentations, writing documentations, etc.</li>
+</ul>
+</li>
+<li><strong>Every Saturday @ 10:00 AM</strong> is the <strong>End of Sprint</strong>. Everything should be pushed by then.<!-- -->
+<ul>
+<li>By noon, every completed issues that have not been closed yet should be closed.</li>
+<li>By noon, everyone should complete a very brief scrum report. We use these weekly internal scrum reports for bi-weekly external (submittable) scrum reports.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="meeting-agenda-template">Meeting Agenda Template<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/project-workflow#meeting-agenda-template" class="hash-link" aria-label="Direct link to Meeting Agenda Template" title="Direct link to Meeting Agenda Template">​</a></h3>
+<p>Our Scrum meetings are structured on agile principles of communication, interaction, and collaboration. We have structured a meeting agenda <strong>flexible</strong> template that lets us stay focused on reviewing sprints and internal demos, while letting us plan for our next sprint.</p>
+<p>Our meeting agenda template exists as a GitHub issues template (screenshots below).</p>
+<p><img decoding="async" loading="lazy" alt="Issue Template" src="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/assets/images/issue-template-531d9cc97eed20dd7b8984fea8cf372b.png" width="650" height="91" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="Issue Template 2" src="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/assets/images/issue-template-2-4f79f808f05c72f94e7197ad6b37f8d3.png" width="655" height="708" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="github-issues-for-project-management">GitHub Issues for Project Management<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/project-workflow#github-issues-for-project-management" class="hash-link" aria-label="Direct link to GitHub Issues for Project Management" title="Direct link to GitHub Issues for Project Management">​</a></h3>
+<p>We decided <strong>not</strong> to use GitHub Projects because we couldn't adjust the visibility settings of the project board. We wanted to create a collaborative environment where team members could actively update their progress without it being publicly visible to other classmates.</p>
+<p>Instead, we are using GitHub Issues as our main platform for project management. Our belief is that with effective scrum meetings, the utilization of GitHub Issues can facilitate clear communication and tracking of tasks and promote Agility. Here's how we leverage GitHub Issues in our workflow:</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="creating-issues">Creating Issues<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/project-workflow#creating-issues" class="hash-link" aria-label="Direct link to Creating Issues" title="Direct link to Creating Issues">​</a></h4>
+<p>Mostly after each scrum meeting, every task, bug, or feature is logged as an issue. This ensures that all work items are tracked and nothing is missed.
+Issues are tagged with appropriate labels (e.g., frontend, backend, bug, documentation) to categorize and prioritize them effectively.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="assigning-issues">Assigning Issues<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/project-workflow#assigning-issues" class="hash-link" aria-label="Direct link to Assigning Issues" title="Direct link to Assigning Issues">​</a></h4>
+<p>During the scrum meetings, each issue is assigned to a specific team member based on their expertise and current workload.
+We use GitHub's assignee feature to make sure responsibilities are clear.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="tracking-progress">Tracking Progress:<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/project-workflow#tracking-progress" class="hash-link" aria-label="Direct link to Tracking Progress:" title="Direct link to Tracking Progress:">​</a></h4>
+<p>Issues are updated regularly with comments and status updates. We use Discord as our primary platform for communication, including discussions of issues. Our Discord consists of channels for each type of work (frontend, backend, documentation, etc). We associate branches with issues using GitHub's branch linking feature, which makes peer-review easier.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="sprint-planning-and-closing-issues">Sprint Planning and Closing Issues<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/project-workflow#sprint-planning-and-closing-issues" class="hash-link" aria-label="Direct link to Sprint Planning and Closing Issues" title="Direct link to Sprint Planning and Closing Issues">​</a></h4>
+<p>At the start of each sprint, we create, review, and prioritize issues. High-priority tasks are marked with the "PRIORITY" tag. During the End of Sprint, we review all closed issues. We use the scrum meeting agenda (as an issue), where we link the closed issues for discussions.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="continuous-integration-and-deployment">Continuous Integration and Deployment<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/project-workflow#continuous-integration-and-deployment" class="hash-link" aria-label="Direct link to Continuous Integration and Deployment" title="Direct link to Continuous Integration and Deployment">​</a></h2>
+<p>To ensure the quality and stability of our software, we have set up continuous integration and deployment (CI/CD) pipelines:</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="automated-testing">Automated Testing<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/project-workflow#automated-testing" class="hash-link" aria-label="Direct link to Automated Testing" title="Direct link to Automated Testing">​</a></h3>
+<p>Every push to the repository's "progress" branch triggers automated tests. This helps us catch issues early in the development cycle.
+We aim to maintain a high code coverage to ensure the robustness of our application.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="code-reviews">Code Reviews<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/project-workflow#code-reviews" class="hash-link" aria-label="Direct link to Code Reviews" title="Direct link to Code Reviews">​</a></h3>
+<p>All code changes are submitted through pull requests (PRs). PRs must pass automated tests and be reviewed by at least one other team member before being merged. This practice helps us maintain code quality and fosters knowledge sharing within the team.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="continuous-deployment">Continuous Deployment<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/project-workflow#continuous-deployment" class="hash-link" aria-label="Direct link to Continuous Deployment" title="Direct link to Continuous Deployment">​</a></h3>
+<p>Once a PR is approved and merged, our CI/CD pipeline automatically deploys the latest code to our private staging environment.
+We perform final checks in the staging environment before promoting changes to the released demo environment along with release notes published on our website.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="our-workflow-is-evolving">Our Workflow is Evolving<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/project-workflow#our-workflow-is-evolving" class="hash-link" aria-label="Direct link to Our Workflow is Evolving" title="Direct link to Our Workflow is Evolving">​</a></h2>
+<p>By adhering to Agile principles and customizing our workflow to fit our team's needs, we strive to deliver high-quality software efficiently. Our structured yet flexible approach to Scrum, combined with the effective use of GitHub Issues and CI/CD pipelines, enables us to stay organized, collaborative, and adaptive. We continuously seek to improve our processes and deliver value through iterative development and frequent feedback during scrum meetings and workshop design reviews.</p>
+<p>Our workflow is constantly evolving as we learn and adapt. We are committed to refining our practices, incorporating new insights, and staying responsive to the changing needs of our project and team. This continuous evolution helps us stay agile and ensures that we can meet our goals effectively.</p>
+<p>We hope that our detailed project workflow provides insight into how we manage our development process and can serve as our own reference for our future development journeys.</p>]]></content:encoded>
+            <category>project</category>
+            <category>workflow</category>
+            <category>project managment</category>
+            <category>agile</category>
+        </item>
+        <item>
             <title><![CDATA[Work In Progress 2]]></title>
             <link>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog/wip-2</link>
             <guid>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog/wip-2</guid>
-            <pubDate>Tue, 05 Mar 2024 00:00:00 GMT</pubDate>
+            <pubDate>Sat, 08 Jun 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[All members of Trekkers are thrilled to share our second work-in-progress update and introduce the first pre-release (v0.1.0) of Trek.]]></description>
             <content:encoded><![CDATA[<p>All members of Trekkers are thrilled to share our second work-in-progress update and introduce the first pre-release (v0.1.0) of Trek.</p>
 <p>In <strong>Progress 2</strong>, we have finalized our app structure, including the high-level React component structure, and developed front-end interfaces for the main features of our minimal viable product (MVP).</p>
