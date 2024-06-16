@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './styles.module.css';
 import Chip from '@mui/material/Chip';
-// import { LinkedInIcon, LinkIcon } from '@mui/icons-material';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import LinkIcon from '@mui/icons-material/Link';
 import Link from '@mui/material/Link';
 import { courseTeam, developmentTeam } from "../../people";
 
@@ -44,8 +45,8 @@ const ProfileCard = ({ name, pictureLink, roles, websiteLink, linkedInLink }) =>
         {chips}
       </div>
       <div className={styles.linksContainer}>
-        {/* {websiteLink && (<Link href={websiteLink} color="inherit" target="_blank"> <LinkIcon /> </Link>)}
-        {linkedInLink && (<Link href={linkedInLink} color="inherit" target="_blank"> <LinkedInIcon /> </Link>)} */}
+        {websiteLink && (<Link href={websiteLink} color="inherit" target="_blank"> <LinkIcon /> </Link>)}
+        {linkedInLink && (<Link href={linkedInLink} color="inherit" target="_blank"> <LinkedInIcon /> </Link>)}
       </div>
     </div>
   );
@@ -58,7 +59,7 @@ const TeamProfileCards = () => {
       <h2>Built by Travellers</h2>
       <div className={styles.trekkersCard}>
         <div className={styles.trekkersSlides}>
-          <img src='/trekkers-docs-public/img/Trekkers_About.jpeg' />
+          <img src='/trekkers-docs-public/img/Trekkers_About.jpeg'  alt="trekkers  Logo" />
         </div>
         <div className={styles.aboutDescriptionContainer}>
           <div style={{ display: "block", gap: 0, justifyContent: "right" }}>
@@ -136,7 +137,7 @@ const TeamProfileCards = () => {
         </p>
 
         <p className={styles.aboutDescription}>
-          Many teaching assistants who facilitated the course and helped the development of Trek include Cathy Yang, Davis Song, Yixuan Li, Michelle Kim, and Mahmoud Al Khatib. 
+          Many teaching assistants who facilitated the course and helped the development of Trek include Cathy Yang, Davis Song, Yixuan Li, Michelle Kim, and Mahmoud Al Khatib.
           And industry professionals who provided workshops and guidance include Ben Cheung.
         </p>
       </div>
