@@ -2,9 +2,9 @@ export const developmentTeam = [
     {
         name: "Jacob Zhu",
         roles: ["Developer"],
-        pictureLink: "",
+        pictureLink: "/trekkers-docs-public/img/jacob.jpg",
         websiteLink: "",
-        linkedInLink: "",
+        linkedInLink: "www.linkedin.com/in/jacob-zhu-a70512212",
     },
     {
         name: "Justin Lieu",
