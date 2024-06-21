@@ -423,6 +423,7 @@ curl -L \
     ```json
     [
       {
+        "date": number,
         "events": [
           "time": number,
           "type": "destination" | "travel",
@@ -747,6 +748,95 @@ curl -L \
             }
         ]
     }
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Update a trip's timeline
+`PUT /api/v1/trip/:uuid/timeline`
+
+Update a trip's timeline information.
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+
+#### Path
+| | |
+|-|-|
+| `uuid` string | The UUID of the trip |
+
+#### Body
+| | |
+|-|-|
+| `date` number | Day (in Epoch time) this portion of the trip is occurring |
+| `events` obj[] | The events of the trip |
+| `events.time` number | The time of this event (Epoch time from Jan 1, 1970) |
+| `events.type` "destination" \| "travel"| Specify whether is this travel or destination information |
+| `events.details` string | The details of this event |
+| `events.details.id` string | (Destinations) Destination ID |
+| `events.details.name` string | Name of the event |
+| `events.details.desc` string | (Destinations) Description of destination |
+| `events.cost` number | Cost of the event |
+| `events.duration` number | Duration of the event |
+```json title="timeline schema"
+
+```
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `304` | Not modified |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+### Code samples for "Update a trip's timeline"
+
+```bash title="PUT /api/v1/trip/:uuid/timeline"
+curl -L \
+    -X PUT \
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/trip/aksjfh9320-oaf90-12iuhfiuas/timeline \
+    -d '[{"date": 1718950662, events: []}]'
+```
+
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response" default>
+    `status: 200`
+    ```json
+    [
+      {
+        "date": 1718950662,
+        "events": []
+      }
+    ]
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    [
+      {
+        "date": number,
+        "events": [
+          "time": number,
+          "type": "destination" | "travel",
+          "details": {
+            "id"?: string,
+            "name": string,
+            "desc"?: string
+          },
+          "cost": number,
+          "duration": number
+        ]
+      }
+    ]
     ```
 
   </TabItem>
