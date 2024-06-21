@@ -2,33 +2,25 @@ import React from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
-// import CCLogo from '@site/static/img/trekkerscompanion-logo-1.svg';
 import Admonition from '@theme/Admonition';
 import Link from '@docusaurus/Link';
-import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import { version, availabilty } from '@site/src/version';
 
 
-
-// Edit the Constants if you are just updating the version number
-const preReleaseVersion = version;
 
 
 
 export default function HomepageFeatures() {
+
+  // import json object from 
+  const { version } = require('../../../static/version.json');
+
+
   return (
     <section className={styles.features}>
       <div className="container" id="demo-container">
 
-        {availabilty && <Admonition type="warning" title="Service Notice">
-          <b>{availabilty}</b>
-        </Admonition>}
-
         <Admonition type="info" title="new release!">
-          <p>First Release Version {preReleaseVersion} has been released. For more information, please refer to the <Link to={`/docs/release-notes/${preReleaseVersion}`}>Release Notes</Link></p>
+          <p>First Release Version {version} has been released. For more information, please refer to the <Link to={`/docs/release-notes/${version}`}>Release Notes</Link></p>
         </Admonition>
 
         <div className={styles.row}>
@@ -40,7 +32,7 @@ export default function HomepageFeatures() {
               </div>
             </div>
             <div className="text--center padding-horiz--md">
-              <Heading as="h3">Pre-Release Demo (v{preReleaseVersion})</Heading>
+              <Heading as="h3">Pre-Release Demo (v{version})</Heading>
               <p>A trip planner built for you!</p>
               <div className={styles.buttons}>
                 <Link
