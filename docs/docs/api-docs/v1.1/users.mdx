@@ -1,0 +1,482 @@
+---
+sidebar_position: 2
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Users
+
+## Get a user
+`GET /api/v1/user/:username`
+
+Get publicly available information about a user
+
+Depending on the user’s privacy settings, some user information may not be present.
+
+### Parameters
+
+#### Path
+| | |
+|-|-|
+| `username` string | The handle for the Trek user account |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `404` | Not found |
+
+### Code samples for "Get a user"
+
+```bash title="GET /api/v1/user/:username"
+curl -L \
+    http://localhost:3000/api/v1/user/gregork
+```
+
+<Tabs className="response-examples">
+  <TabItem value="priv" label="Private profile response" default>
+    `status: 200`
+    ```json
+    {
+        "name": "Gregor Kiczales",
+        "username": "gregork",
+        "image": "http://localhost:3000/api/v1/user/gregork/picture"
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="pub" label="Public profile response">
+    `status: 200`
+    ```json
+    {
+        "name": "Gregor Kiczales",
+        "username": "gregork",
+        "image": "http://localhost:3000/api/v1/user/gregork/picture",
+        "description": "Father of all CS students, king of the natural recursion, and the master of the AOP.",
+        "links": [
+            {
+                "type": "twitter",
+                "url": "https://twitter.com/gregork"
+            },
+            {
+                "type": "site",
+                "url": "https://cs.ubc.ca/~gregor"
+            }
+        ],
+        "interests": ["Island", "Ocean", "Hiking", "Nature", "Recursion"]
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    {
+        "name": "string",
+        "username": "string",
+        "image": "string",
+        "description?": "string",
+        "links?": "Array<{type: string, url: string}">,
+        "interests?": "Array<string>",
+    }
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Get a user's profile picture
+`GET /api/v1/user/:username/picture`
+
+Get the profile picture of the given username
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `Max-Width` number | maximum width of the image to return (required?) |
+| `Max-Height` number | maximum height of the image to return (required?) |
+
+#### Path
+| | |
+|-|-|
+| `username` string | The handle for the Trek user account |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `404` | Not found |
+
+### Code samples for "Get a user's profile picture"
+```bash title="GET /api/v1/user/:username/picture"
+curl -L \
+    -H "Max-Width: 400" \
+    -H "Max-Height: 400" \
+    http://localhost:3000/api/v1/user/gregork/picture
+```
+
+## Get the authenticated user
+`GET /api/v1/user`
+
+Get profile information about the currently authenticated user.
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `401` | Unauthorized |
+
+### Code samples for "Get the authenticated user"
+
+```bash title="GET /api/v1/user"
+curl -L \
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/user
+```
+
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response" default>
+    `status: 200`
+    ```json
+    {
+        "userId": "ksjhfoi-i32aiufh-192oh"
+        "name": "Gregor Kiczales",
+        "username": "gregork",
+        "image": "http://localhost:3000/api/v1/user/gregork/picture",
+        "description": "Father of all CS students, king of the natural recursion, and the master of the AOP.",
+        "links": [
+            {
+                "type": "twitter",
+                "url": "https://twitter.com/gregork"
+            },
+            {
+                "type": "site",
+                "url": "https://cs.ubc.ca/~gregor"
+            }
+        ],
+        "interests": ["Island", "Ocean", "Hiking", "Nature", "Recursion"]
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    {
+        "userId": "string",
+        "name": "string",
+        "username": "string",
+        "image": "string",
+        "description": "string",
+        "links": "Array<{type: string, url: string}">,
+        "interests": "Array<string>",
+    }
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Get authenticated user settings
+`GET /api/v1/user/settings`
+
+Get all the settings for the currently authenticated user
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `401` | Unauthorized |
+
+### Code samples for "Get authenticated user settings"
+
+```bash title="GET /api/v1/user/settings"
+curl -L \
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/user/settings
+```
+
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response" default>
+    `status: 200`
+    ```json
+    {
+        "accountLimitedDeals": "false",
+        "accountNewsletterNotifications": "false",
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    {
+        "accountLimitedDeals": "boolean",
+        "accountNewsletterNotifications": "boolean",
+    }
+
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Create a new user
+`POST /api/v1/user`
+
+Creates a new user
+
+### Parameters
+
+#### Body
+| | |
+|-|-|
+| `name` string | The new user's name |
+| `username` string | The new user's username |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `403` | Forbidden (Username taken) |
+
+### Code samples for "Create a new user"
+
+```bash title="POST /api/v1/user"
+curl -L \
+    -X POST \
+    http://localhost:3000/api/v1/user/gregork/settings \
+    -d '{"name": "Ron Garcia", "username": "rxg"}'
+```
+
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response" default>
+    `status: 200`
+    ```json
+    {
+        "userId": "a87sdhf-9h3iuhfsd-i923hie"
+        "name": "Ron Garcia",
+        "username": "rxg",
+        "image": "http://localhost:3000/api/v1/user/default/picture",
+        "description": "",
+        "links": [],
+        "interests": []
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    {
+        "userId": "string",
+        "name": "string",
+        "username": "string",
+        "image": "string",
+        "description": "string",
+        "links": "Array<{type: string, url: string}">,
+        "interests": "Array<string>",
+    }
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Update a user's settings
+`PUT /api/v1/user/:username/settings`
+
+Update the settings of a user with specified username
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+
+#### Path
+| | |
+|-|-|
+| `username` string | The handle of the Trek user |
+
+#### Body
+| | |
+|-|-|
+| `accountLimitedDeals` boolean | Email for limited deals toggle |
+| `accountNewsletterNotifications` boolean | Email for newsletter toggle |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `304` | Not modified |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+### Code samples for "Update a user's settings"
+
+```bash title="PUT /api/v1/user/:username/settings"
+curl -L \
+    -X PUT \
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/user/gregork/settings \
+    -d '{"accountLimitedDeals": "true"}'
+```
+
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response" default>
+    `status: 200`
+    ```json
+    {
+        "accountLimitedDeals": "true",
+        "accountNewsletterNotifications": "false",
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    {
+        "accountLimitedDeals": "boolean",
+        "accountNewsletterNotifications": "boolean",
+    }
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Edit a user's profile
+`PUT /api/v1/user/:username`
+
+Edits a user's profile information
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+
+#### Path
+| | |
+|-|-|
+| `username` string | The handle of the Trek user |
+
+#### Body
+| | |
+|-|-|
+| `name` string | The new name of the user |
+| `username` string | The new handle of the Trek user |
+| `image` string | The new URL of the profile picture |
+| `description` string | The new description of the Trek user |
+| `links` Array&lt;&#123;type: string, url: string&#125;&gt; | The new links of the Trek user |
+| `interests` Array&lt;string&gt; | The new interests of the Trek user |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `304` | Not modified |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+### Code samples for "Edit a user's profile"
+
+```bash title="PUT /api/v1/user/:username"
+curl -L \
+    -X PUT
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/user/:username \
+    -d '{"description":"Professor at the University of British Columbia. Father of all CS students, king of the natural recursion, and the master of the AOP."}'
+```
+
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response" default>
+    `status: 200`
+    ```json
+    {
+        "userId": "ksjhfoi-i32aiufh-192oh"
+        "name": "Gregor Kiczales",
+        "username": "gregork",
+        "image": "http://localhost:3000/api/v1/user/gregork/picture",
+        "description": "Professor at the University of British Columbia. Father of all CS students, king of the natural recursion, and the master of the AOP.",
+        "links": [
+            {
+                "type": "twitter",
+                "url": "https://twitter.com/gregork"
+            },
+            {
+                "type": "site",
+                "url": "https://cs.ubc.ca/~gregor"
+            }
+        ],
+        "interests": ["Island", "Ocean", "Hiking", "Nature", "Recursion"]
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    {
+        "userId": "string",
+        "name": "string",
+        "username": "string",
+        "image": "string",
+        "description": "string",
+        "links": "Array<{type: string, url: string}">,
+        "interests": "Array<string>",
+    }
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Delete a user
+`DELETE /api/v1/user/:username`
+
+Deletes the user with the specified username
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+
+#### Path
+| | |
+|-|-|
+| `username` string | The handle of the Trek user |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `204` | No Content |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+### Code samples for "Delete a user"
+
+```bash title="DELETE /api/v1/user/:username"
+curl -L \
+    -X DELETE
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/user/:username
+```
+- No response body
