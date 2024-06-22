@@ -1,0 +1,49 @@
+---
+sidebar_position: 1
+---
+# Quickstart
+
+## Getting Started
+Welcome to the Trekkers API! Our API is designed to be flexible, easy-to-use, and secure.
+
+Our goals while designing the API were the following:
+- Cover all of the minimal, standard, and stretch goals
+  - While all stretch goals will have appropriate documentation and endpoints to support their functionality, not all of
+   their endpoints may be implemented.
+- Have endpoints that correspond to functionality on every frontend page of Trek so far
+- Follow best practices for API design, including documentation, testing, and standards as documented by the relevant RFCs
+
+The API is a REST API, which means accessing the API is done entirely through HTTP requests to our backend
+server. Our API has endpoints that implement the following verbs:
+- **GET**: used to read a resource from our server
+- **PUT**: used to create or update a resource
+- **POST**: used to add new data (like trips)
+- **DELETE**: used to delete a resource from the server
+
+To learn more about how to make requests to a REST API, we recommend *[this tutorial](https://www.freecodecamp.org/news/how-to-fetch-data-from-an-api-using-the-fetch-api-in-javascript/)*.
+During development, our REST API is hosted at http://localhost:3000/api/v1.
+
+The URI for the API is /api/v1, which will be incremented on any release updates. To avoid the API version
+incrementing too quickly, our development philosophy is to make fewer but larger API changes.
+
+The release of the next API version will deprecate all prior API versions, but the prior API versions will remain
+available for one year after its deprecation.
+
+Note: while Trek is under heavy development, lots of the API will be quite verbose in logging. However, for security reasons, the production
+API will not give out as much debugging information directly to the caller of the API.
+
+### Authentication
+Many of the endpoints of Trek will not be accessible without authenticating a request.
+
+At the moment, the authentication method will be Auth0 implementing OAuth2. Auth0 is preferred as it has an
+implementation of OAuth2 already, in addition to support for protecting against attacks such as cross-site request forgery.
+
+Documentation is available at https://auth0.com/docs/api/authentication and https://oauth.net/2/. Requests that require
+authentication will require a “Authorization: Bearer” token in the request’s header resulting from a successful OAuth
+client-server token exchange.
+
+### Supported Datatypes
+At the moment, the only proposed supported datatype is JSON. JSON is one of the most popular formats and is very
+compatible with JavaScript.
+
+All dates are stored in **[Unix Epoch](https://en.wikipedia.org/wiki/Unix_time)** time.

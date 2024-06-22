@@ -10,7 +10,10 @@ import TabItem from '@theme/TabItem';
 ## List Trips
 `GET /api/v1/trips`
 
-Get all the trips associated with the authenticated user
+Get all the trips associated with the authenticated user.
+
+Note: this endpoint does not include all information about the trips.
+For more information about a trip see [Get a trip](#get-a-trip)
 
 ### Parameters
 
@@ -145,6 +148,8 @@ curl -L \
 
 Get detailed trip information for the trip with the given UUID if the user is authorized.
 
+The destinations in the response are in order from first to last in the trip information.
+
 ### Parameters
 
 #### Header
@@ -195,7 +200,19 @@ curl -L \
         "url": "http://localhost:5173/trip/alsdkfj-9123jl-asldfkj",
         "owner": "gregork",
         "members": ["gregork", "rtholmes", "rxg"],
-        "private": true
+        "private": true,
+        "destinations": [
+          {
+            "id": "abcde-12345-asdfk",
+            "name": "Capilano Suspension Bridge",
+            "desc": "a simple suspension bridge crossing the Capilano River in Upper Capilano, BC"
+          },
+          {
+            "id": "asdfk-10239-asdfj2",
+            "name": "Lake Louise",
+            "desc": "a glacial lake within Banff National Park in Alberta, Canada"
+          }
+        ]
     }
     ```
 
@@ -217,7 +234,8 @@ curl -L \
         "url": "string",
         "owner": "string",
         "members": "Array<string>",
-        "private": "boolean"
+        "private": "boolean",
+        "destinations": "Array<{ id: string, name: string, desc: string }>"
     }
     ```
 
@@ -304,6 +322,125 @@ curl -L \
 
   </TabItem>
 </Tabs>
+
+## Get a trip's timeline
+`GET /api/v1/trip/:uuid/timeline`
+
+Get the timeline information for a given trip.
+
+The authenticated user must have access permissions to the trip in order to see its timeline.
+
+All timestamps in the trip timeline are in Epoch time - conversions must be done to display
+the information in local times.
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+
+#### Path
+| | |
+|-|-|
+| `uuid` string | The UUID of the trip |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+### Code samples for "Get a trip's timeline"
+```bash title="GET /api/v1/trip/:uuid/timeline"
+curl -L \
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/trip/alsdkfj-9123jl-asldfkj/timeline
+```
+| measurement | units |
+| - | - |
+| `time` | Epoch |
+| `duration` | minutes |
+| `cost` | TBD |
+
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response" default>
+    `status: 200`
+    ```json
+    [
+      {
+        "date": 1718175600,
+        "events": [
+          {
+            "time": 1718200800,
+            "type": "destination",
+            "details": {
+              "id": "askdfjl-890712-asdhjk",
+              "name": "Vancouver International Airport (YVR)",
+              "desc": "The second-busiest airport in Canada, a key hub for all trips on the West Coast"
+            },
+            "cost": 100,
+            "duration": 240
+          },
+          {
+            "time": 1718215200,
+            "type": "travel",
+            "details": {
+              "name": "Fly"
+            },
+            "cost": 50,
+            "duration": 300
+          },
+          {
+            "time": 1718233200,
+            "type": "destination",
+            "details": {
+              "id": "asdkfj-12309ff-asdflk",
+              "name": "Los Angeles International Airport (LAX)",
+              "desc": "The primary airport serving Los Angeles and the surrounding region in California"
+            },
+            "cost": 200,
+            "duration": 120
+          },
+          {
+            "time": 1718240400,
+            "type": "travel",
+            "details": {
+              "name": "Transit"
+            },
+            "cost": 20,
+            "duration": 120
+          },
+        ]
+      }
+    ]
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    [
+      {
+        "events": [
+          "time": number,
+          "type": "destination" | "travel",
+          "details": {
+            "id"?: string,
+            "name": string,
+            "desc"?: string
+          },
+          "cost": number,
+          "duration": number
+        ]
+      }
+    ]
+    ```
+
+  </TabItem>
+</Tabs>
+
 
 ## Get a trip's picture
 `GET /api/v1/trip/:uuid/picture`

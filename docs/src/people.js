@@ -2,23 +2,23 @@ export const developmentTeam = [
     {
         name: "Jacob Zhu",
         roles: ["Developer"],
-        pictureLink: "",
+        pictureLink: "/trekkers-docs-public/img/jacob.jpg",
         websiteLink: "",
-        linkedInLink: "",
+        linkedInLink: "www.linkedin.com/in/jacob-zhu-a70512212",
     },
     {
         name: "Justin Lieu",
         roles: ["Developer"],
-        pictureLink: "https://media.discordapp.net/attachments/1194688094566367315/1246658687444193421/IMG_9662.JPG?ex=665d30e0&is=665bdf60&hm=4c56019834734dcbe35a25a11e00a452934e67bfc0c037963442dd9a20ab6868&=&format=jpeg&width=452&height=452",
+        pictureLink: "/trekkers-docs-public/img/justin.jpg",
         websiteLink: "",
         linkedInLink: "https://www.linkedin.com/in/justin-lieu/",
     },
     {
         name: "Kevin Xu",
         roles: ["Developer"],
-        pictureLink: "",
+        pictureLink: "/trekkers-docs-public/img/kevin.JPG",
         websiteLink: "",
-        linkedInLink: "",
+        linkedInLink: "https://www.linkedin.com/in/kevin-yg-xu/",
     },
     {
         name: "Matthew Kang",
