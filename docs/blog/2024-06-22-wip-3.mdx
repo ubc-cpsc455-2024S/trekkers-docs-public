@@ -11,11 +11,83 @@ In **Progress 3**, we have added Redux to Trek, by thinking of the main type of 
 
 ## Redux
 
-### Action #1: ___
+As mentioned in the introduction, we have begun the integration of Redux into our application.
 
-### Action #2: ____
+### Default Data and Display on Page
 
-### Action #3: ___
+Here is the **default data** that we used to initialize our profile settings reducer.
+
+<hr />
+
+#### Profile Default Data
+
+![Profile Default Data](/img/wip-3/initialState.png)
+
+<hr />
+
+We hooked up the state to display on our **user profile settings** page
+
+<hr />
+
+#### User Profile Settings Page (Displaying from Redux Store)
+
+![User Profile Settings Page](/img/wip-3/display2.png)
+
+<hr />
+
+#### Redux Devtools Screenshot of State
+
+![Redux Devtools Screenshot](/img/wip-3/display1.png)
+
+<hr />
+
+### Our 3 minimum actions
+
+#### Action #1: addProfileCurrentLocation
+
+This action handles the addition of a "current location" of a user to their profile.
+
+Code:
+```js
+export const addProfileCurrentLocation = (location: string) => ({
+    type: ADD_PROFILE_CURRENT_LOCATION,
+    payload: location
+})
+```
+
+#### Action #2: addProfileInterest and removeProfileInterest
+
+These two actions handles the interests of a user, allowing them to add new interests, and remove old unwanted ones freely.
+
+Code:
+```js
+export const addProfileInterest = (interest: string[]) => ({
+    type: ADD_PROFILE_INTEREST,
+    payload: interest
+})
+
+export const removeProfileInterest = (location: string) => ({
+    type: REMOVE_PROFILE_INTEREST,
+    payload: interest
+})
+```
+
+#### Action #3: addProfileSocialAccount
+This action handles addition of social media account links (Facebook, Instagram, Twitter, YouTube)
+
+Code:
+```js
+export const addProfileSocialAccount = (accountType: SocialMediaAccounts, url: string) => ({
+    type: ADD_PROFILE_SOCIAL_ACCOUNT,
+    payload: { accountType, url }
+});
+```
+
+<hr />
+
+#### Of course, we also have many other actions and plan to add more as complexity of the project increases!
+
+![Actions.js](/img/wip-3/actions.png)
 
 ## Other Goals
 
