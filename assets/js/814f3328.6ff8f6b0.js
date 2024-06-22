@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[7472],{5513:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"A Deep Dive into Trekkers Project Workflow","permalink":"/trekkers-docs-public/blog/project-workflow","unlisted":false},{"title":"Work In Progress 2","permalink":"/trekkers-docs-public/blog/wip-2","unlisted":false}]}')}}]);
