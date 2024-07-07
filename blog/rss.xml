@@ -4,10 +4,142 @@
         <title>Trekkers Blog</title>
         <link>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog</link>
         <description>Trekkers Blog</description>
-        <lastBuildDate>Sat, 22 Jun 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 06 Jul 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Local Deployment and a Glimpse Into Trek's CI/CD System]]></title>
+            <link>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog/local-deployment-experiment</link>
+            <guid>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog/local-deployment-experiment</guid>
+            <pubDate>Sat, 06 Jul 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[One of our goals as the Trekkers was always to be able to have a]]></description>
+            <content:encoded><![CDATA[<p>One of our goals as the Trekkers was always to be able to have a
+<strong>cost-effective</strong> but <strong>performant</strong> deployment of Trek. As someone who
+self-hosts their own server for their <a href="https://wyfx.ca/" target="_blank" rel="noopener noreferrer">personal site</a>, I
+thought it would be quite suiting to see if our current needs for deployment and
+CI/CD could be met through repurposing part of self-hosted solution.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="my-site">My Site<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/local-deployment-experiment#my-site" class="hash-link" aria-label="Direct link to My Site" title="Direct link to My Site">​</a></h2>
+<p>As a little bit of background, my personal site (<a href="https://wyfx.ca/" target="_blank" rel="noopener noreferrer">https://wyfx.ca</a>) was originally
+started as just a way for me to take the Raspberry Pi I had sitting at home and
+make it something useful.</p>
+<p>The site was developed under Vite, and deployed under a Docker container running
+nginx. Whenever I have a new version of the site, I build a new version of the
+Docker container, then manually restart the container.</p>
+<p>At Trek, one of our priorities is always knowing about the status of our
+product. Hence, with some of my knowledge on the team, we aimed to leverage that
+knowledge to develop our own self-hosted solution for development purposes.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="considerations">Considerations<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/local-deployment-experiment#considerations" class="hash-link" aria-label="Direct link to Considerations" title="Direct link to Considerations">​</a></h2>
+<p>On the implementation side, moving from a simple statically hosted website to an
+integrated solution with our GitHub workflow would not be easy. Our goals for
+Trek's deployment solution would be something that is <strong>integrated with
+GitHub</strong>, <strong>performant</strong> enough to run on my Raspberry Pi, and <strong>automatic</strong>.
+This solution would be key for our CI/CD process and would ensure that we'd able
+to quickly iterate on new updates to our codebase.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="security">Security<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/local-deployment-experiment#security" class="hash-link" aria-label="Direct link to Security" title="Direct link to Security">​</a></h3>
+<p>Security was especially important to me as we needed a solution that would not
+expose my self-hosted server to too much risk, but would still be able to
+automatically integrate with GitHub. My home server did not have a publicly
+exposed SSH port, yet without one we would not be able to upload files to the
+server. However, as my main account on the server was an administrator, I did
+not want any possible SSH solutions to have full access to the administrator
+account.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="performance">Performance<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/local-deployment-experiment#performance" class="hash-link" aria-label="Direct link to Performance" title="Direct link to Performance">​</a></h3>
+<p>The second primary consideration with our design was performance. This includes
+both the "visible" parts of the site (like API and frontend), but also the build
+process from a successful push to GitHub. While we would not have to worry about
+a large amount of users on the development site, we still wanted a solution that
+would be performant enough for us to evaluate how the site would behave for
+production deployment in the future. The limited compute power of the Raspberry
+Pi also means that this deployment needs to be as lean as possible.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="maintainability">Maintainability<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/local-deployment-experiment#maintainability" class="hash-link" aria-label="Direct link to Maintainability" title="Direct link to Maintainability">​</a></h3>
+<p>The last key consideration was maintainability. The development of Trek moves
+quickly, so our system should be able to adapt to those changes quickly. Without
+a maintainable system, the system could quickly become obsolete - sacrificing
+valuable developer time.</p>
+<hr>
+<p>With all of our considerations in mind, we started the design of the CI/CD system.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="deployment">Deployment<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/local-deployment-experiment#deployment" class="hash-link" aria-label="Direct link to Deployment" title="Direct link to Deployment">​</a></h2>
+<p>Since I was most familiar with a Docker container setup like my home server, my
+initial thoughts were to create another container running on the server at the
+same time as my personal site. So the first challenge was coming up with a
+deployment that would allow both Docker containers to run at the same time while redirecting
+to different domains.
+My solution to this issue was to use
+<a href="https://github.com/nginx-proxy/nginx-proxy" target="_blank" rel="noopener noreferrer">nginx-proxy</a>. <code>nginx-proxy</code>
+essentially acts as a reverse proxy that routes to Docker containers by
+subdomain. Now, I can start my own website's container with an environment
+variable <code>VIRTUAL_HOST=wyfx.ca</code>, while having Trek on a subdomain like
+<code>SUBDOMAIN.wyfx.ca</code>. To handle HTTPS, I extended my original LetsEncrypt
+certificates using
+<a href="https://github.com/nginx-proxy/acme-companion" target="_blank" rel="noopener noreferrer">acme-companion</a>, which will
+automatically generate a new HTTPS certificate for each of my subdomains by
+specifying <code>LETSENCRYPT_HOST=SUBDOMAIN.wyfx.ca</code>.</p>
+<p>The largest decision to make was how to get updates from our GitHub repository.
+As I didn't want to expose a public SSH port on my home server, I initially
+thought about a solution that wouldn't directly connect the GitHub repository to
+the server. Instead, the server could poll for changes on GitHub, and when
+changes are detected, the following would occur:</p>
+<ol>
+<li>Pull the changes from GitHub</li>
+<li>Build a new container</li>
+<li>Restart the running container</li>
+</ol>
+<p>However, we did not end up going with this idea for a few reasons:</p>
+<ul>
+<li>Unless we polled at a very fast rate, there was still going to be a delay
+before we could even detect a change from GitHub</li>
+<li>There were concerns with performance from the fact that the Raspberry Pi would
+have to do all the building</li>
+<li>We would have to create our own scripts to make the polling + building
+possible, which would each cost us maintenance time</li>
+</ul>
+<p>The solution we ended up using for the frontend was to create a nginx Docker
+container that is also running a SSH server. Then, to update the frontend, we
+could write a GitHub Action to build the frontend, then SSH into the Docker
+container and replace the static files in the container. This solution was much
+simpler, which would make it easier to maintain. It also does not involve
+constantly rebuilding the Docker container, as we would be making local updates
+to its filesystem instead. In addition, having the publicly exposed SSH port be
+into a container would gave me some more comfort that any attacks would not be
+able to immediately access my entire server (though
+<a href="https://nvd.nist.gov/vuln/detail/CVE-2024-21626" target="_blank" rel="noopener noreferrer">such</a>
+<a href="https://nvd.nist.gov/vuln/detail/CVE-2024-23651" target="_blank" rel="noopener noreferrer">attacks</a>
+<a href="https://nvd.nist.gov/vuln/detail/CVE-2024-23652" target="_blank" rel="noopener noreferrer">are</a>
+<a href="https://nvd.nist.gov/vuln/detail/CVE-2024-23653" target="_blank" rel="noopener noreferrer">possible</a>).</p>
+<p><img decoding="async" loading="lazy" alt="The frontend workflow" src="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/assets/images/upload-frontend-493e9a095082de2326216e6ec666db4c.png" width="943" height="281" class="img_ev3q"></p>
+<p>Our GitHub action to build and upload the frontend is included <a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/local-deployment-experiment#appendix-github-action">in the
+Appendix</a>. It builds our frontend using <code>npm</code>, and then
+uploads it via SCP to the Docker container using
+<a href="https://github.com/appleboy/scp-action/" target="_blank" rel="noopener noreferrer">appleboy/scp-action</a>. This ended up
+looking like the following:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">name: Deploy Frontend Dev</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">on:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  push:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    branches:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      - "project_[0-9]-dev"</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">jobs:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  deploy:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    name: Deploy FE Dev</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    runs-on: ubuntu-latest</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    concurrency: deploy-group    # optional: ensure only one action runs at a time</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    steps:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      - name: Checkout</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        uses: actions/checkout@v4</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      - name: Build FE</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        run: |</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">         cd frontend</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">         npm install</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">         npm run build</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      - name: Upload to server</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        uses: appleboy/scp-action@v0.1.7</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        with:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">          host: REDACTED</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">          username: REDACTED</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">          password: REDACTED</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">          port: REDACTED</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">          source: "frontend/dist/*"</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">          target: REDACTED</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">          overwrite: true</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">          strip_components: 2</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>For the backend deployment, we built off of the frontend deployment. Our backend
+deployment uses <a href="https://www.npmjs.com/package/tsc-watch" target="_blank" rel="noopener noreferrer">tsc-watch</a> to start up
+our backend server, and then monitor for file changes. Then, a GitHub action is
+triggered whenever a push has been made to our dev branches, uploading the files
+via SCP. <code>tsc-watch</code> is built to automatically detect those changes and rebuild
+the backend dynamically as its files change. To support the communication
+between our frontend and backend, the backend runs under the same nginx server
+as the frontend. Requests to our API endpoints (e.g. /api/v1/users) would then
+be forwarded to the backend server, allowing us to remain under the same
+subdomain and avoid spawning too many Docker containers for the server to
+handle. To make this happen, our <code>nginx.conf</code> includes the following:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">server {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    location /socket.io {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      proxy_set_header Host $host;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      proxy_set_header X-Real-IP $remote_addr;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      proxy_pass REDACTED;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    location / {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      root   REDACTED;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      index  index.html;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      try_files $uri $uri/ /index.html;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    location /api {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      proxy_set_header Host $host;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      proxy_set_header X-Real-IP $remote_addr;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      proxy_pass REDACTED;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    error_page   500 502 503 504  /50x.html;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    location = /50x.html {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      root   /usr/share/nginx/html;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  }</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>By overwriting what happens with the <code>location /api</code> line configuration, we are
+able to redirect requests to go to the backend server rather than still going to
+the frontend.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-future">The Future<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/local-deployment-experiment#the-future" class="hash-link" aria-label="Direct link to The Future" title="Direct link to The Future">​</a></h2>
+<p>As Trek continues to develop, our CI/CD system will have to evolve too. One of
+our upcoming goals for a future sprint is to integrate testing frameworks into
+both our frontend and backend. When our backend develops more, we might also
+find that the self-hosted server won't be powerful enough. However, with our
+maintainable and reproducible system, we are well-equipped to handle these
+future challenges with ease.</p>]]></content:encoded>
+            <category>project</category>
+            <category>workflow</category>
+            <category>ci/cd</category>
+        </item>
         <item>
             <title><![CDATA[Work In Progress 3]]></title>
             <link>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog/wip-3</link>
