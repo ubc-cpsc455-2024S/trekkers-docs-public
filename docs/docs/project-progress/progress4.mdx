@@ -1,0 +1,30 @@
+# Project Progress 4
+Here is a list of our resources for Project Progress 4.
+
+## Slides
+https://docs.google.com/presentation/d/1wAkDtcriREIAK-PdYVdD3OgZ4eXXRSJ2HqbL4aG_ZiU/edit?usp=sharing
+
+## Release Notes
+https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/docs/release-notes/0.2.1
+
+## Questions & Answers
+- **Q**: How did Trek implement the live collaboration?
+  - **Trek**: Earlier in our design phase, we chose a rich text editor that we knew had collaborative features built in (Tiptap). Tiptap provides a WebSocket-based server called Hocuspocus, which we integrated into our Express backend using express-ws.
+- **Q**: Now that you have real-time collaboration, did you have to put in extra thought into race conditions or two calls accessing the same API at the same time?
+  - **Trek**: Yes, absolutely! Our first attempt at implementing real-time collaboration used a different library called `socket.io` where we sent/received diffs which would then be applied onto a "central source". This turned out to be difficult to negotiate as apply patches to a diff relies on all users having the same central base, and we were also occasionally breaking HTML tags that were part of the rich text response.\
+  Hocuspocus provided a solution to this as it relies on Yjs, which is document-based solution for shared data types. This gave us a guarantee that there won't be any HTML tag breakage, while also ensuring that we would not run into merge conflicts.
+- **Q**: Trek reminds me a bit of Strava, which has some engagement and social features, so any plans on adding more of those?
+  - **Trek**: Strava is more of a fitness-oriented social media, so it is a slightly different context. \
+  However, we have more goals we are working towards like social features, user privacy settings, ability to add other users as friends
+- **Q**: Did you run into any design issues this sprint?
+  - **Trek**: There’s designing data from multiple resources, which is “Data integration”, and reading terms of service documents. That’s why things in destinations are a little delayed. We have a standard format now, in our version of GeoJSON called ‘TrekGeoJSON’.\
+  In addition, it took us a lot of iterations to get a good real-time collaboration system setup that would be able to handle synchronization issues.
+  One of the good things is that we have a good documentation system, so we were able to flag these issues and come up with a plan to resolve them.
+- **Q**: Do you think document db like mongo was the best for the app? Or would you choose other type of db if you had a chance?
+  - **Trek**: In Trek's case, our API is developing rapidly. This means that what we're storing in the database is also constantly changing, so using Mongo has actually been great for changing our prototypes efficiently.\
+  Mongo also allows us to query for geocoordinates, which is especially useful for our project's involvement with locations.\
+  We will probably have to reevaluate this in the future, as we may want better data integrity guarantees in the future for our users.
+- **Q**: Are you planning on automated testing?
+  - **Trek**: We do have a CI/CD pipeline implemented with our project, so we will include a test stage into that pipeline. As for the frameworks, we were thinking about Mocha/Chai for the API endpoints, and Vitest for the React frontend.
+- **Q**: Would you say that the great amount of time you put into design/planning early on is paying off now or would you change how you planned if you could go back?
+  - **Trek**: We consider ourselves as a solution that does a lot of data integration. We don’t want to over rely on Google Maps data, or any data. We are planning to integrate from a lot of sources and store data ourselves. With that, comes a lot of planning and design work so that we are compliant with terms of all our sources. So I think it’s really forced by the nature of the project. Documentation isn’t the best for an agile shop that we aspire to be, but due to the nature of the project it’s necessary.

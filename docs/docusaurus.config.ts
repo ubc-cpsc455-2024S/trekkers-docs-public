@@ -74,6 +74,7 @@ const config: Config = {
         },
         {to: '/team', label: 'Team', position: 'left'},
         {to: '/blog', label: 'Blog', position: 'left'},
+        {to: '/docs/category/project-progress', label: 'Project Progress', position: 'left'},
         {
           href: 'https://github.com/ubc-cpsc455-2024S/project-04_trekkers',
           label: 'GitHub',

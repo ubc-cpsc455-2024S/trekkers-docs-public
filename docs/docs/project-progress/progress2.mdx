@@ -1,0 +1,28 @@
+# Project Progress 2
+Here is a list of our resources for Project Progress 2.
+
+## Slides
+https://docs.google.com/presentation/d/13sy_3Y1VjO6X-aeQtdt1o2Q_vXv16QAFp9NUySNcC2Y/edit?usp=sharing
+
+## Release Notes
+https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/docs/release-notes/0.1.0
+
+## Blogpost
+https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/wip-2
+
+## Questions & Answers
+- **Q**: What was the most challenging thing to implement so far?
+  - **Trek**: Currently it has been responsiveness, as our UI involves a lot of components side-by-side. This means that unfortunately, we have a lot less space on a mobile device to work with.
+- **Q**: Where are you planning on storing the code that interfaces with the backend?
+  - **Trek**: We intend to follow the best industry practices. As we have not seen a presentor talk about this technology yet, we are unsure what this will exactly look like at this point.\
+  Our team is also thinking about building a serverless solution, which would involve storing some lambdas or serverless functions in our backend directory.
+- **Q**: What was the deciding factor for using TypeSript over JavaScript?
+  - **Trek**: This is described in our [release notes](/trekkers-docs-public/blog/wip-2#typescript).
+- **Q**: What made you decide to add components folders in the pages folder rather than organizing all components solely in the components folder?
+  - **Trek**: In our current design of Trek, many compoentns are only used once for a page. To avoid cluttering our "main" components directory, we have separated these componetns to make the codebase for each page eaiser to understand. Components that are reused amongst multiple pages are put in the "main" components directory.
+- **Q**: What was your process when deciding how to break down each page/component for your hierarchy?
+  - **Trek**: Our choice was between having a feature-based directory structure versus a page based directory structure. Our requirements were weaker at the end of Progress 1, so we wanted to think in terms of the user experience flow in order to build the best interface from there.
+- **Q**: Have you used any React UI components? They are generally responsive automatically :)
+  - **Trek**: We are using the Mantine UI library as our UI components.
+- **Q**: Why are you encoding a trip's UUID in the URL?
+  - **Trek**: One of our goals is to make trips easily sharable, and having the UUID in the URL facilitates that.

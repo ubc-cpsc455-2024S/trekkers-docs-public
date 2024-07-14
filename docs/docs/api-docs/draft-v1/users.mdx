@@ -235,6 +235,56 @@ curl -L \
   </TabItem>
 </Tabs>
 
+## Get authenticated user's experience settings
+`GET /api/v1/user/experience`
+
+Get all the experience settings for the currently authenticated user
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `401` | Unauthorized |
+
+### Code samples for "Get authenticated user settings"
+
+```bash title="GET /api/v1/user/settings"
+curl -L \
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/user/settings
+```
+
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response" default>
+    `status: 200`
+    ```json
+    {
+        "accountLimitedDeals": "false",
+        "accountNewsletterNotifications": "false",
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    {
+        "accountLimitedDeals": "boolean",
+        "accountNewsletterNotifications": "boolean",
+    }
+
+    ```
+
+  </TabItem>
+</Tabs>
+
 ## Create a new user
 `POST /api/v1/user`
 
