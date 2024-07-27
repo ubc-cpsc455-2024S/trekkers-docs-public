@@ -1,0 +1,27 @@
+# Project Progress 5
+Here is a list of our resources for Project Progress 5!
+
+## Slides
+https://docs.google.com/presentation/d/1vxv2Mkh6WcEkRJn7BD2gQAbHMU9-704A-aKY1Zk2O4g/edit?usp=sharing
+
+## Questions & Answers
+- **Question**: How was the experience with using Auth0 compared to a self-implemented user authentication system?
+  - **Answer**: Auth0 is a powerful and robust industry-level solution for authentication. It has a similar system where you log in and a cookie session is stored. From there, we can get a JWT token from the Auth0Provider on the frontend, which includes a unique identifier and allows for protection of API endpoints. In our experience implementing it, there are a lot of configuration settings that go into it. For simpler use cases, it might be a bit overkill, and the documentation isn’t very clear. However, after understanding the entire flow, it’s pretty straightforward to add on to.
+
+- **Question**: What did you use to deploy? AWS?
+  - **Answer**: Yes, we used AWS for our deployment as well as a self-hosted solution for our dev environment.
+
+- **Question**: I just went to your website and made a profile and I don't actually understand how to make a trip. Are there plans to make your trip more user-friendly? Because it’s kind of confusing to actually make a trip which seems to be the purpose of the website.
+  - **Answer**: Yes, for sure! We have a 15-minute bug initiative coming up that will address a lot of the user experience issues and make Trek more intuitive to use.
+
+- **Question**: Which framework was used for frontend testing?
+  - **Answer**: We are planning to use Vitest and React Testing Library for our frontend testing.
+
+- **Question**: Why not use serverless?
+  - **Answer**: We have a CMS running, and we also have live collaboration which uses web sockets. Although using API Gateway with WebSockets is theoretically possible, since our project was built off of a vanilla Express application, it introduced significant complexity. We didn’t want to introduce new issues in the last 2 weeks of the course. In our documentation, we will advise future changes, outlining the steps to deploy Trek in a serverless environment.
+
+- **Question**: What made you choose AWS and the current deployment setup?
+  - **Answer**: The course is called ‘Applied Industry Practices,’ and we really wanted to fit that theme. That’s why we used Auth0 and ensured we had good documentation. AWS and other cloud infrastructures provide reliable scalability. Unfortunately going serverless within the time we have remaining wasn't feasible, but for scalability purposes it would have been more ideal given the time. We have S3 already using that, so we thought it would be nice to have everything on the same platform.
+
+- **Question**: When will you show us the app in action in greater detail?
+  - **Answer**: You can play around with it right now at https://trek.wyfx.ca/. However we’re still doing some iterations on our 15-minute bug initiative, so we didn’t want to demo anything we weren’t confident would work right now.
