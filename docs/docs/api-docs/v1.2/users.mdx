@@ -7,8 +7,108 @@ import TabItem from '@theme/TabItem';
 
 # Users
 
-## Get a user
-`GET /api/v1/user/:username`
+## Get a user by Auth0 subtoken
+`GET /api/v1/users/:subtoken`
+
+Get publicly available information about a user using their subtoken
+
+Depending on the user’s privacy settings, some user information may not be present.
+
+### Parameters
+
+#### Path
+| | |
+|-|-|
+| `subtoken` string | The Auth0 subtoken associated with the given Trek user account |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `404` | Not found |
+
+### Code samples for "Get a user by Auth0 subtoken"
+
+```bash title="GET /api/v1/users/:subtoken"
+curl -L \
+    http://localhost:3000/api/v1/users/auth0|abcdefg123456
+```
+
+<Tabs className="response-examples">
+  <TabItem value="priv" label="Private profile response" default>
+    `status: 200`
+    ```json
+    {
+        "_id": "1234567asdfghjkl",
+        "sub": "auth0|abcdefg123456",
+        "name": "Gregor Kiczales",
+        "username": "gregork",
+        "image": "https://s.gravatar.com/avatar/gregork_picture",
+        "uploadedProfilePicture": "abcdefghijk",
+        "uploadedProfilePictureURL": "https://cpsc-455-trek-users.s3.us-east-2.amazonaws.com/12345678900.jpeg",
+        "email": "gregork@example.com",
+        "trips": ["389c6c16-1094-4901-a062-ab71e14398e5", "389c6c16-1094-4901-a062-ab71e14398e0"]
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="pub" label="Public profile response">
+    `status: 200`
+    ```json
+    {
+        "_id": "1234567asdfghjkl",
+        "sub": "auth0|abcdefg123456",
+        "name": "Gregor Kiczales",
+        "username": "gregork",
+        "image": "https://s.gravatar.com/avatar/gregork_picture",
+        "uploadedProfilePicture": "abcdefghijk",
+        "uploadedProfilePictureURL": "https://cpsc-455-trek-users.s3.us-east-2.amazonaws.com/12345678900.jpeg",
+        "email": "gregork@example.com",
+        "description": "Father of all CS students, king of the natural recursion, and the master of the AOP.",
+        "links": [
+            {
+                "type": "twitter",
+                "url": "https://twitter.com/gregork"
+            },
+            {
+                "type": "site",
+                "url": "https://cs.ubc.ca/~gregor"
+            }
+        ],
+        "interests": ["Island", "Ocean", "Hiking", "Nature", "Recursion"],
+        "home": "Vancouver, BC",
+        "currentlyAt": "UBC",
+        "trips": ["389c6c16-1094-4901-a062-ab71e14398e5", "389c6c16-1094-4901-a062-ab71e14398e0"]
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    {
+        "_id": "ObjectID",
+        "sub": "string"
+        "name": "string",
+        "username": "string",
+        "image": "string",
+        "uploadedProfilePicture?": "ObjectID",
+        "uploadedProfilePictureURL?": "string",
+        "email": "string"
+        "description?": "string",
+        "links?": "Array<{type: string, url: string}">,
+        "interests?": "Array<string>",
+        "home?": "string",
+        "currentlyAt?": "string",
+        "trips": "Array<UUID>"
+    }
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Get a user by username
+`GET /api/v1/users/username/:username`
 
 Get publicly available information about a user
 
@@ -29,9 +129,9 @@ Depending on the user’s privacy settings, some user information may not be pre
 
 ### Code samples for "Get a user"
 
-```bash title="GET /api/v1/user/:username"
+```bash title="GET /api/v1/users/:username"
 curl -L \
-    http://localhost:3000/api/v1/user/gregork
+    http://localhost:3000/api/v1/users/username/gregork
 ```
 
 <Tabs className="response-examples">
@@ -39,9 +139,15 @@ curl -L \
     `status: 200`
     ```json
     {
+        "_id": "1234567asdfghjkl",
+        "sub": "auth0|abcdefg123456",
         "name": "Gregor Kiczales",
         "username": "gregork",
-        "image": "http://localhost:3000/api/v1/user/gregork/picture"
+        "image": "https://s.gravatar.com/avatar/gregork_picture",
+        "uploadedProfilePicture": "abcdefghijk",
+        "uploadedProfilePictureURL": "https://cpsc-455-trek-users.s3.us-east-2.amazonaws.com/12345678900.jpeg",
+        "email": "gregork@example.com",
+        "trips": ["389c6c16-1094-4901-a062-ab71e14398e5", "389c6c16-1094-4901-a062-ab71e14398e0"]
     }
     ```
 
@@ -50,9 +156,14 @@ curl -L \
     `status: 200`
     ```json
     {
+        "_id": "1234567asdfghjkl",
+        "sub": "auth0|abcdefg123456",
         "name": "Gregor Kiczales",
         "username": "gregork",
-        "image": "http://localhost:3000/api/v1/user/gregork/picture",
+        "image": "https://s.gravatar.com/avatar/gregork_picture",
+        "uploadedProfilePicture": "abcdefghijk",
+        "uploadedProfilePictureURL": "https://cpsc-455-trek-users.s3.us-east-2.amazonaws.com/12345678900.jpeg",
+        "email": "gregork@example.com",
         "description": "Father of all CS students, king of the natural recursion, and the master of the AOP.",
         "links": [
             {
@@ -64,7 +175,10 @@ curl -L \
                 "url": "https://cs.ubc.ca/~gregor"
             }
         ],
-        "interests": ["Island", "Ocean", "Hiking", "Nature", "Recursion"]
+        "interests": ["Island", "Ocean", "Hiking", "Nature", "Recursion"],
+        "home": "Vancouver, BC",
+        "currentlyAt": "UBC",
+        "trips": ["389c6c16-1094-4901-a062-ab71e14398e5", "389c6c16-1094-4901-a062-ab71e14398e0"]
     }
     ```
 
@@ -73,12 +187,20 @@ curl -L \
 
     ```json
     {
+        "_id": "ObjectID",
+        "sub": "string"
         "name": "string",
         "username": "string",
         "image": "string",
+        "uploadedProfilePicture?": "ObjectID",
+        "uploadedProfilePictureURL?": "string",
+        "email": "string"
         "description?": "string",
         "links?": "Array<{type: string, url: string}">,
         "interests?": "Array<string>",
+        "home?": "string",
+        "currentlyAt?": "string",
+        "trips": "Array<UUID>"
     }
     ```
 
@@ -86,22 +208,18 @@ curl -L \
 </Tabs>
 
 ## Get a user's profile picture
-`GET /api/v1/user/:username/picture`
+`GET /api/v1/users/:subtoken/picture`
 
 Get the profile picture of the given username
 
 ### Parameters
 
 #### Header
-| | |
-|-|-|
-| `Max-Width` number | maximum width of the image to return (required?) |
-| `Max-Height` number | maximum height of the image to return (required?) |
 
 #### Path
 | | |
 |-|-|
-| `username` string | The handle for the Trek user account |
+| `subtoken` string | The Auth0 subtoken associated with the given Trek user account |
 
 ### Response Codes
 | Status code | Description |
@@ -110,15 +228,42 @@ Get the profile picture of the given username
 | `404` | Not found |
 
 ### Code samples for "Get a user's profile picture"
-```bash title="GET /api/v1/user/:username/picture"
+```bash title="GET /api/v1/users/:subtoken/picture"
 curl -L \
-    -H "Max-Width: 400" \
-    -H "Max-Height: 400" \
-    http://localhost:3000/api/v1/user/gregork/picture
+    http://localhost:3000/api/v1/users/auth0|abcdefg123456/picture
 ```
 
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response">
+
+    ```json
+    {
+        "_id": "1234567asdfghjkl",
+        "sub": "auth0|abcdefg123456"
+        "image": "https://s.gravatar.com/avatar/gregork_picture",
+        "uploadedProfilePicture": "abcdefghijk",
+        "uploadedProfilePictureURL": "https://cpsc-455-trek-users.s3.us-east-2.amazonaws.com/12345678900.jpeg"
+    }
+    ```
+
+  </TabItem>
+
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    {
+        "_id": "ObjectID",
+        "image": "string",
+        "uploadedProfilePicture?": "ObjectID",
+        "uploadedProfilePictureURL?": "string",
+    }
+    ```
+
+  </TabItem>
+</Tabs>
+
 ## Get the authenticated user
-`GET /api/v1/user`
+`GET /api/v1/users`
 
 Get profile information about the currently authenticated user.
 
@@ -134,13 +279,14 @@ Get profile information about the currently authenticated user.
 | ----------- | ----------- |
 | `200` | OK |
 | `401` | Unauthorized |
+| `404` | Not found |
 
 ### Code samples for "Get the authenticated user"
 
-```bash title="GET /api/v1/user"
+```bash title="GET /api/v1/users"
 curl -L \
     -H "Authorization: Bearer <YOUR-TOKEN>" \
-    http://localhost:3000/api/v1/user
+    http://localhost:3000/api/v1/users
 ```
 
 <Tabs className="response-examples">
@@ -148,10 +294,14 @@ curl -L \
     `status: 200`
     ```json
     {
-        "userId": "ksjhfoi-i32aiufh-192oh"
+        "_id": "1234567asdfghjkl",
+        "sub": "auth0|abcdefg123456",
         "name": "Gregor Kiczales",
         "username": "gregork",
-        "image": "http://localhost:3000/api/v1/user/gregork/picture",
+        "image": "https://s.gravatar.com/avatar/gregork_picture",
+        "uploadedProfilePicture": "abcdefghijk",
+        "uploadedProfilePictureURL": "https://cpsc-455-trek-users.s3.us-east-2.amazonaws.com/12345678900.jpeg",
+        "email": "gregork@example.com",
         "description": "Father of all CS students, king of the natural recursion, and the master of the AOP.",
         "links": [
             {
@@ -163,7 +313,46 @@ curl -L \
                 "url": "https://cs.ubc.ca/~gregor"
             }
         ],
-        "interests": ["Island", "Ocean", "Hiking", "Nature", "Recursion"]
+        "interests": ["Island", "Ocean", "Hiking", "Nature", "Recursion"],
+        "home": "Vancouver, BC",
+        "currentlyAt": "UBC",
+        "settings": {
+          "accountLimitedDeals": true,
+          "accountNewsletterNotifications": false,
+          "privateAccount": true
+        },
+        "experience": {
+          "accommodationBudget": {
+            "lo": 0, 
+            "hi": 1000
+          },
+          "activities": [],
+          "activitiesBudget": {
+            "lo":0, 
+            "hi": 1000
+          },
+          "ageRange": 20,
+          "climateAndWeather": [],
+          "connectivityNeeds": "No connectivity needed",
+          "culture": [],
+          "dining": [],
+          "diningBudget": {
+            "lo": 0, 
+            "hi": 1000
+          },
+          "healthAndAccessibility": "",
+          "language": "Comfortable with different language",
+          "occupation": "Employed",
+          "passports": [],
+          "safety": "",
+          "tosAgreement": false,
+          "transportPreferences": [],
+          "travelFrequency": "2-4 times a year",
+          "travelStyle": [],
+          "tripDuration": "",
+          "visas": []
+        },
+        "trips": ["389c6c16-1094-4901-a062-ab71e14398e5", "389c6c16-1094-4901-a062-ab71e14398e0"]
     }
     ```
 
@@ -172,21 +361,64 @@ curl -L \
 
     ```json
     {
-        "userId": "string",
+        "_id": "ObjectID",
+        "sub": "string"
         "name": "string",
         "username": "string",
         "image": "string",
-        "description": "string",
-        "links": "Array<{type: string, url: string}">,
-        "interests": "Array<string>",
+        "uploadedProfilePicture?": "ObjectID",
+        "uploadedProfilePictureURL?": "string",
+        "email": "string"
+        "description?": "string",
+        "links?": "Array<{type: string, url: string}">,
+        "interests?": "Array<string>",
+        "home?": "string",
+        "currentlyAt?": "string",
+        "settings": {
+          "accountLimitedDeals": "boolean",
+          "accountNewsletterNotifications": "boolean",
+          "privateAccount": "boolean"
+        },
+        "experience": {
+          "accommodationBudget": {
+            "lo": "number", 
+            "hi": "number"
+          },
+          "activities": "Array<string>",
+          "activitiesBudget": {
+            "lo": "number", 
+            "hi": "number"
+          },
+          "ageRange": "number",
+          "climateAndWeather": "Array<string>",
+          "connectivityNeeds": "string (enum)",
+          "culture": "Array<string>",
+          "dining": "Array<string>",
+          "diningBudget": {
+            "lo": "number", 
+            "hi": "number"
+          },
+          "healthAndAccessibility": "string",
+          "language": "string (enum)",
+          "occupation": "string (enum)",
+          "passports": "Array<string>",
+          "safety": "string",
+          "tosAgreement": "boolean",
+          "transportPreferences": "Array<string>",
+          "travelFrequency": "string (enum)",
+          "travelStyle": "Array<string>",
+          "tripDuration": "string",
+          "visas": "Array<string>"
+        },
+        "trips": "Array<UUID>"
     }
     ```
 
   </TabItem>
 </Tabs>
 
-## Get authenticated user settings
-`GET /api/v1/user/settings`
+## Get authenticated user's settings
+`GET /api/v1/users/settings`
 
 Get all the settings for the currently authenticated user
 
@@ -202,13 +434,14 @@ Get all the settings for the currently authenticated user
 | ----------- | ----------- |
 | `200` | OK |
 | `401` | Unauthorized |
+| `404` | Not found |
 
 ### Code samples for "Get authenticated user settings"
 
-```bash title="GET /api/v1/user/settings"
+```bash title="GET /api/v1/users/settings"
 curl -L \
     -H "Authorization: Bearer <YOUR-TOKEN>" \
-    http://localhost:3000/api/v1/user/settings
+    http://localhost:3000/api/v1/users/settings
 ```
 
 <Tabs className="response-examples">
@@ -216,8 +449,9 @@ curl -L \
     `status: 200`
     ```json
     {
-        "accountLimitedDeals": "false",
-        "accountNewsletterNotifications": "false",
+        "accountLimitedDeals": false,
+        "accountNewsletterNotifications": false,
+        "privateAccount": true
     }
     ```
 
@@ -228,6 +462,7 @@ curl -L \
     {
         "accountLimitedDeals": "boolean",
         "accountNewsletterNotifications": "boolean",
+        "privateAccount": "boolean"
     }
 
     ```
@@ -235,32 +470,41 @@ curl -L \
   </TabItem>
 </Tabs>
 
-## Create a new user
-`POST /api/v1/user`
+## Create a new user with Auth0
+`POST /api/v1/users/fetch-user`
 
 Creates a new user
 
 ### Parameters
 
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+
 #### Body
 | | |
 |-|-|
-| `name` string | The new user's name |
-| `username` string | The new user's username |
+| `sub` string | The new user's Auth0 subtoken |
+| `name` string | The new user's display name |
+| `email` string | The new user's Auth0 login email | 
+| `image` string | The link to the user's default Auth0-provided profile picture |
 
 ### Response Codes
 | Status code | Description |
 | ----------- | ----------- |
 | `200` | OK |
-| `403` | Forbidden (Username taken) |
+| `400` | Bad request |
+| `401` | Unauthorized |
 
 ### Code samples for "Create a new user"
 
-```bash title="POST /api/v1/user"
+```bash title="POST /api/v1/users/fetch-user"
 curl -L \
     -X POST \
-    http://localhost:3000/api/v1/user/gregork/settings \
-    -d '{"name": "Ron Garcia", "username": "rxg"}'
+    http://localhost:3000/api/v1/users/fetch-user \
+    -d '{"sub": "auth0|abcdefg123456", "name": "Gregor", 
+    "email": "gregork@example.com", "image": "https://s.gravatar.com/avatar/gregork_picture"}'
 ```
 
 <Tabs className="response-examples">
@@ -268,13 +512,49 @@ curl -L \
     `status: 200`
     ```json
     {
-        "userId": "a87sdhf-9h3iuhfsd-i923hie"
-        "name": "Ron Garcia",
-        "username": "rxg",
-        "image": "http://localhost:3000/api/v1/user/default/picture",
-        "description": "",
-        "links": [],
-        "interests": []
+        "_id": "a87sdhf-9h3iuhfsd-i923hie"
+        "sub": "auth0|abcdefg123456",
+        "name": "Gregor",
+        "username": "gregork",
+        "image": "https://s.gravatar.com/avatar/gregork_picture",
+        "email": "gregork@example.com"
+        "settings": {
+          "accountLimitedDeals": true,
+          "accountNewsletterNotifications": true,
+          "privateAccount": false
+        },
+        "experience": {
+          "accommodationBudget": {
+            "lo": 0, 
+            "hi": 1000
+          },
+          "activities": [],
+          "activitiesBudget": {
+            "lo": 0, 
+            "hi": 1000
+          },
+          "ageRange": 18,
+          "climateAndWeather": [],
+          "connectivityNeeds": "",
+          "culture": [],
+          "dining": [],
+          "diningBudget": {
+            "lo": 0, 
+            "hi": 1000
+          },
+          "healthAndAccessibility": "",
+          "language": "",
+          "occupation": "",
+          "passports": [],
+          "safety": "",
+          "tosAgreement": false,
+          "transportPreferences": [],
+          "travelFrequency": "",
+          "travelStyle": [],
+          "tripDuration": "",
+          "visas": []
+        },
+        "trips": []
     }
     ```
 
@@ -283,13 +563,49 @@ curl -L \
 
     ```json
     {
-        "userId": "string",
+        "_id": "ObjectID",
+        "sub": "string"
         "name": "string",
         "username": "string",
         "image": "string",
-        "description": "string",
-        "links": "Array<{type: string, url: string}">,
-        "interests": "Array<string>",
+        "email": "string"
+        "settings": {
+          "accountLimitedDeals": "boolean",
+          "accountNewsletterNotifications": "boolean",
+          "privateAccount": "boolean"
+        },
+        "experience": {
+          "accommodationBudget": {
+            "lo": "number", 
+            "hi": "number"
+          },
+          "activities": "Array<string>",
+          "activitiesBudget": {
+            "lo": "number", 
+            "hi": "number"
+          },
+          "ageRange": "number",
+          "climateAndWeather": "Array<string>",
+          "connectivityNeeds": "string (enum)",
+          "culture": "Array<string>",
+          "dining": "Array<string>",
+          "diningBudget": {
+            "lo": "number", 
+            "hi": "number"
+          },
+          "healthAndAccessibility": "string",
+          "language": "string (enum)",
+          "occupation": "string (enum)",
+          "passports": "Array<string>",
+          "safety": "string",
+          "tosAgreement": "boolean",
+          "transportPreferences": "Array<string>",
+          "travelFrequency": "string (enum)",
+          "travelStyle": "Array<string>",
+          "tripDuration": "string",
+          "visas": "Array<string>"
+        },
+        "trips": "Array<UUID>"
     }
     ```
 
@@ -297,7 +613,7 @@ curl -L \
 </Tabs>
 
 ## Update a user's settings
-`PUT /api/v1/user/:username/settings`
+`PUT /api/v1/users/:subtoken/settings`
 
 Update the settings of a user with specified username
 
@@ -311,13 +627,14 @@ Update the settings of a user with specified username
 #### Path
 | | |
 |-|-|
-| `username` string | The handle of the Trek user |
+| `subtoken` string | The Auth0 subtoken associated with the given Trek user account |
 
 #### Body
 | | |
 |-|-|
 | `accountLimitedDeals` boolean | Email for limited deals toggle |
 | `accountNewsletterNotifications` boolean | Email for newsletter toggle |
+| `privateAccount` boolean | Setting for whether the account is private or not | 
 
 ### Response Codes
 | Status code | Description |
@@ -329,12 +646,12 @@ Update the settings of a user with specified username
 
 ### Code samples for "Update a user's settings"
 
-```bash title="PUT /api/v1/user/:username/settings"
+```bash title="PUT /api/v1/users/:subtoken/settings"
 curl -L \
     -X PUT \
     -H "Authorization: Bearer <YOUR-TOKEN>" \
-    http://localhost:3000/api/v1/user/gregork/settings \
-    -d '{"accountLimitedDeals": "true"}'
+    http://localhost:3000/api/v1/users/auth0|abcdefg123456/settings \
+    -d '{"accountLimitedDeals": true}'
 ```
 
 <Tabs className="response-examples">
@@ -342,8 +659,9 @@ curl -L \
     `status: 200`
     ```json
     {
-        "accountLimitedDeals": "true",
-        "accountNewsletterNotifications": "false",
+        "accountLimitedDeals": true,
+        "accountNewsletterNotifications": false,
+        "privateAccount": false
     }
     ```
 
@@ -354,14 +672,15 @@ curl -L \
     {
         "accountLimitedDeals": "boolean",
         "accountNewsletterNotifications": "boolean",
+        "privateAccount": "boolean"
     }
     ```
 
   </TabItem>
 </Tabs>
 
-## Edit a user's profile
-`PUT /api/v1/user/:username`
+## Edit a user's experience data for the chatbot
+`PUT /api/v1/users/:subtoken/experience`
 
 Edits a user's profile information
 
@@ -375,34 +694,48 @@ Edits a user's profile information
 #### Path
 | | |
 |-|-|
-| `username` string | The handle of the Trek user |
+| `subtoken` string | The Auth0 subtoken associated with the given Trek user account |
 
 #### Body
 | | |
 |-|-|
-| `name` string | The new name of the user |
-| `username` string | The new handle of the Trek user |
-| `image` string | The new URL of the profile picture |
-| `description` string | The new description of the Trek user |
-| `links` Array&lt;&#123;type: string, url: string&#125;&gt; | The new links of the Trek user |
-| `interests` Array&lt;string&gt; | The new interests of the Trek user |
+| `accommodationBudget` &#123;`lo`: number, `hi`: number&#125; | The budget range the user has for their accomodation |
+| `activities` Array&lt;string&gt; | The activities the user enjoys |
+| `activitiesBudget` &#123;`lo`: number, `hi`: number&#125; | The budget range the user has for activities |
+| `ageRange` number | The approximate age of the user |
+| `climateAndWeather` Array&lt;string&gt; | The climate preferences of the user |
+| `connectivityNeeds` string (enum) | The connectivity needs of the user |
+| `culture` Array&lt;string&gt; | The cultural preferences of the user |
+| `dining` Array&lt;string&gt; | The dining preferences of the user |
+| `diningBudget` &#123;`lo`: number, `hi`: number&#125; | The budget range the user has for their dining options |
+| `healthAndAccessibility` string | The user's health and accessibility needs | 
+| `language` string (enum) | The user's language preferences |
+| `occupation` string (enum) | The user's employment status |
+| `passports` Array&lt;string&gt; | The passports the user has |
+| `safety` string | The user's safety preferences |
+| `tosAgreement` boolean | If the user consents to the use of their information in the chatbot | 
+| `transportPreferences` Array&lt;string&gt; | The user's preferences in terms of transportation methods |
+| `travelFrequency` string (enum) | The user's travel frequency |
+| `travelStyle` Array&lt;string&gt; | The user's preferred travel style |
+| `tripDuration` string | The user's preferred trip duration |
+| `visas` Array&lt;string&gt; | The visas the user has access to | 
 
 ### Response Codes
 | Status code | Description |
 | ----------- | ----------- |
 | `200` | OK |
-| `304` | Not modified |
+| `400` | Bad request |
 | `401` | Unauthorized |
 | `404` | Not found |
 
-### Code samples for "Edit a user's profile"
+### Code samples for "Edit a user's profile picture"
 
-```bash title="PUT /api/v1/user/:username"
+```bash title="PUT /api/v1/users/:subtoken/picture"
 curl -L \
     -X PUT
     -H "Authorization: Bearer <YOUR-TOKEN>" \
-    http://localhost:3000/api/v1/user/:username \
-    -d '{"description":"Professor at the University of British Columbia. Father of all CS students, king of the natural recursion, and the master of the AOP."}'
+    http://localhost:3000/api/v1/users/auth0|abcdefg123456/experience \
+    -d '{"language": "Prefer English-speaking countries" }'
 ```
 
 <Tabs className="response-examples">
@@ -410,11 +743,132 @@ curl -L \
     `status: 200`
     ```json
     {
-        "userId": "ksjhfoi-i32aiufh-192oh"
+      "accommodationBudget": {
+        "lo": 0, 
+        "hi": 1000
+      },
+      "activities": [],
+      "activitiesBudget": {
+        "lo": 0, 
+        "hi": 1000
+      },
+      "ageRange": 18,
+      "climateAndWeather": [],
+      "connectivityNeeds": "",
+      "culture": [],
+      "dining": [],
+      "diningBudget": {
+        "lo": 0, 
+        "hi": 1000
+      },
+      "healthAndAccessibility": "",
+      "language": "",
+      "occupation": "",
+      "passports": [],
+      "safety": "",
+      "tosAgreement": false,
+      "transportPreferences": [],
+      "travelFrequency": "",
+      "travelStyle": [],
+      "tripDuration": "",
+      "visas": []
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    {
+      "accommodationBudget": {
+        "lo": "number", 
+        "hi": "number"
+      },
+      "activities": "Array<string>",
+      "activitiesBudget": {
+        "lo": "number", 
+        "hi": "number"
+      },
+      "ageRange": "number",
+      "climateAndWeather": "Array<string>",
+      "connectivityNeeds": "string (enum)",
+      "culture": "Array<string>",
+      "dining": "Array<string>",
+      "diningBudget": {
+        "lo": "number", 
+        "hi": "number"
+      },
+      "healthAndAccessibility": "string",
+      "language": "string (enum)",
+      "occupation": "string (enum)",
+      "passports": "Array<string>",
+      "safety": "string",
+      "tosAgreement": "boolean",
+      "transportPreferences": "Array<string>",
+      "travelFrequency": "string (enum)",
+      "travelStyle": "Array<string>",
+      "tripDuration": "string",
+      "visas": "Array<string>"
+    }
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Edit a user's user-uploaded profile picture
+`PUT /api/v1/users/:subtoken/picture`
+
+Edits a user's profile picture
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+
+#### Path
+| | |
+|-|-|
+| `subtoken` string | The Auth0 subtoken associated with the given Trek user account |
+
+#### Body
+| | |
+|-|-|
+| `accommodationBudget`  | The image file corresponding to the new profile picture |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `400` | Bad request |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+### Code samples for "Edit a user's profile picture"
+
+```bash title="PUT /api/v1/users/:subtoken/picture"
+curl -L \
+    -X PUT
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/users/auth0|abcdefg123456 \
+    -d '{"uploadedProfilePicture": ... }'
+```
+
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response" default>
+    `status: 200`
+    ```json
+    {
+        "_id": "1234567asdfghjkl",
+        "sub": "auth0|abcdefg123456",
         "name": "Gregor Kiczales",
         "username": "gregork",
-        "image": "http://localhost:3000/api/v1/user/gregork/picture",
-        "description": "Professor at the University of British Columbia. Father of all CS students, king of the natural recursion, and the master of the AOP.",
+        "image": "https://s.gravatar.com/avatar/gregork_picture",
+        "uploadedProfilePicture": "abcdefghijk",
+        "uploadedProfilePictureURL": "https://cpsc-455-trek-users.s3.us-east-2.amazonaws.com/12345678900.jpeg",
+        "email": "gregork@example.com",
+        "description": "Father of all CS students, king of the natural recursion, and the master of the AOP.",
         "links": [
             {
                 "type": "twitter",
@@ -425,7 +879,46 @@ curl -L \
                 "url": "https://cs.ubc.ca/~gregor"
             }
         ],
-        "interests": ["Island", "Ocean", "Hiking", "Nature", "Recursion"]
+        "interests": ["Island", "Ocean", "Hiking", "Nature", "Recursion"],
+        "home": "Vancouver, BC",
+        "currentlyAt": "UBC",
+        "settings": {
+          "accountLimitedDeals": true,
+          "accountNewsletterNotifications": false,
+          "privateAccount": true
+        },
+        "experience": {
+          "accommodationBudget": {
+            "lo": 0, 
+            "hi": 1000
+          },
+          "activities": [],
+          "activitiesBudget": {
+            "lo":0, 
+            "hi": 1000
+          },
+          "ageRange": 20,
+          "climateAndWeather": [],
+          "connectivityNeeds": "No connectivity needed",
+          "culture": [],
+          "dining": [],
+          "diningBudget": {
+            "lo": 0, 
+            "hi": 1000
+          },
+          "healthAndAccessibility": "",
+          "language": "Comfortable with different language",
+          "occupation": "Employed",
+          "passports": [],
+          "safety": "",
+          "tosAgreement": false,
+          "transportPreferences": [],
+          "travelFrequency": "2-4 times a year",
+          "travelStyle": [],
+          "tripDuration": "",
+          "visas": []
+        },
+        "trips": ["389c6c16-1094-4901-a062-ab71e14398e5", "389c6c16-1094-4901-a062-ab71e14398e0"]
     }
     ```
 
@@ -434,13 +927,231 @@ curl -L \
 
     ```json
     {
-        "userId": "string",
+        "_id": "ObjectID",
+        "sub": "string"
         "name": "string",
         "username": "string",
         "image": "string",
-        "description": "string",
-        "links": "Array<{type: string, url: string}">,
-        "interests": "Array<string>",
+        "uploadedProfilePicture?": "ObjectID",
+        "uploadedProfilePictureURL?": "string",
+        "email": "string"
+        "description?": "string",
+        "links?": "Array<{type: string, url: string}">,
+        "interests?": "Array<string>",
+        "home?": "string",
+        "currentlyAt?": "string",
+        "settings": {
+          "accountLimitedDeals": "boolean",
+          "accountNewsletterNotifications": "boolean",
+          "privateAccount": "boolean"
+        },
+        "experience": {
+          "accommodationBudget": {
+            "lo": "number", 
+            "hi": "number"
+          },
+          "activities": "Array<string>",
+          "activitiesBudget": {
+            "lo": "number", 
+            "hi": "number"
+          },
+          "ageRange": "number",
+          "climateAndWeather": "Array<string>",
+          "connectivityNeeds": "string (enum)",
+          "culture": "Array<string>",
+          "dining": "Array<string>",
+          "diningBudget": {
+            "lo": "number", 
+            "hi": "number"
+          },
+          "healthAndAccessibility": "string",
+          "language": "string (enum)",
+          "occupation": "string (enum)",
+          "passports": "Array<string>",
+          "safety": "string",
+          "tosAgreement": "boolean",
+          "transportPreferences": "Array<string>",
+          "travelFrequency": "string (enum)",
+          "travelStyle": "Array<string>",
+          "tripDuration": "string",
+          "visas": "Array<string>"
+        },
+        "trips": "Array<UUID>"
+    }
+    ```
+
+  </TabItem>
+</Tabs>
+
+
+## Edit a user's profile
+`PUT /api/v1/users/:subtoken`
+
+Edits a user's profile information
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+
+#### Path
+| | |
+|-|-|
+| `subtoken` string | The Auth0 subtoken associated with the given Trek user account |
+
+#### Body
+| | |
+|-|-|
+| `name` string | The new name of the user |
+| `description` string | The new description of the Trek user |
+| `links` Array&lt;&#123;type: string, url: string&#125;&gt; | The new links of the Trek user |
+| `interests` Array&lt;string&gt; | The new interests of the Trek user |
+| `home` string | The user's area of residence |
+| `currentlyAt` string | The user's approximate current location |
+| `trips` Array&lt;ObjectID&gt; | The list of trips the user is an owner of |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `400` | Bad request |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+### Code samples for "Edit a user's profile"
+
+```bash title="PUT /api/v1/users/:subtoken"
+curl -L \
+    -X PUT
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/users/auth0|abcdefg123456 \
+    -d '{"description":"Professor at the University of British Columbia. Father of all CS students, king of the natural recursion, and the master of the AOP."}'
+```
+
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response" default>
+    `status: 200`
+    ```json
+    {
+        "_id": "1234567asdfghjkl",
+        "sub": "auth0|abcdefg123456",
+        "name": "Gregor Kiczales",
+        "username": "gregork",
+        "image": "https://s.gravatar.com/avatar/gregork_picture",
+        "uploadedProfilePicture": "abcdefghijk",
+        "uploadedProfilePictureURL": "https://cpsc-455-trek-users.s3.us-east-2.amazonaws.com/12345678900.jpeg",
+        "email": "gregork@example.com",
+        "description": "Father of all CS students, king of the natural recursion, and the master of the AOP.",
+        "links": [
+            {
+                "type": "twitter",
+                "url": "https://twitter.com/gregork"
+            },
+            {
+                "type": "site",
+                "url": "https://cs.ubc.ca/~gregor"
+            }
+        ],
+        "interests": ["Island", "Ocean", "Hiking", "Nature", "Recursion"],
+        "home": "Vancouver, BC",
+        "currentlyAt": "UBC",
+        "settings": {
+          "accountLimitedDeals": true,
+          "accountNewsletterNotifications": false,
+          "privateAccount": true
+        },
+        "experience": {
+          "accommodationBudget": {
+            "lo": 0, 
+            "hi": 1000
+          },
+          "activities": [],
+          "activitiesBudget": {
+            "lo":0, 
+            "hi": 1000
+          },
+          "ageRange": 20,
+          "climateAndWeather": [],
+          "connectivityNeeds": "No connectivity needed",
+          "culture": [],
+          "dining": [],
+          "diningBudget": {
+            "lo": 0, 
+            "hi": 1000
+          },
+          "healthAndAccessibility": "",
+          "language": "Comfortable with different language",
+          "occupation": "Employed",
+          "passports": [],
+          "safety": "",
+          "tosAgreement": false,
+          "transportPreferences": [],
+          "travelFrequency": "2-4 times a year",
+          "travelStyle": [],
+          "tripDuration": "",
+          "visas": []
+        },
+        "trips": ["389c6c16-1094-4901-a062-ab71e14398e5", "389c6c16-1094-4901-a062-ab71e14398e0"]
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    {
+        "_id": "ObjectID",
+        "sub": "string"
+        "name": "string",
+        "username": "string",
+        "image": "string",
+        "uploadedProfilePicture?": "ObjectID",
+        "uploadedProfilePictureURL?": "string",
+        "email": "string"
+        "description?": "string",
+        "links?": "Array<{type: string, url: string}">,
+        "interests?": "Array<string>",
+        "home?": "string",
+        "currentlyAt?": "string",
+        "settings": {
+          "accountLimitedDeals": "boolean",
+          "accountNewsletterNotifications": "boolean",
+          "privateAccount": "boolean"
+        },
+        "experience": {
+          "accommodationBudget": {
+            "lo": "number", 
+            "hi": "number"
+          },
+          "activities": "Array<string>",
+          "activitiesBudget": {
+            "lo": "number", 
+            "hi": "number"
+          },
+          "ageRange": "number",
+          "climateAndWeather": "Array<string>",
+          "connectivityNeeds": "string (enum)",
+          "culture": "Array<string>",
+          "dining": "Array<string>",
+          "diningBudget": {
+            "lo": "number", 
+            "hi": "number"
+          },
+          "healthAndAccessibility": "string",
+          "language": "string (enum)",
+          "occupation": "string (enum)",
+          "passports": "Array<string>",
+          "safety": "string",
+          "tosAgreement": "boolean",
+          "transportPreferences": "Array<string>",
+          "travelFrequency": "string (enum)",
+          "travelStyle": "Array<string>",
+          "tripDuration": "string",
+          "visas": "Array<string>"
+        },
+        "trips": "Array<UUID>"
     }
     ```
 
@@ -448,7 +1159,7 @@ curl -L \
 </Tabs>
 
 ## Delete a user
-`DELETE /api/v1/user/:username`
+`DELETE /api/v1/users/:subtoken`
 
 Deletes the user with the specified username
 
@@ -462,7 +1173,7 @@ Deletes the user with the specified username
 #### Path
 | | |
 |-|-|
-| `username` string | The handle of the Trek user |
+| `subtoken` string | The Auth0 subtoken associated with the given Trek user account |
 
 ### Response Codes
 | Status code | Description |
@@ -473,10 +1184,10 @@ Deletes the user with the specified username
 
 ### Code samples for "Delete a user"
 
-```bash title="DELETE /api/v1/user/:username"
+```bash title="DELETE /api/v1/users/:subtoken"
 curl -L \
     -X DELETE
     -H "Authorization: Bearer <YOUR-TOKEN>" \
-    http://localhost:3000/api/v1/user/:username
+    http://localhost:3000/api/v1/users/auth0|abcdefg123456
 ```
 - No response body
