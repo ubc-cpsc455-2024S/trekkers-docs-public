@@ -1,0 +1,122 @@
+---
+sidebar_position: 4
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Destinations
+Proposed data:
+```json
+{
+    "name": "Vancouver, B.C.",
+    "image": "https://...",
+    "description": "Vancouver, British Columbia, is a vibrant coastal city…",
+    "url": "http://localhost:3000/api/v1/destination/vancouverbc"
+}
+```
+
+**TODO** See standard requirement for Search for locations within cities, add location pins on map? (https://developers.google.com/maps/documentation/places/web-service/search)
+- Show city/town specific transportation options/cost
+
+
+## Search for a destination
+`GET /api/v1/destination`
+
+Find destinations within a certain radius and/or in a city.
+
+If the `city` URL param is specified, only search results that are in that city will be returned.
+
+If `lat`, `lon` are specified, then the search will be within a circular radius of that location.
+Note that **both** lat and lon are required together (i.e. queries with only lat or only lon will be rejected).
+
+### Parameters
+
+#### Header
+| | |
+|-|-|
+| `token` string | The user access token |
+
+#### Path
+| | |
+|-|-|
+| `city` | City name |
+| `lat`  | Latitude of location (optional) |
+| `lon`  | Longitude of location (optional)|
+| `radius` | Radius to search for location by (optional for lat/lon, default 50km) |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `400` | Bad request |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+### Code samples for "Search for a destination"
+
+```bash title="GET /api/v1/destinations?city=VancouverBC"
+curl -L \
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/destinations?city=VancouverBC
+```
+
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response" default>
+    `status: 200`
+    ```json
+   [
+        {
+            "name": "Queen Elizabeth Park",
+            "image": "https://...",
+            "description": "Queen Elizabeth Park is a 130-acre municipal park located in Vancouver, British Columbia, Canada."
+        },
+        {
+            "name": "Stanley Park",
+            "image": "https://...",
+            "description": "Stanley Park is a 405-hectare public park that borders the downtown of Vanocuver in British Columbia, Canada and is almost entirely surrounded by waters of Vancouver Harbour an..."
+        }
+   ]
+    ```
+
+  </TabItem>
+  <TabItem value="schema" label="Response schema">
+
+    ```json
+    [
+        {
+            "name": string,
+            "image": string,
+            "description": string
+        }
+    ]
+    ```
+
+  </TabItem>
+</Tabs>
+---
+```bash title="GET /api/v1/destinations?lat=49.225407&lon=-123.023471"
+curl -L \
+    -H "Authorization: Bearer <YOUR-TOKEN>" \
+    http://localhost:3000/api/v1/destinations?lat=49.225407&lon=-123.023471
+```
+<Tabs className="response-examples">
+  <TabItem value="example" label="Example response" default>
+    `status: 200`
+    ```json
+   [
+        {
+            "name": "Central Park",
+            "image": "https://...",
+            "description": "Central Park is a 90-acre municipal park located in Burnaby, British Columbia, Canada."
+        },
+        {
+            "name": "Killarney Park",
+            "image": "https://...",
+            "description": "Killarney Community Centre is a 32.5 acre municipal park located in Vancouver, British Columbia, Canada."
+        }
+   ]
+    ```
+
+  </TabItem>
+</Tabs>
