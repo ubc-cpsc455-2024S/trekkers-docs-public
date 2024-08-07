@@ -1,0 +1,1144 @@
+---
+sidebar_position: 3
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Trips
+
+## List Trips
+`GET /api/v1/trips`
+
+Get all the trips associated with the authenticated user.
+
+### Parameters
+
+#### Header
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `token` | string | The user access token |
+
+### Response CodesA
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `401` | Unauthorized |
+
+### Code samples for "Get all trips"
+
+```bash title="GET /api/v1/trips"
+curl -L  \\
+-H "Authorization: Bearer <YOUR-TOKEN>" \\
+http://localhost:3000/api/v1/trips
+```
+
+<Tabs className="response-examples">
+    <TabItem value="example" label="Example response">
+        status: 200
+        ```json
+        [
+        {
+            _id: "trip-id-123",
+            name: "Beach Vacation",
+            desc: "A relaxing trip to the beach.",
+            photos: ["beach1.jpg", "beach2.jpg"],
+            mainImage: "mainBeachImage.jpg",
+            photoURLs: ["https://example.com/beach1.jpg", "https://example.com/beach2.jpg"],
+            mainImageURL: "https://example.com/mainBeachImage.jpg",
+            ownerUser: {
+            userId: "owner-id-123",
+            userName: "John Doe",
+            email: "john@example.com"
+        },
+            nonOwnerUsers: [
+        {
+            userId: "user-id-456",
+            userName: "Jane Smith",
+            email: "jane@example.com"
+        },
+        {
+            userId: "user-id-789",
+            userName: "Bob Johnson",
+            email: "bob@example.com"
+        }
+            ]
+        },
+        {
+            _id: "trip-id-456",
+            name: "Mountain Adventure",
+            desc: "An exciting mountain hiking trip.",
+            photos: ["mountain1.jpg", "mountain2.jpg"],
+            mainImage: "mainMountainImage.jpg",
+            photoURLs: ["https://example.com/mountain1.jpg", "https://example.com/mountain2.jpg"],
+            mainImageURL: "https://example.com/mainMountainImage.jpg",
+            ownerUser: {
+            userId: "owner-id-456",
+            userName: "Alice Brown",
+            email: "alice@example.com"
+        },
+            nonOwnerUsers: [
+        {
+            userId: "user-id-101",
+            userName: "Charlie Davis",
+            email: "charlie@example.com"
+        },
+        {
+            userId: "user-id-102",
+            userName: "Dana White",
+            email: "dana@example.com"
+        }
+            ]
+        }
+        ]
+        ```
+    </TabItem>
+    <TabItem value="schema" label="Response schema">
+        ```json
+        [
+        {
+            _id: string;
+            name: string;
+            desc: string;
+            photos: string[];
+            mainimage: string;
+            photourls: string[];
+            mainimageurl: string;
+            owneruser: basicuser;
+            nonownerusers: basicuser[];
+        }
+        ]
+        ```
+    </TabItem>
+</Tabs>
+
+## Paginated Trips
+`GET /api/v1/trips/paginated  `
+
+Get a subset of trips for pagination.
+
+### Parameters
+
+#### Header
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `token` | string | The user access token |
+
+#### Query
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `page` | number | The page number for pagination (default is 0) |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `401` | Unauthorized |
+| `404` | Not Found |
+
+### Code samples for "Get paginated trips"
+
+ ```bash title="GET /api/v1/trips/paginated"
+curl -L \\
+-H "Authorization: Bearer <YOUR-TOKEN>" \\
+http://localhost:3000/api/v1/trips/paginated?page=1
+ ```
+
+<Tabs className="response-examples">
+    <TabItem value="example" label="Example response">
+        status: 200
+        ```json
+        {
+            "trips": [
+        {
+            "_id": "trip-id-123",
+            "name": "Beach Vacation",
+            "desc": "A relaxing trip to the beach.",
+            "photos": ["beach1.jpg", "beach2.jpg"],
+            "mainImage": "mainBeachImage.jpg",
+            "photoURLs": [
+            "https://example.com/beach1.jpg",
+            "https://example.com/beach2.jpg"
+            ],
+            "mainImageURL": "https://example.com/mainBeachImage.jpg",
+            "ownerUser": {
+            "userId": "owner-id-123",
+            "userName": "John Doe",
+            "email": "john@example.com"
+        },
+            "nonOwnerUsers": [
+        {
+            "userId": "user-id-456",
+            "userName": "Jane Smith",
+            "email": "jane@example.com"
+        },
+        {
+            "userId": "user-id-789",
+            "userName": "Bob Johnson",
+            "email": "bob@example.com"
+        }
+            ]
+        },
+        {
+            "_id": "trip-id-456",
+            "name": "Mountain Adventure",
+            "desc": "An exciting mountain hiking trip.",
+            "photos": ["mountain1.jpg", "mountain2.jpg"],
+            "mainImage": "mainMountainImage.jpg",
+            "photoURLs": [
+            "https://example.com/mountain1.jpg",
+            "https://example.com/mountain2.jpg"
+            ],
+            "mainImageURL": "https://example.com/mainMountainImage.jpg",
+            "ownerUser": {
+            "userId": "owner-id-456",
+            "userName": "Alice Brown",
+            "email": "alice@example.com"
+        },
+            "nonOwnerUsers": [
+        {
+            "userId": "user-id-101",
+            "userName": "Charlie Davis",
+            "email": "charlie@example.com"
+        },
+        {
+            "userId": "user-id-102",
+            "userName": "Dana White",
+            "email": "dana@example.com"
+        }
+            ]
+        }
+            ],
+            "pages": 2
+        }
+        ```
+    </TabItem>
+    <TabItem value="schema" label="Response schema">
+        ```json
+        {
+            "trips": [
+        {
+            "uuid": "string",
+            "name": "string",
+            "desc": "string",
+            "img": "string"
+        }
+            ],
+            "pages": "number"
+        }
+        ```
+    </TabItem>
+</Tabs>
+
+## Get a Trip
+`GET /api/v1/trips/:uuid  `
+
+Get detailed information about a specific trip if authorized.
+
+### Parameters
+
+#### Header
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `token` | string | The user access token |
+
+#### Path
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `uuid` | string | The UUID of the trip |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `401` | Unauthorized |
+| `404` | Not Found |
+
+### Code samples for "Get a trip"
+
+ ```bash title="GET /api/v1/trips/:uuid"
+curl -L \\
+-H "Authorization: Bearer <YOUR-TOKEN>" \\
+http://localhost:3000/api/v1/trips/alsdkfj-9123jl-asldfkj
+ ```
+
+<Tabs className="response-examples">
+    <TabItem value="example" label="Example response" default>
+        status: 200
+        ```json
+        {
+            _id: "trip-id-123",
+            name: "Beach Vacation",
+            desc: "A relaxing trip to the beach.",
+            photos: ["photo1-id", "photo2-id"],
+            mainImage: "mainImage-id",
+            photoURLs: [
+            "https://example.com/photo1.jpg",
+            "https://example.com/photo2.jpg"
+            ],
+            mainImageURL: "https://example.com/mainImage.jpg",
+            ownerUser: {
+            userId: "owner-id-123",
+            userName: "John Doe",
+            email: "john@example.com"
+        },
+            nonOwnerUsers: [
+        {
+            userId: "user-id-456",
+            userName: "Jane Smith",
+            email: "jane@example.com"
+        },
+        {
+            userId: "user-id-789",
+            userName: "Bob Johnson",
+            email: "bob@example.com"
+        }
+            ],
+            dest: ["dest-id-1", "dest-id-2"],
+            destObjs: [
+        {
+            _id: "dest-id-1",
+            name: "Sunny Beach",
+            location: "Florida, USA",
+            description: "A beautiful sunny beach in Florida."
+        },
+        {
+            _id: "dest-id-2",
+            name: "Beach Hotel",
+            location: "Florida, USA",
+            description: "A luxurious hotel by the beach."
+        }
+            ],
+            budget: {
+            baseCurrency: "USD",
+            tripBudgetCategoriesGroupCost: [
+        {
+            category: "Accommodation",
+            value: 500
+        },
+        {
+            category: "Food and Restaurants",
+            value: 300
+        }
+            ],
+            tripTotalGroupCost: 1000,
+            tripTotalPayments: 800,
+            tripMemberPayments: [
+        {
+            member: "John Doe",
+            value: 500
+        }
+            ],
+            tripMemberSummary: [
+        {
+            member: "John Doe",
+            totalCost: 700,
+            totalPayment: 500
+        }
+            ]
+        },
+            expenditures: [
+        {
+            expenditure: "Flight",
+            cost: 300
+        }
+            ],
+            date: {
+            start: new Date("2023-06-01"),
+            end: new Date("2023-06-07")
+        },
+            todo: ["Book hotels", "Buy tickets"],
+            image: "tripImage.jpg",
+            url: "https://example.com/trip/beach-vacation",
+            owner: "owner-id-123",
+            members: ["member-id-456", "member-id-789"],
+            map: {
+            locations: [
+        {
+            title: "Sunny Beach",
+            address: "Beach Address",
+            date: {
+            start: new Date("2023-06-01"),
+            end: new Date("2023-06-07")
+        },
+            transportation: {
+            type: "Car",
+            distance: 20,
+            time: 30,
+            cost: 10
+        }
+        }
+            ],
+            notes: "Map notes"
+        },
+            areas: [
+        {
+            name: "Beach Area",
+            description: "Area description"
+        }
+            ],
+            areaNames: ["Beach Area"],
+            private: true,
+            startObj: {
+            _id: "start-dest-id",
+            name: "Starting Point",
+            location: "New York, USA",
+            description: "The starting point of our journey."
+        }
+        };
+        ```
+    </TabItem>
+    <TabItem value="schema" label="Response schema">
+        ```json
+        {
+            _id: string;
+            name: string;
+            desc: string;
+            photos: string[];
+            mainImage: string;
+            photoURLs: string[];
+            mainImageURL: string;
+            ownerUser: BasicUser;
+            nonOwnerUsers: BasicUser[];
+            dest: string[];
+            destObjs: Destination[];
+            budget: TripBudget;
+            expenditures: Expenditure[];
+            date: {start: Date; end: Date};
+            todo: string[];
+            image: string;
+            url: string;
+            owner: string;
+            members: string[];
+            map: Map;
+            areas: Area[];
+            areaNames: string[];
+            private: boolean;
+            startObj: Destination;
+        }
+        ```
+    </TabItem>
+</Tabs>
+
+## Get a Trip's Itinerary
+`GET /api/v1/trips/:uuid/trip_items  `
+
+Get the itinerary information for a specific trip if authorized.
+
+### Parameters
+
+#### Header
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `token` | string | The user access token |
+
+#### Path
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `uuid` | string | The UUID of the trip |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `401` | Unauthorized |
+| `404` | Not Found |
+
+### Code samples for "Get a trip's itinerary"
+
+ ```bash title="GET /api/v1/trips/:uuid/trip_items"
+curl -L \\
+-H "Authorization: Bearer <YOUR-TOKEN>" \\
+http://localhost:3000/api/v1/trips/alsdkfj-9123jl-asldfkj/trip_items
+ ```
+
+<Tabs className="response-examples">
+    <TabItem value="example" label="Example response" default>
+        status: 200
+        ```json
+
+        ```
+    </TabItem>
+    <TabItem value="schema" label="Response schema">
+        ```json
+        [
+        {
+            "item_id": "item-id-1",
+            "item_type": "destination",
+            "index": 0,
+            "day": 1,
+            "start_time": "2023-06-01T10:00:00Z",
+            "end_time": "2023-06-01T12:00:00Z",
+            "duration": 7200,
+            "budget": {
+            "currency": "USD",
+            "category": "Activities",
+            "totalEstimatedCost": 100,
+            "totalCost": 90,
+            "totalPaidCost": 80,
+            "membersBudget": [
+        {
+            "memberId": "member-id-1",
+            "memberName": "John Doe",
+            "estimatedCost": 50,
+            "cost": 45,
+            "paidValue": 40,
+            "paymentDate": "2023-06-01T09:00:00Z",
+            "paymentBaseCurrencyValue": 40
+        }
+            ]
+        },
+            "destination": {
+            "_id": "dest-id-1",
+            "name": "Sunny Beach",
+            "location": "Florida, USA",
+            "description": "A beautiful sunny beach in Florida."
+        },
+            "photos": [
+        {
+            "url": "https://example.com/photo1.jpg",
+            "description": "A sunny day at the beach."
+        },
+        {
+            "url": "https://example.com/photo2.jpg",
+            "description": "Relaxing at the beach."
+        }
+            ]
+        },
+        {
+            "item_id": "item-id-2",
+            "item_type": "transportations",
+            "index": 1,
+            "day": 2,
+            "start_time": "2023-06-02T08:00:00Z",
+            "end_time": "2023-06-02T10:00:00Z",
+            "duration": 7200,
+            "budget": {
+            "currency": "USD",
+            "category": "Transportation",
+            "totalEstimatedCost": 50,
+            "totalCost": 45,
+            "totalPaidCost": 40,
+            "membersBudget": [
+        {
+            "memberId": "member-id-2",
+            "memberName": "Jane Smith",
+            "estimatedCost": 25,
+            "cost": 22.5,
+            "paidValue": 20,
+            "paymentDate": "2023-06-02T07:00:00Z",
+            "paymentBaseCurrencyValue": 20
+        }
+            ]
+        },
+            "destination": {
+            "_id": "dest-id-2",
+            "name": "Mountain Hike",
+            "location": "Colorado, USA",
+            "description": "A thrilling hike in the mountains."
+        },
+            "photos": [
+        {
+            "url": "https://example.com/photo3.jpg",
+            "description": "Starting the hike."
+        },
+        {
+            "url": "https://example.com/photo4.jpg",
+            "description": "Beautiful mountain view."
+        }
+            ]
+        }
+        ]
+        ```
+    </TabItem>
+</Tabs>
+
+## Get a Trip's Picture
+`GET /api/v1/trips/:uuid/picture  `
+
+Get the picture of the given trip if authorized.
+
+### Parameters
+
+#### Header
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `token` | string | The user access token |
+| `Max-Width` | number | The maximum width of the image to return |
+| `Max-Height` | number | The maximum height of the image to return |
+
+#### Path
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `uuid` | string | The UUID of the trip |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `401` | Unauthorized |
+| `403` | Not Found |
+
+### Code samples for "Get a trip's picture"
+
+ ```bash title="GET /api/v1/trips/:uuid/picture"
+curl -L \\
+-H "Max-Width: 400" \\
+-H "Max-Height: 400" \\
+-H "Authorization: Bearer <YOUR-TOKEN>" \\
+http://localhost:3000/api/v1/trips/alsdkfj-9123jl-asldfkj/picture
+ ```
+
+<Tabs className="response-examples">
+    <TabItem value="example" label="Example response" default>
+        status: 200
+        ```json
+        {
+            photos: ["photo1-id", "photo2-id"],
+            mainImage: "mainImage-id",
+            owner: "owner-id-123",
+            members: ["member-id-456", "member-id-789"],
+        }
+
+        ```
+    </TabItem>
+    <TabItem value="schema" label="Response schema">
+        ```json
+        {
+            photos: Array<string>;
+            mainImage: string;
+            owner: string;
+            members: Array<string>;
+        }
+        ```
+    </TabItem>
+</Tabs>
+
+## Create a Trip
+`POST /api/v1/trips  `
+
+Create a new trip under the authenticated user’s name.
+
+### Parameters
+
+#### Header
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `token` | string | The user access token |
+
+#### Body
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `name` | string | Required. The name of the trip |
+| `desc` | string | The description of the trip |
+| `budget` | object | The budget of the trip |
+| `budget.lo` | number | The lower end of the budget |
+| `budget.hi` | number | The higher end of the budget |
+| `date` | object | The date of the trip |
+| `date.start` | number | The start date of the trip (epoch time) |
+| `date.end` | number | The end date of the trip (epoch time) |
+| `private` | boolean | Privacy setting of the trip |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `401` | Not authorized |
+
+### Code samples for "Create a trip"
+
+ ```bash title="POST /api/v1/trips"
+curl -L \\
+-X POST \\
+-H "Authorization: Bearer <YOUR-TOKEN>" \\
+http://localhost:3000/api/v1/trips \\
+-d '{"name": "gregorks Trip", "desc": "tmp grad trip", "private":true}'
+ ```
+
+<Tabs className="response-examples">
+    <TabItem value="example" label="Example response" default>
+        status: 200
+        ```json
+        {
+            id: '66afbed15b9e0c31dba90480',
+            type: 'Feature',
+            geometry: [ -123.113952, 49.2608724 ],
+            properties: {
+            osm_id: '1852574',
+            osm_type: 'r',
+            wikidata_id: 'Q24639',
+            wikipedia: 'en:Vancouver',
+            destination_type: 'area',
+            name: 'Vancouver',
+            display_name: 'Vancouver, Metro Vancouver Regional District, British Columbia, Canada',
+            main_photo: {
+            id: '66afbed05b9e0c31dba9047e',
+            image_origin: 'external',
+            artist: 'David G. Gordon',
+            license_url: 'https://creativecommons.org/licenses/by-sa/4.0',
+            license: 'cc-by-sa-4.0',
+            filename: '4a5a62b2-3406-41f9-95b1-ea457c738d9b.jpg',
+            mimeType: 'image/jpeg',
+            filesize: 1481092,
+            width: 4356,
+            height: 2450,
+            focalX: 50,
+            focalY: 50,
+            sizes: [Object],
+            createdAt: '2024-08-04T17:48:00.866Z',
+            updatedAt: '2024-08-04T17:48:00.866Z',
+            url: '/media/4a5a62b2-3406-41f9-95b1-ea457c738d9b.jpg'
+        },
+            timezone: 'America/Vancouver',
+            bbox: {
+            min_latitude: 49.1989306,
+            min_longitude: -123.2249611,
+            max_latitude: 49.3161714,
+            max_longitude: -123.0232419
+        }
+        },
+            createdAt: '2024-08-04T17:48:01.035Z',
+            updatedAt: '2024-08-04T17:48:01.035Z'
+        }
+
+        ```
+    </TabItem>
+    <TabItem value="schema" label="Response schema">
+        ```js
+        type Geometry = [number, number];
+
+        type MainPhoto = {
+        id: string;
+        image_origin: string;
+        artist: string;
+        license_url: string;
+        license: string;
+        filename: string;
+        mimeType: string;
+        filesize: number;
+        width: number;
+        height: number;
+        focalX: number;
+        focalY: number;
+        sizes: object;
+        createdAt: string;
+        updatedAt: string;
+        url: string;
+    };
+
+        type Bbox = {
+        min_latitude: number;
+        min_longitude: number;
+        max_latitude: number;
+        max_longitude: number;
+    };
+
+        type Properties = {
+        osm_id: string;
+        osm_type: string;
+        wikidata_id: string;
+        wikipedia: string;
+        destination_type: string;
+        name: string;
+        display_name: string;
+        main_photo: MainPhoto;
+        timezone: string;
+        bbox: Bbox;
+    };
+
+        type Feature = {
+        id: string;
+        type: string;
+        geometry: Geometry;
+        properties: Properties;
+        createdAt: string;
+        updatedAt: string;
+    };
+
+        ```
+    </TabItem>
+</Tabs>
+
+## Update a Trip's Itinerary
+    `PUT /api/v1/trips/:uuid/trip_items  `
+
+Update a trip's itinerary information if authorized.
+
+### Parameters
+
+#### Header
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `token` | string | The user access token |
+
+#### Path
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `uuid` | string | The UUID of the trip |
+
+#### Body
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `trip_items` | array | The updated itinerary items |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `304` | Not modified |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+### Code samples for "Update a trip's itinerary"
+
+```bash title="PUT /api/v1/trips/:uuid/trip_items"
+curl -L \\
+-X PUT \\
+-H "Authorization: Bearer <YOUR-TOKEN>" \\
+http://localhost:3000/api/v1/trips/aksjfh9320-oaf90-12iuhfiuas/trip_items \\
+-d '{ "trip_items": [ { "item": "Visit X museum", "cost": 20, "date": 1715640000 } ] }'
+ ```
+
+                     <Tabs className="response-examples">
+                         <TabItem value="example" label="Example response" default>
+                             status: 200
+                             ```json
+                             {
+                                 "trip_items": [
+                             {
+                                 "item": "Visit X museum",
+                                 "cost": 20,
+                                 "date": 1715640000
+                             }
+                                 ]
+                             }
+                             ```
+                         </TabItem>
+                         <TabItem value="schema" label="Response schema">
+                             ```json
+                             {
+                                 "trip_items": [
+                             {
+                                 "item": "string",
+                                 "cost": "number",
+                                 "date": "number"
+                             }
+                                 ]
+                             }
+                             ```
+                         </TabItem>
+                     </Tabs>
+
+## Update a Trip's Budget
+    `PUT /api/v1/trips/:uuid/budget  `
+
+Update a trip's budget information if authorized.
+
+### Parameters
+
+#### Header
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `token` | string | The user access token |
+
+#### Path
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `uuid` | string | The UUID of the trip |
+
+#### Body
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `budget` | object | The updated budget information |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `304` | Not modified |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+### Code samples for "Update a trip's budget"
+
+                     ```bash title="PUT /api/v1/trips/:uuid/budget"
+curl -L \\
+-X PUT \\
+-H "Authorization: Bearer <YOUR-TOKEN>" \\
+http://localhost:3000/api/v1/trips/aksjfh9320-oaf90-12iuhfiuas/budget \\
+-d '{ "budget": { "lo": 500, "hi": 2000 } }'
+ ```
+
+                     <Tabs className="response-examples">
+                         <TabItem value="example" label="Example response" default>
+                             status: 200
+                             ```json
+                             {
+                                 "budget": {"lo": 500, "hi": 2000}
+                             }
+                             ```
+                         </TabItem>
+                         <TabItem value="schema" label="Response schema">
+                             ```json
+                             {
+                                 "budget": {"lo": "number", "hi": "number"}
+                             }
+                             ```
+                         </TabItem>
+                     </Tabs>
+
+## Update a Trip's Management
+    `PUT /api/v1/trips/:uuid/management  `
+
+Update a trip's management settings if authorized.
+
+### Parameters
+
+#### Header
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `token` | string | The user access token |
+
+#### Path
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `uuid` | string | The UUID of the trip |
+
+#### Body
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `owner` | string | The username of the new owner of the trip |
+| `members` | array | The updated members of the trip |
+| `private` | boolean | The new privacy setting of the trip |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `304` | Not modified |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+### Code samples for "Update a trip's management"
+
+                     ```bash title="PUT /api/v1/trips/:uuid/management"
+curl -L \\
+-X PUT \\
+-H "Authorization: Bearer <YOUR-TOKEN>" \\
+http://localhost:3000/api/v1/trips/aksjfh9320-oaf90-12iuhfiuas/management \\
+-d '{ "owner": "newOwner", "members": ["member1", "member2"], "private": false }'
+ ```
+
+                     <Tabs className="response-examples">
+                         <TabItem value="example" label="Example response" default>
+                             status: 200
+                             ```json
+                             {
+                                 "owner": "newOwner",
+                                 "members": ["member1", "member2"],
+                                 "private": false
+                             }
+                             ```
+                         </TabItem>
+                         <TabItem value="schema" label="Response schema">
+                             ```json
+                             {
+                                 "owner": "string",
+                                 "members": ["string"],
+                                 "private": "boolean"
+                             }
+                             ```
+                         </TabItem>
+                     </Tabs>
+
+## Update a Trip's Picture
+    `PUT /api/v1/trips/:uuid/picture  `
+
+Update a trip's picture if authorized.
+
+### Parameters
+
+#### Header
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `token` | string | The user access token |
+
+#### Path
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `uuid` | string | The UUID of the trip |
+
+#### Body
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `mainImage` | file | The main image file for the trip |
+| `photos` | array | The array of additional photo files for the trip |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `304` | Not modified |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+### Code samples for "Update a trip's picture"
+
+                     ```bash title="PUT /api/v1/trips/:uuid/picture"
+curl -L \\
+-X PUT \\
+-H "Authorization: Bearer <YOUR-TOKEN>" \\
+-F "mainImage=@/path/to/image.jpg" \\
+-F "photos=@/path/to/photo1.jpg" \\
+http://localhost:3000/api/v1/trips/aksjfh9320-oaf90-12iuhfiuas/picture
+```
+
+                     <Tabs className="response-examples">
+                         <TabItem value="example" label="Example response" default>
+                             status: 200
+                             ```json
+                             {
+                                 "mainImage": "http://localhost:3000/api/v1/trips/aksjfh9320-oaf90-12iuhfiuas/mainImage",
+                                 "photos": [
+                                 "http://localhost:3000/api/v1/trips/aksjfh9320-oaf90-12iuhfiuas/photo1",
+                                 "http://localhost:3000/api/v1/trips/aksjfh9320-oaf90-12iuhfiuas/photo2"
+                                 ]
+                             }
+                             ```
+                         </TabItem>
+                         <TabItem value="schema" label="Response schema">
+                             ```json
+                             {
+                                 "mainImage": "string",
+                                 "photos": ["string"]
+                             }
+                             ```
+                         </TabItem>
+                     </Tabs>
+
+## Update a Trip
+    `PUT /api/v1/trips/:uuid`
+
+Update a trip's information if authorized.
+
+### Parameters
+
+#### Header
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `token` | string | The user access token |
+
+#### Path
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `uuid` | string | The UUID of the trip |
+
+#### Body
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `name` | string | The new name of the trip |
+| `desc` | string | The new description of the trip |
+| `dest` | array | The new destinations of the trip |
+| `budget` | object | The new budget of the trip |
+| `expenditures` | array | The new expenditures of the trip |
+| `date` | object | The new date of the trip |
+| `todo` | array | The new todo items of the trip |
+| `img` | string | The new image URL of the trip |
+| `owner` | string | The username of the new owner of the trip |
+| `members` | array | The updated members of the trip |
+| `private` | boolean | The new privacy setting of the trip |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `200` | OK |
+| `304` | Not modified |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+### Code samples for "Update a trip"
+
+                     ```bash title="PUT /api/v1/trips/:uuid"
+curl -L \\
+-X PUT \\
+-H "Authorization: Bearer <YOUR-TOKEN>" \\
+http://localhost:3000/api/v1/trips/aksjfh9320-oaf90-12iuhfiuas \\
+-d '{ "name": "New Trip Name", "desc": "Updated trip description" }'
+```
+
+                     <Tabs className="response-examples">
+                         <TabItem value="example" label="Example response" default>
+                             status: 200
+                             ```json
+                             {
+                                 "uuid": "aksjfh9320-oaf90-12iuhfiuas",
+                                 "name": "New Trip Name",
+                                 "desc": "Updated trip description",
+                                 "dest": [],
+                                 "budget": {"lo": 0, "hi": 0},
+                                 "expenditures": [],
+                                 "date": {"start": 1715640000, "end": 1715640000},
+                                 "todo": [],
+                                 "img": "http://localhost:3000/api/v1/trip/default/picture",
+                                 "url": "http://localhost:5173/trip/aksjfh9320-oaf90-12iuhfiuas",
+                                 "owner": "gregork",
+                                 "members": ["gregork"],
+                                 "private": true
+                             }
+                             ```
+                         </TabItem>
+                         <TabItem value="schema" label="Response schema">
+                             ```json
+                             {
+                                 "uuid": "string",
+                                 "name": "string",
+                                 "desc": "string",
+                                 "dest": "Array<string>",
+                                 "budget": "{ lo: number, hi: number }",
+                                 "expenditures": "Array<{ expenditure: string, cost: number }>",
+                                 "date": "{ start: number, end: number }",
+                                 "todo": "Array<string>",
+                                 "notes": "string",
+                                 "img": "string",
+                                 "url": "string",
+                                 "owner": "string",
+                                 "members": "Array<string>",
+                                 "private": "boolean"
+                             }
+                             ```
+                         </TabItem>
+                     </Tabs>
+
+## Delete a Trip
+    `DELETE /api/v1/trips/:uuid`
+
+Delete a trip if authorized.
+
+### Parameters
+
+#### Header
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `token` | string | The user access token |
+
+#### Path
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `uuid` | string | The UUID of the trip |
+
+### Response Codes
+| Status code | Description |
+| ----------- | ----------- |
+| `204` | No Content |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+### Code samples for "Delete a trip"
+
+                     ```bash title="DELETE /api/v1/trips/:uuid"
+curl -L \\
+-X DELETE \\
+-H "Authorization: Bearer <YOUR-TOKEN>" \\
+http://localhost:3000/api/v1/trips/askdjh-eqfhu9823-iquwef
+```
+                     - No response body
