@@ -38,75 +38,75 @@ http://localhost:3000/api/v1/trips
         status: 200
         ```json
         [
-        {
-            _id: "trip-id-123",
-            name: "Beach Vacation",
-            desc: "A relaxing trip to the beach.",
-            photos: ["beach1.jpg", "beach2.jpg"],
-            mainImage: "mainBeachImage.jpg",
-            photoURLs: ["https://example.com/beach1.jpg", "https://example.com/beach2.jpg"],
-            mainImageURL: "https://example.com/mainBeachImage.jpg",
-            ownerUser: {
-            userId: "owner-id-123",
-            userName: "John Doe",
-            email: "john@example.com"
-        },
-            nonOwnerUsers: [
-        {
-            userId: "user-id-456",
-            userName: "Jane Smith",
-            email: "jane@example.com"
-        },
-        {
-            userId: "user-id-789",
-            userName: "Bob Johnson",
-            email: "bob@example.com"
-        }
-            ]
-        },
-        {
-            _id: "trip-id-456",
-            name: "Mountain Adventure",
-            desc: "An exciting mountain hiking trip.",
-            photos: ["mountain1.jpg", "mountain2.jpg"],
-            mainImage: "mainMountainImage.jpg",
-            photoURLs: ["https://example.com/mountain1.jpg", "https://example.com/mountain2.jpg"],
-            mainImageURL: "https://example.com/mainMountainImage.jpg",
-            ownerUser: {
-            userId: "owner-id-456",
-            userName: "Alice Brown",
-            email: "alice@example.com"
-        },
-            nonOwnerUsers: [
-        {
-            userId: "user-id-101",
-            userName: "Charlie Davis",
-            email: "charlie@example.com"
-        },
-        {
-            userId: "user-id-102",
-            userName: "Dana White",
-            email: "dana@example.com"
-        }
-            ]
-        }
+            {
+                _id: "trip-id-123",
+                name: "Beach Vacation",
+                desc: "A relaxing trip to the beach.",
+                photos: ["beach1.jpg", "beach2.jpg"],
+                mainImage: "mainBeachImage.jpg",
+                photoURLs: ["https://example.com/beach1.jpg", "https://example.com/beach2.jpg"],
+                mainImageURL: "https://example.com/mainBeachImage.jpg",
+                ownerUser: {
+                    userId: "owner-id-123",
+                    userName: "John Doe",
+                    email: "john@example.com"
+                },
+                nonOwnerUsers: [
+                    {
+                        userId: "user-id-456",
+                        userName: "Jane Smith",
+                        email: "jane@example.com"
+                    },
+                    {
+                        userId: "user-id-789",
+                        userName: "Bob Johnson",
+                        email: "bob@example.com"
+                    }
+                ]
+            },
+            {
+                _id: "trip-id-456",
+                name: "Mountain Adventure",
+                desc: "An exciting mountain hiking trip.",
+                photos: ["mountain1.jpg", "mountain2.jpg"],
+                mainImage: "mainMountainImage.jpg",
+                photoURLs: ["https://example.com/mountain1.jpg", "https://example.com/mountain2.jpg"],
+                mainImageURL: "https://example.com/mainMountainImage.jpg",
+                ownerUser: {
+                    userId: "owner-id-456",
+                    userName: "Alice Brown",
+                    email: "alice@example.com"
+                },
+                nonOwnerUsers: [
+                    {
+                        userId: "user-id-101",
+                        userName: "Charlie Davis",
+                        email: "charlie@example.com"
+                    },
+                    {
+                        userId: "user-id-102",
+                        userName: "Dana White",
+                        email: "dana@example.com"
+                    }
+                ]
+            }
         ]
         ```
     </TabItem>
     <TabItem value="schema" label="Response schema">
         ```json
         [
-        {
-            _id: string;
-            name: string;
-            desc: string;
-            photos: string[];
-            mainimage: string;
-            photourls: string[];
-            mainimageurl: string;
-            owneruser: basicuser;
-            nonownerusers: basicuser[];
-        }
+            {
+                _id: string;
+                name: string;
+                desc: string;
+                photos: string[];
+                mainimage: string;
+                photourls: string[];
+                mainimageurl: string;
+                owneruser: basicuser;
+                nonownerusers: basicuser[];
+            }
         ]
         ```
     </TabItem>
@@ -150,64 +150,64 @@ http://localhost:3000/api/v1/trips/paginated?page=1
         ```json
         {
             "trips": [
-        {
-            "_id": "trip-id-123",
-            "name": "Beach Vacation",
-            "desc": "A relaxing trip to the beach.",
-            "photos": ["beach1.jpg", "beach2.jpg"],
-            "mainImage": "mainBeachImage.jpg",
-            "photoURLs": [
-            "https://example.com/beach1.jpg",
-            "https://example.com/beach2.jpg"
-            ],
-            "mainImageURL": "https://example.com/mainBeachImage.jpg",
-            "ownerUser": {
-            "userId": "owner-id-123",
-            "userName": "John Doe",
-            "email": "john@example.com"
-        },
-            "nonOwnerUsers": [
-        {
-            "userId": "user-id-456",
-            "userName": "Jane Smith",
-            "email": "jane@example.com"
-        },
-        {
-            "userId": "user-id-789",
-            "userName": "Bob Johnson",
-            "email": "bob@example.com"
-        }
-            ]
-        },
-        {
-            "_id": "trip-id-456",
-            "name": "Mountain Adventure",
-            "desc": "An exciting mountain hiking trip.",
-            "photos": ["mountain1.jpg", "mountain2.jpg"],
-            "mainImage": "mainMountainImage.jpg",
-            "photoURLs": [
-            "https://example.com/mountain1.jpg",
-            "https://example.com/mountain2.jpg"
-            ],
-            "mainImageURL": "https://example.com/mainMountainImage.jpg",
-            "ownerUser": {
-            "userId": "owner-id-456",
-            "userName": "Alice Brown",
-            "email": "alice@example.com"
-        },
-            "nonOwnerUsers": [
-        {
-            "userId": "user-id-101",
-            "userName": "Charlie Davis",
-            "email": "charlie@example.com"
-        },
-        {
-            "userId": "user-id-102",
-            "userName": "Dana White",
-            "email": "dana@example.com"
-        }
-            ]
-        }
+                {
+                    "_id": "trip-id-123",
+                    "name": "Beach Vacation",
+                    "desc": "A relaxing trip to the beach.",
+                    "photos": ["beach1.jpg", "beach2.jpg"],
+                    "mainImage": "mainBeachImage.jpg",
+                    "photoURLs": [
+                        "https://example.com/beach1.jpg",
+                        "https://example.com/beach2.jpg"
+                        ],
+                    "mainImageURL": "https://example.com/mainBeachImage.jpg",
+                    "ownerUser": {
+                        "userId": "owner-id-123",
+                        "userName": "John Doe",
+                        "email": "john@example.com"
+                    },
+                    "nonOwnerUsers": [
+                        {
+                            "userId": "user-id-456",
+                            "userName": "Jane Smith",
+                            "email": "jane@example.com"
+                        },
+                        {
+                            "userId": "user-id-789",
+                            "userName": "Bob Johnson",
+                            "email": "bob@example.com"
+                        }
+                    ]
+                },
+                {
+                    "_id": "trip-id-456",
+                    "name": "Mountain Adventure",
+                    "desc": "An exciting mountain hiking trip.",
+                    "photos": ["mountain1.jpg", "mountain2.jpg"],
+                    "mainImage": "mainMountainImage.jpg",
+                    "photoURLs": [
+                        "https://example.com/mountain1.jpg",
+                        "https://example.com/mountain2.jpg"
+                        ],
+                    "mainImageURL": "https://example.com/mainMountainImage.jpg",
+                    "ownerUser": {
+                        "userId": "owner-id-456",
+                        "userName": "Alice Brown",
+                        "email": "alice@example.com"
+                    },
+                    "nonOwnerUsers": [
+                        {
+                            "userId": "user-id-101",
+                            "userName": "Charlie Davis",
+                            "email": "charlie@example.com"
+                        },
+                        {
+                            "userId": "user-id-102",
+                            "userName": "Dana White",
+                            "email": "dana@example.com"
+                        }
+                    ]
+                }
             ],
             "pages": 2
         }
@@ -217,12 +217,12 @@ http://localhost:3000/api/v1/trips/paginated?page=1
         ```json
         {
             "trips": [
-        {
-            "uuid": "string",
-            "name": "string",
-            "desc": "string",
-            "img": "string"
-        }
+                {
+                    "uuid": "string",
+                    "name": "string",
+                    "desc": "string",
+                    "img": "string"
+                }
             ],
             "pages": "number"
         }
@@ -273,118 +273,118 @@ http://localhost:3000/api/v1/trips/alsdkfj-9123jl-asldfkj
             photos: ["photo1-id", "photo2-id"],
             mainImage: "mainImage-id",
             photoURLs: [
-            "https://example.com/photo1.jpg",
-            "https://example.com/photo2.jpg"
+                "https://example.com/photo1.jpg",
+                "https://example.com/photo2.jpg"
             ],
             mainImageURL: "https://example.com/mainImage.jpg",
             ownerUser: {
-            userId: "owner-id-123",
-            userName: "John Doe",
-            email: "john@example.com"
-        },
+                userId: "owner-id-123",
+                userName: "John Doe",
+                email: "john@example.com"
+            },
             nonOwnerUsers: [
-        {
-            userId: "user-id-456",
-            userName: "Jane Smith",
-            email: "jane@example.com"
-        },
-        {
-            userId: "user-id-789",
-            userName: "Bob Johnson",
-            email: "bob@example.com"
-        }
+                {
+                    userId: "user-id-456",
+                    userName: "Jane Smith",
+                    email: "jane@example.com"
+                },
+                {
+                    userId: "user-id-789",
+                    userName: "Bob Johnson",
+                    email: "bob@example.com"
+                }
             ],
             dest: ["dest-id-1", "dest-id-2"],
             destObjs: [
-        {
-            _id: "dest-id-1",
-            name: "Sunny Beach",
-            location: "Florida, USA",
-            description: "A beautiful sunny beach in Florida."
-        },
-        {
-            _id: "dest-id-2",
-            name: "Beach Hotel",
-            location: "Florida, USA",
-            description: "A luxurious hotel by the beach."
-        }
+                {
+                    _id: "dest-id-1",
+                    name: "Sunny Beach",
+                    location: "Florida, USA",
+                    description: "A beautiful sunny beach in Florida."
+                },
+                {
+                    _id: "dest-id-2",
+                    name: "Beach Hotel",
+                    location: "Florida, USA",
+                    description: "A luxurious hotel by the beach."
+                }
             ],
             budget: {
-            baseCurrency: "USD",
-            tripBudgetCategoriesGroupCost: [
-        {
-            category: "Accommodation",
-            value: 500
-        },
-        {
-            category: "Food and Restaurants",
-            value: 300
-        }
-            ],
-            tripTotalGroupCost: 1000,
-            tripTotalPayments: 800,
-            tripMemberPayments: [
-        {
-            member: "John Doe",
-            value: 500
-        }
-            ],
-            tripMemberSummary: [
-        {
-            member: "John Doe",
-            totalCost: 700,
-            totalPayment: 500
-        }
-            ]
-        },
+                baseCurrency: "USD",
+                tripBudgetCategoriesGroupCost: [
+                    {
+                        category: "Accommodation",
+                        value: 500
+                    },
+                    {
+                        category: "Food and Restaurants",
+                        value: 300
+                    }
+                ],
+                tripTotalGroupCost: 1000,
+                tripTotalPayments: 800,
+                tripMemberPayments: [
+                    {
+                        member: "John Doe",
+                        value: 500
+                    }
+                        ],
+                        tripMemberSummary: [
+                    {
+                        member: "John Doe",
+                        totalCost: 700,
+                        totalPayment: 500
+                    }
+                ]
+            },
             expenditures: [
-        {
-            expenditure: "Flight",
-            cost: 300
-        }
+                {
+                    expenditure: "Flight",
+                    cost: 300
+                }
             ],
             date: {
-            start: new Date("2023-06-01"),
-            end: new Date("2023-06-07")
-        },
+                start: new Date("2023-06-01"),
+                end: new Date("2023-06-07")
+            },
             todo: ["Book hotels", "Buy tickets"],
             image: "tripImage.jpg",
             url: "https://example.com/trip/beach-vacation",
             owner: "owner-id-123",
             members: ["member-id-456", "member-id-789"],
             map: {
-            locations: [
-        {
-            title: "Sunny Beach",
-            address: "Beach Address",
-            date: {
-            start: new Date("2023-06-01"),
-            end: new Date("2023-06-07")
-        },
-            transportation: {
-            type: "Car",
-            distance: 20,
-            time: 30,
-            cost: 10
-        }
-        }
-            ],
-            notes: "Map notes"
-        },
+                locations: [
+                    {
+                        title: "Sunny Beach",
+                        address: "Beach Address",
+                        date: {
+                            start: new Date("2023-06-01"),
+                            end: new Date("2023-06-07")
+                        },
+                        transportation: {
+                            type: "Car",
+                            distance: 20,
+                            time: 30,
+                            cost: 10
+                        }
+                    }
+                ],
+                notes: "Map notes"
+            },
             areas: [
-        {
-            name: "Beach Area",
-            description: "Area description"
-        }
+                {
+                    name: "Beach Area",
+                    description: "Area description"
+                }
             ],
             areaNames: ["Beach Area"],
             private: true,
             startObj: {
-            _id: "start-dest-id",
-            name: "Starting Point",
-            location: "New York, USA",
-            description: "The starting point of our journey."
-        }
+                _id: "start-dest-id",
+                name: "Starting Point",
+                location: "New York, USA",
+                description: "The starting point of our journey."
+            }
         };
         ```
     </TabItem>
@@ -456,98 +456,111 @@ http://localhost:3000/api/v1/trips/alsdkfj-9123jl-asldfkj/trip_items
     <TabItem value="example" label="Example response" default>
         status: 200
         ```json
-
+            [
+                {
+                    "item_id":"item-id-1",
+                    "item_type":"destination",
+                    "index":0,
+                    "day":1,
+                    "start_time":"2023-06-01T10:00:00Z",
+                    "end_time":"2023-06-01T12:00:00Z",
+                    "duration":7200,
+                    "budget":{
+                        "currency":"USD",
+                        "category":"Activities",
+                        "totalEstimatedCost":100,
+                        "totalCost":90,
+                        "totalPaidCost":80,
+                        "membersBudget":[
+                            {
+                                "memberId":"member-id-1",
+                                "memberName":"John Doe",
+                                "estimatedCost":50,
+                                "cost":45,
+                                "paidValue":40,
+                                "paymentDate":"2023-06-01T09:00:00Z",
+                                "paymentBaseCurrencyValue":40
+                            }
+                        ]
+                    },
+                    "destination":{
+                        "_id":"dest-id-1",
+                        "name":"Sunny Beach",
+                        "location":"Florida, USA",
+                        "description":"A beautiful sunny beach in Florida."
+                    },
+                    "photos":[
+                        {
+                            "url":"https://example.com/photo1.jpg",
+                            "description":"A sunny day at the beach."
+                        },
+                        {
+                            "url":"https://example.com/photo2.jpg",
+                            "description":"Relaxing at the beach."
+                        }
+                    ]
+                },
+                {
+                    "item_id":"item-id-2",
+                    "item_type":"transportations",
+                    "index":1,
+                    "day":2,
+                    "start_time":"2023-06-02T08:00:00Z",
+                    "end_time":"2023-06-02T10:00:00Z",
+                    "duration":7200,
+                    "budget":{
+                        "currency":"USD",
+                        "category":"Transportation",
+                        "totalEstimatedCost":50,
+                        "totalCost":45,
+                        "totalPaidCost":40,
+                        "membersBudget":[
+                            {
+                                "memberId":"member-id-2",
+                                "memberName":"Jane Smith",
+                                "estimatedCost":25,
+                                "cost":22.5,
+                                "paidValue":20,
+                                "paymentDate":"2023-06-02T07:00:00Z",
+                                "paymentBaseCurrencyValue":20
+                            }
+                        ]
+                    },
+                    "destination":{
+                        "_id":"dest-id-2",
+                        "name":"Mountain Hike",
+                        "location":"Colorado, USA",
+                        "description":"A thrilling hike in the mountains."
+                    },
+                    "photos":[
+                        {
+                            "url":"https://example.com/photo3.jpg",
+                            "description":"Starting the hike."
+                        },
+                        {
+                            "url":"https://example.com/photo4.jpg",
+                            "description":"Beautiful mountain view."
+                        }
+                    ]
+                }
+            ]
         ```
     </TabItem>
     <TabItem value="schema" label="Response schema">
         ```json
         [
-        {
-            "item_id": "item-id-1",
-            "item_type": "destination",
-            "index": 0,
-            "day": 1,
-            "start_time": "2023-06-01T10:00:00Z",
-            "end_time": "2023-06-01T12:00:00Z",
-            "duration": 7200,
-            "budget": {
-            "currency": "USD",
-            "category": "Activities",
-            "totalEstimatedCost": 100,
-            "totalCost": 90,
-            "totalPaidCost": 80,
-            "membersBudget": [
-        {
-            "memberId": "member-id-1",
-            "memberName": "John Doe",
-            "estimatedCost": 50,
-            "cost": 45,
-            "paidValue": 40,
-            "paymentDate": "2023-06-01T09:00:00Z",
-            "paymentBaseCurrencyValue": 40
-        }
-            ]
-        },
-            "destination": {
-            "_id": "dest-id-1",
-            "name": "Sunny Beach",
-            "location": "Florida, USA",
-            "description": "A beautiful sunny beach in Florida."
-        },
-            "photos": [
-        {
-            "url": "https://example.com/photo1.jpg",
-            "description": "A sunny day at the beach."
-        },
-        {
-            "url": "https://example.com/photo2.jpg",
-            "description": "Relaxing at the beach."
-        }
-            ]
-        },
-        {
-            "item_id": "item-id-2",
-            "item_type": "transportations",
-            "index": 1,
-            "day": 2,
-            "start_time": "2023-06-02T08:00:00Z",
-            "end_time": "2023-06-02T10:00:00Z",
-            "duration": 7200,
-            "budget": {
-            "currency": "USD",
-            "category": "Transportation",
-            "totalEstimatedCost": 50,
-            "totalCost": 45,
-            "totalPaidCost": 40,
-            "membersBudget": [
-        {
-            "memberId": "member-id-2",
-            "memberName": "Jane Smith",
-            "estimatedCost": 25,
-            "cost": 22.5,
-            "paidValue": 20,
-            "paymentDate": "2023-06-02T07:00:00Z",
-            "paymentBaseCurrencyValue": 20
-        }
-            ]
-        },
-            "destination": {
-            "_id": "dest-id-2",
-            "name": "Mountain Hike",
-            "location": "Colorado, USA",
-            "description": "A thrilling hike in the mountains."
-        },
-            "photos": [
-        {
-            "url": "https://example.com/photo3.jpg",
-            "description": "Starting the hike."
-        },
-        {
-            "url": "https://example.com/photo4.jpg",
-            "description": "Beautiful mountain view."
-        }
-            ]
-        }
+            {
+                item_id: string;
+                item_type: 'destination' | 'transportations';
+                index: number;
+                day: number;
+                start_time: string;
+                end_time: string;
+                duration: number;
+                budget: Budget;
+                destination: Destination;
+                photos: Photo[];
+            }
         ]
         ```
     </TabItem>
@@ -659,47 +672,52 @@ http://localhost:3000/api/v1/trips \\
     <TabItem value="example" label="Example response" default>
         status: 200
         ```json
-        {
-            id: '66afbed15b9e0c31dba90480',
-            type: 'Feature',
-            geometry: [ -123.113952, 49.2608724 ],
-            properties: {
-            osm_id: '1852574',
-            osm_type: 'r',
-            wikidata_id: 'Q24639',
-            wikipedia: 'en:Vancouver',
-            destination_type: 'area',
-            name: 'Vancouver',
-            display_name: 'Vancouver, Metro Vancouver Regional District, British Columbia, Canada',
-            main_photo: {
-            id: '66afbed05b9e0c31dba9047e',
-            image_origin: 'external',
-            artist: 'David G. Gordon',
-            license_url: 'https://creativecommons.org/licenses/by-sa/4.0',
-            license: 'cc-by-sa-4.0',
-            filename: '4a5a62b2-3406-41f9-95b1-ea457c738d9b.jpg',
-            mimeType: 'image/jpeg',
-            filesize: 1481092,
-            width: 4356,
-            height: 2450,
-            focalX: 50,
-            focalY: 50,
-            sizes: [Object],
-            createdAt: '2024-08-04T17:48:00.866Z',
-            updatedAt: '2024-08-04T17:48:00.866Z',
-            url: '/media/4a5a62b2-3406-41f9-95b1-ea457c738d9b.jpg'
-        },
-            timezone: 'America/Vancouver',
-            bbox: {
-            min_latitude: 49.1989306,
-            min_longitude: -123.2249611,
-            max_latitude: 49.3161714,
-            max_longitude: -123.0232419
-        }
-        },
-            createdAt: '2024-08-04T17:48:01.035Z',
-            updatedAt: '2024-08-04T17:48:01.035Z'
-        }
+            {
+                id:'66afbed15b9e0c31dba90480',
+                type:'Feature',
+                geometry:[
+                    -123.113952,
+                    49.2608724
+                ],
+                properties:{
+                    osm_id:'1852574',
+                    osm_type:'r',
+                    wikidata_id:'Q24639',
+                    wikipedia:'en:Vancouver',
+                    destination_type:'area',
+                    name:'Vancouver',
+                    display_name:'Vancouver, Metro Vancouver Regional District, British Columbia, Canada',
+                    main_photo:{
+                        id:'66afbed05b9e0c31dba9047e',
+                        image_origin:'external',
+                        artist:'David G. Gordon',
+                        license_url:'https://creativecommons.org/licenses/by-sa/4.0',
+                        license:'cc-by-sa-4.0',
+                        filename:'4a5a62b2-3406-41f9-95b1-ea457c738d9b.jpg',
+                        mimeType:'image/jpeg',
+                        filesize:1481092,
+                        width:4356,
+                        height:2450,
+                        focalX:50,
+                        focalY:50,
+                        sizes:[
+                            Object
+                        ],
+                        createdAt:'2024-08-04T17:48:00.866Z',
+                        updatedAt:'2024-08-04T17:48:00.866Z',
+                        url:'/media/4a5a62b2-3406-41f9-95b1-ea457c738d9b.jpg'
+                    },
+                    timezone:'America/Vancouver',
+                    bbox:{
+                        min_latitude:49.1989306,
+                        min_longitude:-123.2249611,
+                        max_latitude:49.3161714,
+                        max_longitude:-123.0232419
+                    }
+                },
+                createdAt:'2024-08-04T17:48:01.035Z',
+                updatedAt:'2024-08-04T17:48:01.035Z'
+            }
 
         ```
     </TabItem>
@@ -796,38 +814,117 @@ curl -L \\
 -X PUT \\
 -H "Authorization: Bearer <YOUR-TOKEN>" \\
 http://localhost:3000/api/v1/trips/aksjfh9320-oaf90-12iuhfiuas/trip_items \\
--d '{ "trip_items": [ { "item": "Visit X museum", "cost": 20, "date": 1715640000 } ] }'
+-d '{ "trip_items": [ {
+    item_id: "item-id-1",
+    item_type: "destination",
+    index: 0,
+    day: 1,
+    start_time: new Date("2023-06-01T10:00:00Z"),
+    end_time: new Date("2023-06-01T12:00:00Z"),
+    duration: 7200,
+    budget: {
+        currency: "USD",
+        category: "Activities",
+        totalEstimatedCost: 100,
+        totalCost: 90,
+        totalPaidCost: 80,
+        membersBudget: [
+            {
+                memberId: "member-id-1",
+                memberName: "John Doe",
+                estimatedCost: 50,
+                cost: 45,
+                paidValue: 40,
+                paymentDate: new Date("2023-06-01T09:00:00Z"),
+                paymentBaseCurrencyValue: 40
+            }
+        ]
+    },
+    destination: {
+        _id: "dest-id-1",
+        name: "Sunny Beach",
+        location: "Florida, USA",
+        description: "A beautiful sunny beach in Florida."
+    },
+    photos: [
+        {
+            url: "https://example.com/photo1.jpg",
+            description: "A sunny day at the beach."
+        },
+        {
+            url: "https://example.com/photo2.jpg",
+            description: "Relaxing at the beach."
+        }
+    ]
+} ] }'
  ```
 
-                     <Tabs className="response-examples">
-                         <TabItem value="example" label="Example response" default>
-                             status: 200
-                             ```json
-                             {
-                                 "trip_items": [
-                             {
-                                 "item": "Visit X museum",
-                                 "cost": 20,
-                                 "date": 1715640000
-                             }
-                                 ]
-                             }
-                             ```
-                         </TabItem>
-                         <TabItem value="schema" label="Response schema">
-                             ```json
-                             {
-                                 "trip_items": [
-                             {
-                                 "item": "string",
-                                 "cost": "number",
-                                 "date": "number"
-                             }
-                                 ]
-                             }
-                             ```
-                         </TabItem>
-                     </Tabs>
+<Tabs className="response-examples">
+    <TabItem value="example" label="Example response" default>
+        status: 200
+        ```json
+            {
+                item_id: "item-id-1",
+                item_type: "destination",
+                index: 0,
+                day: 1,
+                start_time: new Date("2023-06-01T10:00:00Z"),
+                end_time: new Date("2023-06-01T12:00:00Z"),
+                duration: 7200,
+                budget: {
+                    currency: "USD",
+                    category: "Activities",
+                    totalEstimatedCost: 100,
+                    totalCost: 90,
+                    totalPaidCost: 80,
+                    membersBudget: [
+                        {
+                            memberId: "member-id-1",
+                            memberName: "John Doe",
+                            estimatedCost: 50,
+                            cost: 45,
+                            paidValue: 40,
+                            paymentDate: new Date("2023-06-01T09:00:00Z"),
+                            paymentBaseCurrencyValue: 40
+                        }
+                    ]
+                },
+                destination: {
+                    _id: "dest-id-1",
+                    name: "Sunny Beach",
+                    location: "Florida, USA",
+                    description: "A beautiful sunny beach in Florida."
+                },
+                photos: [
+                    {
+                        url: "https://example.com/photo1.jpg",
+                        description: "A sunny day at the beach."
+                    },
+                    {
+                        url: "https://example.com/photo2.jpg",
+                        description: "Relaxing at the beach."
+                    }
+                ]
+            }
+        ```
+    </TabItem>
+    <TabItem value="schema" label="Response schema">
+        ```json
+        TripItem {
+            item_id: string;
+            item_type: 'destination' | 'transportations';
+            index: number;
+            day: number;
+            start_time?: Date;
+            end_time?: Date;
+            duration?: number;
+            budget?: Budget;
+            destination: Destination;
+            photos?: UserUploadedImage[];
+        }
+        ```
+    </TabItem>
+</Tabs>
 
 ## Update a Trip's Budget
     `PUT /api/v1/trips/:uuid/budget  `
@@ -866,23 +963,62 @@ curl -L \\
 -X PUT \\
 -H "Authorization: Bearer <YOUR-TOKEN>" \\
 http://localhost:3000/api/v1/trips/aksjfh9320-oaf90-12iuhfiuas/budget \\
--d '{ "budget": { "lo": 500, "hi": 2000 } }'
+-d '{ {"budget":{"currency":"USD","category":"Accommodation","totalEstimatedCost":1000,"totalCost":900,"totalPaidCost":800,"membersBudget":[{"memberId":"member-id-1","memberName":"John Doe","estimatedCost":500,"cost":450,"paidValue":400,"paymentDate":"2023-06-01T09:00:00Z","paymentBaseCurrencyValue":400},{"memberId":"member-id-2","memberName":"Jane Smith","estimatedCost":500,"cost":450,"paidValue":400,"paymentDate":"2023-06-02T09:00:00Z","paymentBaseCurrencyValue":400}]}}}'
  ```
 
                      <Tabs className="response-examples">
                          <TabItem value="example" label="Example response" default>
                              status: 200
                              ```json
-                             {
-                                 "budget": {"lo": 500, "hi": 2000}
-                             }
+                                    {
+                                        currency: "USD",
+                                        category: "Accommodation",
+                                        totalEstimatedCost: 1000,
+                                        totalCost: 900,
+                                        totalPaidCost: 800,
+                                        membersBudget: [
+                                            {
+                                                memberId: "member-id-1",
+                                                memberName: "John Doe",
+                                                estimatedCost: 500,
+                                                cost: 450,
+                                                paidValue: 400,
+                                                paymentDate: new Date("2023-06-01T09:00:00Z"),
+                                                paymentBaseCurrencyValue: 400
+                                            },
+                                            {
+                                                memberId: "member-id-2",
+                                                memberName: "Jane Smith",
+                                                estimatedCost: 500,
+                                                cost: 450,
+                                                paidValue: 400,
+                                                paymentDate: new Date("2023-06-02T09:00:00Z"),
+                                                paymentBaseCurrencyValue: 400
+                                            }
+                                        ]
+                                    }
                              ```
                          </TabItem>
                          <TabItem value="schema" label="Response schema">
                              ```json
-                             {
-                                 "budget": {"lo": "number", "hi": "number"}
-                             }
+                                type Budget = {
+                                    currency: string;
+                                    category: string;
+                                    totalEstimatedCost: number;
+                                    totalCost: number;
+                                    totalPaidCost: number;
+                                    membersBudget: MemberBudget[];
+                                };
+
+                                type MemberBudget = {
+                                    memberId: string;
+                                    memberName: string;
+                                    estimatedCost: number;
+                                    cost: number;
+                                    paidValue: number;
+                                    paymentDate: Date;
+                                    paymentBaseCurrencyValue: number;
+                                };
                              ```
                          </TabItem>
                      </Tabs>
@@ -1000,8 +1136,8 @@ http://localhost:3000/api/v1/trips/aksjfh9320-oaf90-12iuhfiuas/picture
                              {
                                  "mainImage": "http://localhost:3000/api/v1/trips/aksjfh9320-oaf90-12iuhfiuas/mainImage",
                                  "photos": [
-                                 "http://localhost:3000/api/v1/trips/aksjfh9320-oaf90-12iuhfiuas/photo1",
-                                 "http://localhost:3000/api/v1/trips/aksjfh9320-oaf90-12iuhfiuas/photo2"
+                                    "http://localhost:3000/api/v1/trips/aksjfh9320-oaf90-12iuhfiuas/photo1",
+                                    "http://localhost:3000/api/v1/trips/aksjfh9320-oaf90-12iuhfiuas/photo2"
                                  ]
                              }
                              ```
@@ -1070,41 +1206,64 @@ http://localhost:3000/api/v1/trips/aksjfh9320-oaf90-12iuhfiuas \\
                          <TabItem value="example" label="Example response" default>
                              status: 200
                              ```json
-                             {
-                                 "uuid": "aksjfh9320-oaf90-12iuhfiuas",
-                                 "name": "New Trip Name",
-                                 "desc": "Updated trip description",
-                                 "dest": [],
-                                 "budget": {"lo": 0, "hi": 0},
-                                 "expenditures": [],
-                                 "date": {"start": 1715640000, "end": 1715640000},
-                                 "todo": [],
-                                 "img": "http://localhost:3000/api/v1/trip/default/picture",
-                                 "url": "http://localhost:5173/trip/aksjfh9320-oaf90-12iuhfiuas",
-                                 "owner": "gregork",
-                                 "members": ["gregork"],
-                                 "private": true
-                             }
-                             ```
-                         </TabItem>
-                         <TabItem value="schema" label="Response schema">
-                             ```json
-                             {
-                                 "uuid": "string",
-                                 "name": "string",
-                                 "desc": "string",
-                                 "dest": "Array<string>",
-                                 "budget": "{ lo: number, hi: number }",
-                                 "expenditures": "Array<{ expenditure: string, cost: number }>",
-                                 "date": "{ start: number, end: number }",
-                                 "todo": "Array<string>",
-                                 "notes": "string",
-                                 "img": "string",
-                                 "url": "string",
-                                 "owner": "string",
-                                 "members": "Array<string>",
-                                 "private": "boolean"
-                             }
+                                {
+                                    "uuid":"aksjfh9320-oaf90-12iuhfiuas",
+                                    "name":"New Trip Name",
+                                    "desc":"Updated trip description",
+                                    "dest":[
+                                        "dest-id-1",
+                                        "dest-id-2"
+                                    ],
+                                    "budget":{
+                                        "baseCurrency":"USD",
+                                        "tripBudgetCategoriesGroupCost":[
+                                            {
+                                                "category":"Accommodation",
+                                                "value":500
+                                            },
+                                            {
+                                                "category":"Food and Restaurants",
+                                                "value":300
+                                            }
+                                        ],
+                                        "tripTotalGroupCost":1000,
+                                        "tripTotalPayments":800,
+                                        "tripMemberPayments":[
+                                            {
+                                                "member":"John Doe",
+                                                "value":500
+                                            }
+                                        ],
+                                        "tripMemberSummary":[
+                                            {
+                                                "member":"John Doe",
+                                                "totalCost":700,
+                                                "totalPayment":500
+                                            }
+                                        ]
+                                    },
+                                    "expenditures":[
+                                        {
+                                            "expenditure":"Flight",
+                                            "cost":300
+                                        }
+                                    ],
+                                    "date":{
+                                        "start":"2023-06-01T00:00:00.000Z",
+                                        "end":"2023-06-07T00:00:00.000Z"
+                                    },
+                                    "todo":[
+                                        "Book hotels",
+                                        "Buy tickets"
+                                    ],
+                                    "img":"http://localhost:3000/api/v1/trip/default/picture",
+                                    "url":"http://localhost:5173/trip/aksjfh9320-oaf90-12iuhfiuas",
+                                    "owner":"gregork",
+                                    "members":[
+                                        "gregork"
+                                    ],
+                                    "private":true
+                                }
                              ```
                          </TabItem>
                      </Tabs>
