@@ -18,10 +18,17 @@ export default function HomepageFeatures() {
   return (
     <section className={styles.features}>
       <div className="container" id="demo-container">
-{/* 
+        {/* 
         <Admonition type="info" title="new release!">
           <p>First Release Version {version} has been released. For more information, please refer to the <Link to={`/docs/release-notes/${version}`}>Release Notes</Link></p>
         </Admonition> */}
+
+        <Admonition type="info" title="Important Notice">
+          <p>Even though the deadline for the final project of CPSC 455 has passed, we will continue to update this website to share our knowledge! If you wish to view the version of our documentation website
+            as it was before the deadline (12:00 PM, August 7th, 2024), please refer to <a href="https://github.com/ubc-cpsc455-2024S/trekkers-docs-public/tree/3f462d02934b54322cd4e7f2da2aad5e052b6c24">this commit</a>.
+          </p>
+        </Admonition>
+
 
         <div className={styles.row}>
 
