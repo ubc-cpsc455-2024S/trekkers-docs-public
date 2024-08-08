@@ -138,7 +138,7 @@ const TeamProfileCards = () => {
 
         <p className={styles.aboutDescription}>
           Many teaching assistants who facilitated the course and helped the development of Trek include Cathy Yang, Davis Song, Yixuan Li, Michelle Kim, and Mahmoud Al Khatib.
-          And industry professionals who provided workshops and guidance include Ben Cheung.
+          And industry professionals who provided workshops and guidance include Ben Cheung, Stephanie Mah, Joshua Grant, Dorothy Ordogh, and Jeremy Goh.
         </p>
       </div>
 
