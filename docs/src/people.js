@@ -52,4 +52,8 @@ export const courseTeam = [
     {
         name: "Justin Jao",
         roles: ["Teaching Assistant"],
+    },
+    {
+        name: "Michelle Kim",
+        roles: ["Teaching Assistant"],
     }];
