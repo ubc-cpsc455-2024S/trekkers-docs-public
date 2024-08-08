@@ -29,7 +29,6 @@ export default function HomepageFeatures() {
           </p>
         </Admonition>
 
-
         <div className={styles.row}>
 
           <div className={clsx('col col--4', styles.featureCard)}>
@@ -40,7 +39,7 @@ export default function HomepageFeatures() {
             </div>
             <div className="text--center padding-horiz--md">
               <Heading as="h3">First Release Demo (v{version})</Heading>
-              <p>A trip planner built for you!</p>
+              <p>Refer to <Link to={`/docs/demo`}>Demo Access Documentation</Link> on how to access our demo, including Course Staff Credentials.</p>
               <div className={styles.buttons}>
                 <Link
                   className="button button--secondary button--lg"
