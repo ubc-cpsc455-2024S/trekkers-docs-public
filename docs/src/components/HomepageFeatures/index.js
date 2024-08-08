@@ -37,7 +37,7 @@ export default function HomepageFeatures() {
               <div className={styles.buttons}>
                 <Link
                   className="button button--secondary button--lg"
-                  to="https://trek-beta.fly.dev/">
+                  to="https://trek.wyfx.ca">
                   See Demo
                 </Link>
               </div>
