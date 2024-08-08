@@ -32,7 +32,7 @@ export default function HomepageFeatures() {
               </div>
             </div>
             <div className="text--center padding-horiz--md">
-              <Heading as="h3">Pre-Release Demo (v{version})</Heading>
+              <Heading as="h3">First Release Demo (v{version})</Heading>
               <p>A trip planner built for you!</p>
               <div className={styles.buttons}>
                 <Link
