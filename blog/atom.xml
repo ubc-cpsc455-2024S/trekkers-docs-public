@@ -46,60 +46,7 @@ including scalability and future-oriented design. The goal is to explore differe
 <li><strong>Description</strong> – For landmarks, well-known businesses (e.g. McDonalds), and attractions, use AI generated descriptions.</li>
 <li><strong>Contact, Hours, and Reviews</strong> – Use TripAdvisor or Yelp API to link review data, open hours, and contact information. Only load review data if the user clicks on it to limit unnecessary API calls. Yelp allows caching up to 24 hours but has no free tier.</li>
 <li><strong>In-House User-Contributed POI Data System</strong> – Support an in-house user-contributed POI Data system, where users can upload images, description, and reviews to a place.</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="proposed-solution">Proposed Solution<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#proposed-solution" class="hash-link" aria-label="Direct link to Proposed Solution" title="Direct link to Proposed Solution">​</a></h2>
-<p>Create an OSM-based In-House User-Contributed POI Data System with integration with Mapbox for additional non-cached POI attributes such as contact information and hours of operation. The goal is to integrate the best of both worlds: MapBox and OSM.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="benefits">Benefits<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#benefits" class="hash-link" aria-label="Direct link to Benefits" title="Direct link to Benefits">​</a></h3>
-<ul>
-<li>Integrates MapBox’s context-based searching capabilities, better than OSM queries.</li>
-<li>Extensive POI database, better than OSM database.</li>
-<li>Storage of Data with OSM-provided attributes, more control over data.</li>
-<li>Less dependency on Mapbox.</li>
-<li>In case Mapbox changes their Mapbox ID or expires, users will still get the correct basic geographical data.</li>
-<li>In case we migrate from Mapbox to another GIS provider, process will be smoother.</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="drawbacks">Drawbacks<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#drawbacks" class="hash-link" aria-label="Direct link to Drawbacks" title="Direct link to Drawbacks">​</a></h3>
-<ul>
-<li>Complexity of data with using two sources alongside user-generated content.</li>
-<li>Keeping three different IDs and maintaining synchronization.</li>
-<li>Requires handling of cases where Mapbox POI information cannot be matched with OSM POIs.</li>
-<li>Since no attributes except Mapbox ID are stored, it requires API calls for every look-up. Possible mitigation: for popular POIs, add POI to OSM ourselves and help contribute to OSM.</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="internal-poi-object-with-mapbox-and-osm">Internal POI Object with Mapbox and OSM<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#internal-poi-object-with-mapbox-and-osm" class="hash-link" aria-label="Direct link to Internal POI Object with Mapbox and OSM" title="Direct link to Internal POI Object with Mapbox and OSM">​</a></h2>
-<p>Our internal POI system will store POI objects in the following list of attributes (non-exhaustive):</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="poi-object">POI Object<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#poi-object" class="hash-link" aria-label="Direct link to POI Object" title="Direct link to POI Object">​</a></h3>
-<table><thead><tr><th>Attribute</th><th>Source</th><th>Description</th></tr></thead><tbody><tr><td>POI ID</td><td>internal</td><td>identifier for POI</td></tr><tr><td>Mapbox ID</td><td>Mapbox</td><td>Mapbox place identifier (limited use but storable)</td></tr><tr><td>OSM ID</td><td>OSM</td><td>OSM place identifier</td></tr><tr><td>Place Name</td><td>OSM</td><td>Display name in OSM</td></tr><tr><td>Latitude</td><td>OSM</td><td>Latitude in OSM</td></tr><tr><td>Longitude</td><td>OSM</td><td>Longitude in OSM</td></tr><tr><td>Description</td><td>AI generated</td><td>AI generated description of place</td></tr><tr><td>Photos</td><td>Wikipedia</td><td>Fetch from Wikipedia API</td></tr><tr><td>Other Attributes</td><td>User-Generated</td><td>Examples include: Reviews</td></tr></tbody></table>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="flow-of-data">Flow of Data<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#flow-of-data" class="hash-link" aria-label="Direct link to Flow of Data" title="Direct link to Flow of Data">​</a></h3>
-<p><strong>User Looks-Up Place on a Map or Search Box</strong></p>
-<ul>
-<li>Uses SearchBox API on Mapbox to return Mapbox ID and other POI information such as place name, image, etc.</li>
-</ul>
-<p><strong>User Adds the Place to their Trip (Mapbox ID is not in our database)</strong></p>
-<ul>
-<li>Mapbox ID is stored into a POI Object in our database.</li>
-<li>If and only if the OSM-equivalent of the Place exists, Match POI information from Mapbox API results to OSM and fill in:<!-- -->
-<ul>
-<li>OSM ID from OSM</li>
-<li>Place Name from OSM</li>
-<li>Latitude and Longitude from OSM</li>
-<li>Other useful information</li>
-</ul>
-</li>
-</ul>
-<p><strong>User Views a Trip with the Place they Added (e.g. Itinerary/Timeline or Map)</strong></p>
-<ul>
-<li>Identify Places (POIs or POI Objects) by our POI ID, not Mapbox ID.</li>
-<li>Display data in our POI Object for basic information (Place Name, Latitude, Longitude) of the place.</li>
-<li>If our POI object does not store OSM data (it couldn’t find an equivalent OSM POI data), then fetch from Mapbox using Mapbox ID.</li>
-<li>When and only when the user wants the details of the place, using Mapbox ID, fetch Mapbox data (Phone #, Website, Operating Hours).</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="compliance-with-mapbox-terms-of-service">Compliance with Mapbox Terms of Service<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#compliance-with-mapbox-terms-of-service" class="hash-link" aria-label="Direct link to Compliance with Mapbox Terms of Service" title="Direct link to Compliance with Mapbox Terms of Service">​</a></h3>
-<p>Mapbox does not allow storage of API results except for Mapbox ID. The proposed solution only stores Mapbox ID from the API results.</p>
-<p>Mapbox does not prohibit using its services with other third-party data sources. I couldn’t find anything that says I can’t use it with other services, unlike Google Maps or HERE.</p>
-<p>Both Mapbox and OSM require attributions for its data. It must be clear where a specific piece of data comes from.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion">Conclusion<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion">​</a></h2>
-<p>Integrating a GIS into Trek is essential for providing a rich user experience with detailed maps, routing information, and places of interest. While Google Maps offers comprehensive data, its high cost and restrictive data usage policies make it impractical for Trek. Instead, using a combination of Mapbox and OSM provides a cost-effective and flexible solution. By following the proposed plan and ensuring compliance with terms of service, Trek can offer users an interactive and informative travel planning tool without breaking the bank (for end-users as well!).</p>
-<p>For further details on the integration process or to provide feedback, feel free to contact us.</p>]]></content>
+</ul>]]></content>
         <author>
             <name>Matthew Kang</name>
             <uri>https://www.linkedin.com/in/kang-matt/</uri>
