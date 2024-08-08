@@ -2,11 +2,93 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog</id>
     <title>Trekkers Blog</title>
-    <updated>2024-07-10T00:00:00.000Z</updated>
+    <updated>2024-07-20T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog"/>
     <subtitle>Trekkers Blog</subtitle>
     <icon>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Trek's File Storage System with Amazon S3]]></title>
+        <id>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog/s3-integration</id>
+        <link href="https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog/s3-integration"/>
+        <updated>2024-07-20T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[This blogpost is a modified version of an internal Trek document. You can view the internal document]]></summary>
+        <content type="html"><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>This blogpost is a modified version of an internal Trek document. You can view the internal document
+<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/assets/files/Trek-AWS-S3-Integration-f7a9135df2cc329b75883ab8cb6a6c7d.pdf" target="_blank">here</a>.</p></div></div>
+<p>At Trek, our goal is to make trip planning as smooth and efficient as possible. To achieve this, we decided to integrate AWS S3 for storing images and files, allowing users to upload photos and other media easily. In this blog post, we’ll walk you through our integration process, the challenges we faced, and how we overcame them.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="why-aws-s3">Why AWS S3?<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/s3-integration#why-aws-s3" class="hash-link" aria-label="Direct link to Why AWS S3?" title="Direct link to Why AWS S3?">​</a></h2>
+<p>AWS S3 (Simple Storage Service) provides scalable object storage, making it an ideal choice for our needs. It offers:</p>
+<ul>
+<li>Reliable and durable storage.</li>
+<li>Scalability to handle large amounts of data.</li>
+<li>Integration with other AWS services.</li>
+<li>Secure access control and management.</li>
+<li>Overview of the Integration</li>
+</ul>
+<p>The integration of AWS S3 in Trek is handled entirely by our backend Express server to ensure security and simplicity. Here’s a high-level overview of the data flow when a user uploads an image:</p>
+<ul>
+<li>User Uploads Image: The user uploads an image through the frontend.</li>
+<li>Backend Processing: The image is sent to the backend server, which handles the upload to S3.</li>
+<li>S3 Storage: The image is stored in an S3 bucket.</li>
+<li>MongoDB Logging: Metadata about the uploaded image is logged in our MongoDB database.</li>
+<li>S3 Pricing Considerations</li>
+</ul>
+<p>While AWS offers a Free Tier with the following limits:</p>
+<ul>
+<li>5GB of S3 storage.</li>
+<li>20,000 GET requests.</li>
+<li>2,000 PUT, COPY, POST, or LIST requests.</li>
+<li>100GB of data transfer out per month.</li>
+</ul>
+<p>It’s essential to monitor usage to avoid unexpected costs. We learned the hard way when a private, empty S3 bucket unexpectedly incurred a $1300 charge. Always monitor your S3 usage and set budget alerts to avoid surprises.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="setting-up-aws-access">Setting Up AWS Access<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/s3-integration#setting-up-aws-access" class="hash-link" aria-label="Direct link to Setting Up AWS Access" title="Direct link to Setting Up AWS Access">​</a></h2>
+<p>To interact with AWS S3, we use an IAM user, trek-s3-user, which has the necessary permissions to upload files. The credentials are stored in environment variables for security:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ATLAS_URI="..."</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">AWS_ACCESS_KEY_ID=your_access_key_id</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">AWS_SECRET_ACCESS_KEY=your_secret_access_key</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">AWS_REGION=us-east-2</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">S3_BUCKET_NAME=cpsc-455-trek</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>These keys are used by our backend server to authenticate requests to AWS S3.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="mongodb-schema-for-s3-files">MongoDB Schema for S3 Files<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/s3-integration#mongodb-schema-for-s3-files" class="hash-link" aria-label="Direct link to MongoDB Schema for S3 Files" title="Direct link to MongoDB Schema for S3 Files">​</a></h2>
+<p>We keep track of the files stored in S3 using a MongoDB collection called S3Files. Here’s the schema:</p>
+<ul>
+<li>_id: Auto-generated unique ID.</li>
+<li>key: S3 object key.</li>
+<li>bucket: S3 bucket name.</li>
+<li>url: URL of the stored object.</li>
+<li>upload_by: User ID of the uploader.</li>
+<li>upload_time: Timestamp of the upload.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="backend-validation-before-upload">Backend Validation Before Upload<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/s3-integration#backend-validation-before-upload" class="hash-link" aria-label="Direct link to Backend Validation Before Upload" title="Direct link to Backend Validation Before Upload">​</a></h3>
+<p>To ensure that only appropriate files are uploaded, we perform several validations on the backend:</p>
+<ul>
+<li>File Type: Verify the file type being uploaded.</li>
+<li>File Size: Check if the file size is within acceptable limits.</li>
+<li>Upload Frequency: Limit the number of files a user can upload within a specific period.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="middleware-for-s3--mongodb">Middleware for S3 &amp; MongoDB<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/s3-integration#middleware-for-s3--mongodb" class="hash-link" aria-label="Direct link to Middleware for S3 &amp; MongoDB" title="Direct link to Middleware for S3 &amp; MongoDB">​</a></h3>
+<p>Our backend uses Express middlewares to handle the upload and logging process:</p>
+<ul>
+<li><strong>Auth0 Middleware</strong>: Verifies the JWT token and appends user information to the request.</li>
+<li><strong>S3 Middleware</strong>: Uploads the image to S3 and appends the metadata to the request.</li>
+</ul>
+<p>Here’s an example of the S3 uploading middleware:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">import { upload } from './s3/upload';</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">app.post('/test/upload', upload.array('photos', 3), function (err, req, res) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    if (err) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        // handle upload error</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    res.send('Successfully uploaded ' + (req.files?.length ?? 0) + ' files!');</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">});</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>If an error occurs during the upload, it’s passed to the callback function, allowing for proper error handling.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion">Conclusion<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/s3-integration#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion">​</a></h2>
+<p>Integrating AWS S3 into Trek has enhanced our ability to handle user-uploaded images efficiently and securely. By leveraging AWS S3’s scalable storage and integrating it with our backend, we’ve ensured that our users have a seamless experience when planning their trips. We hope our journey and insights help you in your own integration projects.</p>
+<p>Stay tuned for more updates and technical deep dives from the Trekkers team!</p>]]></content>
+        <author>
+            <name>Jacob Zhu</name>
+            <uri>https://www.linkedin.com/in/jacob-zhu-a70512212</uri>
+        </author>
+        <author>
+            <name>Matthew Kang</name>
+            <uri>https://www.linkedin.com/in/kang-matt/</uri>
+        </author>
+        <category label="project" term="project"/>
+        <category label="maps" term="maps"/>
+        <category label="POI" term="POI"/>
+        <category label="GIS" term="GIS"/>
+        <category label="geocoding" term="geocoding"/>
+        <category label="routing" term="routing"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Choosing the Best Geographic Information System (GIS) for Trek]]></title>
         <id>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog/trek-gis-study</id>
