@@ -18,10 +18,10 @@ export default function HomepageFeatures() {
   return (
     <section className={styles.features}>
       <div className="container" id="demo-container">
-
+{/* 
         <Admonition type="info" title="new release!">
           <p>First Release Version {version} has been released. For more information, please refer to the <Link to={`/docs/release-notes/${version}`}>Release Notes</Link></p>
-        </Admonition>
+        </Admonition> */}
 
         <div className={styles.row}>
 
