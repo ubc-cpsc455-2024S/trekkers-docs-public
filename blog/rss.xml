@@ -4,10 +4,110 @@
         <title>Trekkers Blog</title>
         <link>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog</link>
         <description>Trekkers Blog</description>
-        <lastBuildDate>Sat, 06 Jul 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 10 Jul 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Choosing the Best Geographic Information System (GIS) for Trek]]></title>
+            <link>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog/trek-gis-study</link>
+            <guid>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog/trek-gis-study</guid>
+            <pubDate>Wed, 10 Jul 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[This blogpost is a modified version of an internal Trek document. You can view the internal document]]></description>
+            <content:encoded><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>This blogpost is a modified version of an internal Trek document. You can view the internal document
+<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/assets/files/Trek-Geographic-Information-System-f322afbecf2fe7577b463c2abb7b07d3.pdf" target="_blank">here</a>.</p></div></div>
+<p>Integrating <strong>Google Maps</strong> was our original plan at Trek until we realized that the cost of integrating Google Maps would be outside our budget, as well as the budget of anyone deploying Trek.</p>
+<p>Although Google provides its customers with a $200 credit for the use of their APIs, including the Google Maps Platform APIs, once customers exceed the $200 limit, they are faced with potentially thousands of dollars in billing statements.</p>
+<p>The truth is, Google holds a monopoly over high-quality geographical information, especially their Places API, which provides the best up-to-date Points of Interest (POI) data. Using Google would be the best move if we could afford to lose the money. Unfortunately, we are not one of those companies that can lose money for a decade before making a profit.</p>
+<p>Furthermore, Google does not allow its customers to cache or store any of its data (with the exception of place IDs), which means that every time we want to display a place name for the user, we have to call Google's API—something we cannot afford.</p>
+<p>This blog post goes through the GIS alternatives to Google Maps that we have explored in the process of designing and building Trek.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-is-a-gis">What is a GIS?<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#what-is-a-gis" class="hash-link" aria-label="Direct link to What is a GIS?" title="Direct link to What is a GIS?">​</a></h2>
+<p>A Geographic Information System (GIS) is a powerful tool that allows users to visualize, analyze, and interpret spatial and geographic data. In the context of Trek, a GIS is essential for enhancing the user experience by providing detailed and interactive maps, route planning, and information on places of interest. It integrates various data sources to create a comprehensive view of the trip and the world.</p>
+<p><strong>A Geographic Information System (GIS) for Trek should offer the following features or services:</strong></p>
+<p><strong>Maps -</strong> Various visual dynamic maps imagery. Displays maps for ‘Map View’ and location markers, ‘Pins’ within the map, and geographic information (longitude and latitude) to provide context when searching for places.</p>
+<p><strong>Routes -</strong> Provides routing information in ‘driving’, ‘transiting’, ‘cycling’, or ‘walking’. Find best routes from place to place in different transportation methods.</p>
+<p><strong>Places of Interest (POI) -</strong> Provides information on places and ability to search for places. Gathers and provides place information including place ID (identifiers), name, location, description, address, photo, and reviews.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-makes-a-gis-good-for-trek">What makes a GIS Good (for Trek)?<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#what-makes-a-gis-good-for-trek" class="hash-link" aria-label="Direct link to What makes a GIS Good (for Trek)?" title="Direct link to What makes a GIS Good (for Trek)?">​</a></h2>
+<p>GIS can be used in many different applications and use cases. The goal of GIS in Trek is to help meet its functional and non-functional requirements,
+including scalability and future-oriented design. The goal is to explore different GIS options Trek can integrate, while considering the following:</p>
+<p><strong>Compliance —</strong> <em>“Are we complying with GIS’ Terms of Service? Are we stealing data and potentially committing academic misconduct?”</em></p>
+<p><strong>UI/UX —</strong> <em>“Does the UI Look Good?”</em></p>
+<p><strong>Usability —</strong> <em>“Does it provide good usability with sufficient information of places and provide quality search and personalization?”</em></p>
+<p><strong>Sustainability —</strong> <em>“Will the system be financially sustainable with the integration costs? Can costs be lowered by caching or storing data?”</em></p>
+<p><strong>Maintainability —</strong> <em>“Is the information easily manageable and does not require frequent extensive maintenance on Trek’s end?”</em></p>
+<p><strong>Dependency —</strong> <em>“Can we manage our own information without relying on the GIS?  Are we able to migrate from this GIS to another system easily”</em></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="comparison-of-gis-api-integrations">Comparison of GIS API Integrations<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#comparison-of-gis-api-integrations" class="hash-link" aria-label="Direct link to Comparison of GIS API Integrations" title="Direct link to Comparison of GIS API Integrations">​</a></h2>
+<p>Some GIS services do not provide all three packages (Maps, Routing, POI). Some GIS services do not allow caching or storage of data. Some GIS services are outside our budget.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="summary">Summary<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#summary" class="hash-link" aria-label="Direct link to Summary" title="Direct link to Summary">​</a></h3>
+<table><thead><tr><th>API</th><th>Maps &amp; Routing</th><th>Places of Interests</th><th>Caching &amp; Storing</th><th>Pricing</th><th>Description</th></tr></thead><tbody><tr><td>Google Maps Platform</td><td>Best</td><td>Photos, Reviews</td><td>Restrictive</td><td>High</td><td>Best up-to-date POI information</td></tr><tr><td>FourSquare</td><td>N/A (POI only)</td><td>Photos, Reviews</td><td>Restrictive</td><td>Medium</td><td>Provides decent POI and places ‘personalization’; best for tourist POI</td></tr><tr><td>Mapbox</td><td>Good</td><td>Integrates FourSquare</td><td>Restrictive (non-enterprise)</td><td>Medium/Low</td><td>Alternative to Google Maps. Good UI. OSM-based. Second most popular</td></tr><tr><td>LocationIQ</td><td>No transit routing</td><td>Only GeoCoding</td><td>Allowed</td><td>Low</td><td>Fully OSM Data packaged as API. Comes with only Geocoding data (no POI)</td></tr><tr><td>MapTiler</td><td>Good</td><td>Basic</td><td>Client-side</td><td>Low</td><td></td></tr><tr><td>HERE</td><td>Good</td><td>Basic</td><td>30 days or Response Header</td><td>Low</td><td>No permanent storage of location IDs</td></tr><tr><td>MapQuest</td><td>No transit routing</td><td>Basic</td><td>Restrictive (non-paid)</td><td>Low</td><td></td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="poi-data-image-description-and-reviews-data">POI Data: Image, Description, and Reviews Data<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#poi-data-image-description-and-reviews-data" class="hash-link" aria-label="Direct link to POI Data: Image, Description, and Reviews Data" title="Direct link to POI Data: Image, Description, and Reviews Data">​</a></h3>
+<p>Apart from Google Maps Platform and ForeSquare, OSM-based GIS APIs only provide basic POI data. Some GIS APIs do not provide contact information or opening hours. We can integrate the following technologies to provide end-users with these data:</p>
+<ul>
+<li><strong>Image</strong> – For landmarks, well-known businesses (e.g. McDonalds), and attractions, use Wikipedia API to fetch images that are shareable for commercial purposes.</li>
+<li><strong>Description</strong> – For landmarks, well-known businesses (e.g. McDonalds), and attractions, use AI generated descriptions.</li>
+<li><strong>Contact, Hours, and Reviews</strong> – Use TripAdvisor or Yelp API to link review data, open hours, and contact information. Only load review data if the user clicks on it to limit unnecessary API calls. Yelp allows caching up to 24 hours but has no free tier.</li>
+<li><strong>In-House User-Contributed POI Data System</strong> – Support an in-house user-contributed POI Data system, where users can upload images, description, and reviews to a place.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="proposed-solution">Proposed Solution<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#proposed-solution" class="hash-link" aria-label="Direct link to Proposed Solution" title="Direct link to Proposed Solution">​</a></h2>
+<p>Create an OSM-based In-House User-Contributed POI Data System with integration with Mapbox for additional non-cached POI attributes such as contact information and hours of operation. The goal is to integrate the best of both worlds: MapBox and OSM.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="benefits">Benefits<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#benefits" class="hash-link" aria-label="Direct link to Benefits" title="Direct link to Benefits">​</a></h3>
+<ul>
+<li>Integrates MapBox’s context-based searching capabilities, better than OSM queries.</li>
+<li>Extensive POI database, better than OSM database.</li>
+<li>Storage of Data with OSM-provided attributes, more control over data.</li>
+<li>Less dependency on Mapbox.</li>
+<li>In case Mapbox changes their Mapbox ID or expires, users will still get the correct basic geographical data.</li>
+<li>In case we migrate from Mapbox to another GIS provider, process will be smoother.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="drawbacks">Drawbacks<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#drawbacks" class="hash-link" aria-label="Direct link to Drawbacks" title="Direct link to Drawbacks">​</a></h3>
+<ul>
+<li>Complexity of data with using two sources alongside user-generated content.</li>
+<li>Keeping three different IDs and maintaining synchronization.</li>
+<li>Requires handling of cases where Mapbox POI information cannot be matched with OSM POIs.</li>
+<li>Since no attributes except Mapbox ID are stored, it requires API calls for every look-up. Possible mitigation: for popular POIs, add POI to OSM ourselves and help contribute to OSM.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="internal-poi-object-with-mapbox-and-osm">Internal POI Object with Mapbox and OSM<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#internal-poi-object-with-mapbox-and-osm" class="hash-link" aria-label="Direct link to Internal POI Object with Mapbox and OSM" title="Direct link to Internal POI Object with Mapbox and OSM">​</a></h2>
+<p>Our internal POI system will store POI objects in the following list of attributes (non-exhaustive):</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="poi-object">POI Object<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#poi-object" class="hash-link" aria-label="Direct link to POI Object" title="Direct link to POI Object">​</a></h3>
+<table><thead><tr><th>Attribute</th><th>Source</th><th>Description</th></tr></thead><tbody><tr><td>POI ID</td><td>internal</td><td>identifier for POI</td></tr><tr><td>Mapbox ID</td><td>Mapbox</td><td>Mapbox place identifier (limited use but storable)</td></tr><tr><td>OSM ID</td><td>OSM</td><td>OSM place identifier</td></tr><tr><td>Place Name</td><td>OSM</td><td>Display name in OSM</td></tr><tr><td>Latitude</td><td>OSM</td><td>Latitude in OSM</td></tr><tr><td>Longitude</td><td>OSM</td><td>Longitude in OSM</td></tr><tr><td>Description</td><td>AI generated</td><td>AI generated description of place</td></tr><tr><td>Photos</td><td>Wikipedia</td><td>Fetch from Wikipedia API</td></tr><tr><td>Other Attributes</td><td>User-Generated</td><td>Examples include: Reviews</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="flow-of-data">Flow of Data<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#flow-of-data" class="hash-link" aria-label="Direct link to Flow of Data" title="Direct link to Flow of Data">​</a></h3>
+<p><strong>User Looks-Up Place on a Map or Search Box</strong></p>
+<ul>
+<li>Uses SearchBox API on Mapbox to return Mapbox ID and other POI information such as place name, image, etc.</li>
+</ul>
+<p><strong>User Adds the Place to their Trip (Mapbox ID is not in our database)</strong></p>
+<ul>
+<li>Mapbox ID is stored into a POI Object in our database.</li>
+<li>If and only if the OSM-equivalent of the Place exists, Match POI information from Mapbox API results to OSM and fill in:<!-- -->
+<ul>
+<li>OSM ID from OSM</li>
+<li>Place Name from OSM</li>
+<li>Latitude and Longitude from OSM</li>
+<li>Other useful information</li>
+</ul>
+</li>
+</ul>
+<p><strong>User Views a Trip with the Place they Added (e.g. Itinerary/Timeline or Map)</strong></p>
+<ul>
+<li>Identify Places (POIs or POI Objects) by our POI ID, not Mapbox ID.</li>
+<li>Display data in our POI Object for basic information (Place Name, Latitude, Longitude) of the place.</li>
+<li>If our POI object does not store OSM data (it couldn’t find an equivalent OSM POI data), then fetch from Mapbox using Mapbox ID.</li>
+<li>When and only when the user wants the details of the place, using Mapbox ID, fetch Mapbox data (Phone #, Website, Operating Hours).</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="compliance-with-mapbox-terms-of-service">Compliance with Mapbox Terms of Service<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#compliance-with-mapbox-terms-of-service" class="hash-link" aria-label="Direct link to Compliance with Mapbox Terms of Service" title="Direct link to Compliance with Mapbox Terms of Service">​</a></h3>
+<p>Mapbox does not allow storage of API results except for Mapbox ID. The proposed solution only stores Mapbox ID from the API results.</p>
+<p>Mapbox does not prohibit using its services with other third-party data sources. I couldn’t find anything that says I can’t use it with other services, unlike Google Maps or HERE.</p>
+<p>Both Mapbox and OSM require attributions for its data. It must be clear where a specific piece of data comes from.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion">Conclusion<a href="https://ubc-cpsc455-2024s.github.io/trekkers-docs-public/blog/trek-gis-study#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion">​</a></h2>
+<p>Integrating a GIS into Trek is essential for providing a rich user experience with detailed maps, routing information, and places of interest. While Google Maps offers comprehensive data, its high cost and restrictive data usage policies make it impractical for Trek. Instead, using a combination of Mapbox and OSM provides a cost-effective and flexible solution. By following the proposed plan and ensuring compliance with terms of service, Trek can offer users an interactive and informative travel planning tool without breaking the bank (for end-users as well!).</p>
+<p>For further details on the integration process or to provide feedback, feel free to contact us.</p>]]></content:encoded>
+            <category>project</category>
+            <category>maps</category>
+            <category>POI</category>
+            <category>GIS</category>
+            <category>geocoding</category>
+            <category>routing</category>
+        </item>
         <item>
             <title><![CDATA[Local Deployment and a Glimpse Into Trek's CI/CD System]]></title>
             <link>https://ubc-cpsc455-2024S.github.io/trekkers-docs-public/blog/local-deployment-experiment</link>
